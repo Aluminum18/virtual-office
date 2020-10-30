@@ -175,6 +175,36 @@ Transform:
   m_Father: {fileID: 7339500980840903432}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6493921691798484494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6092846164409728579}
+  m_Layer: 0
+  m_Name: CamLook
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6092846164409728579
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6493921691798484494}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.223, y: 1.052, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7339500980840903492}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7339500980596317687
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,6 +215,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7339500980596317684}
   - component: {fileID: 7339500980596317685}
+  - component: {fileID: 61005451}
+  - component: {fileID: 61005452}
+  - component: {fileID: 6265942845249610296}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -225,6 +258,78 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!114 &61005451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7339500980596317687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a121e936647cbba4bac7c028f2ddb472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _joystickDirection: {fileID: 11400000, guid: 492af0ab120cc884ba0e8ee04f895704, type: 2}
+  _onStartMove:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 61005452}
+        m_TargetAssemblyTypeName: CharacterAnimController, Assembly-CSharp
+        m_MethodName: PlayRunAnim
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onStop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 61005452}
+        m_TargetAssemblyTypeName: CharacterAnimController, Assembly-CSharp
+        m_MethodName: PlayIdle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _moveSpeed: 3
+--- !u!114 &61005452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7339500980596317687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392fc19b177ec744e8faa783bc26d29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 7339500980833213602}
+--- !u!114 &6265942845249610296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7339500980596317687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c1f4b67c21ce7d46b26cd455af00cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _joystick: {fileID: 11400000, guid: 492af0ab120cc884ba0e8ee04f895704, type: 2}
+  _rotateSpeed: 360
+  _offsetAngle: 5
 --- !u!114 &7361160587799405203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,6 +500,12 @@ GameObject:
 --- !u!4 &7339500980840903492 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400006, guid: 67e4903d70c3a984dbdc388e7bd027a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7339500980840507842}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7339500980833213602 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 67e4903d70c3a984dbdc388e7bd027a2,
     type: 3}
   m_PrefabInstance: {fileID: 7339500980840507842}
   m_PrefabAsset: {fileID: 0}

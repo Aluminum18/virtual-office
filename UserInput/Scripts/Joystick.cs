@@ -6,11 +6,15 @@ using UnityEngine.EventSystems;
 public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     [SerializeField]
+    private Vector3Variable _joystickDirection;
+    [SerializeField]
     private float _litmitDistance;
     [SerializeField]
     private Camera _uiCam;
     [SerializeField]
     private Canvas _parentCanvas;
+
+    private Vector2 _direction = Vector2.zero;
 
     private Vector3 _centerPos;
     private Vector3 _positionVector;
@@ -36,12 +40,17 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
         if (Vector3.Distance(_centerPos, _positionVector) >= _litmitDistance)
         {
-            Debug.Log("touchToWorld" + touchPointToWorld);
-            //BackToCenter();
-            CalculateOverFlow(touchPointToWorld);
+            CalculateOverFlow(touchPointToWorld, out bool success);
+            if (!success)
+            {
+                return;
+            }
         }
 
         transform.position = _positionVector;
+        _direction.x = transform.position.x - _centerPos.x;
+        _direction.y = transform.position.y - _centerPos.y;
+        _joystickDirection.Value = _direction;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -55,7 +64,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     Vector2 distance1 = Vector2.zero;
     Vector2 distance2 = Vector2.zero;
-    private void CalculateOverFlow(Vector2 touchPoint)
+    private void CalculateOverFlow(Vector2 touchPoint, out bool success)
     {
         float xAO = touchPoint.x - _centerPos.x;
         A = (touchPoint.y - _centerPos.y) / xAO;
@@ -68,15 +77,17 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
         if (delta < 0)
         {
+            success = false;
             return;
         }
+        float sqrtDelta = Mathf.Sqrt(delta);
 
-        float x1 = (-Bi + Mathf.Sqrt(delta)) / (2 * Ai);
+        float x1 = (-Bi + sqrtDelta) / (2 * Ai);
         float y1 = A * x1 - B;
         distance1.x = x1 - touchPoint.x;
         distance1.y = y1 - touchPoint.y;
 
-        float x2 = (-Bi - Mathf.Sqrt(delta)) / (2 * Ai);
+        float x2 = (-Bi - sqrtDelta) / (2 * Ai);
         float y2 = A * x2 - B;
         distance2.x = x2 - touchPoint.x;
         distance2.y = y2 - touchPoint.y;
@@ -91,11 +102,14 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
             _positionVector.x = x2;
             _positionVector.y = y2;
         }
+
+        success = true;
     }
 
     private void BackToCenter()
     {
         LeanTween.move(gameObject, _centerPos, 0.2f).setEase(LeanTweenType.linear);
+        _joystickDirection.Value = Vector3.zero;
     }
 
 

@@ -3,7 +3,11 @@ guid: 434851dcb05d58a4795e3e03ef6c8b91
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _joystickDirection: {fileID: 11400000, guid: 492af0ab120cc884ba0e8ee04f895704,
+      type: 2}
+  - _uiCam: {instanceID: 0}
+  - _parentCanvas: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
