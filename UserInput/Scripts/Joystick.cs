@@ -5,16 +5,22 @@ using UnityEngine.EventSystems;
 
 public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
+    [Header("Reference")]
     [SerializeField]
     private Vector3Variable _joystickDirection;
+
+    [Header("Config")]
     [SerializeField]
     private float _litmitDistance;
     [SerializeField]
     private Camera _uiCam;
     [SerializeField]
+    private Transform _worldCamTransform;
+    [SerializeField]
     private Canvas _parentCanvas;
 
-    private Vector2 _direction = Vector2.zero;
+    private float _directionX = 0;
+    private float _directionY = 0;
 
     private Vector3 _centerPos;
     private Vector3 _positionVector;
@@ -48,9 +54,9 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         }
 
         transform.position = _positionVector;
-        _direction.x = transform.position.x - _centerPos.x;
-        _direction.y = transform.position.y - _centerPos.y;
-        _joystickDirection.Value = _direction;
+        _directionX = transform.position.x - _centerPos.x;
+        _directionY = transform.position.y - _centerPos.y;
+        _joystickDirection.Value = _worldCamTransform.right * _directionX + _worldCamTransform.forward * _directionY;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -110,6 +116,22 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     {
         LeanTween.move(gameObject, _centerPos, 0.2f).setEase(LeanTweenType.linear);
         _joystickDirection.Value = Vector3.zero;
+    }
+
+    private int NormalizeDirection(float value)
+    {
+        if (value > 0)
+        {
+            return 1;
+        }
+        else if (value < 0)
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
 

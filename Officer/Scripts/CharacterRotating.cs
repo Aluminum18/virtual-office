@@ -27,7 +27,7 @@ public class CharacterRotating : MonoBehaviour
 
         Vector3 nomalize = Vector3.Normalize(direction);
         _direction.x = nomalize.x;
-        _direction.z = nomalize.y;
+        _direction.z = nomalize.z;
 
         StartRotate();
     }

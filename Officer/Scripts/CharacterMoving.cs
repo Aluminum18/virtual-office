@@ -45,7 +45,7 @@ public class CharacterMoving : MonoBehaviour
     {
         Vector3 normalizedDir = Vector3.Normalize(direction);
         _direction.x = normalizedDir.x;
-        _direction.z = normalizedDir.y;
+        _direction.z = normalizedDir.z;
         StartMove();
     }
 
