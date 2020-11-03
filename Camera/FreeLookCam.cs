@@ -12,24 +12,29 @@ public class FreeLookCam : MonoBehaviour, IDragHandler, IPointerDownHandler, IPo
     private float _horizonRatio;
     private float _verticalRatio;
 
-    private void Start()
+    public void ChangeVirtualCam(CinemachineFreeLook virtualCam)
     {
-        _horizonRatio = 180f / Screen.width;
-        _verticalRatio = 1f / Screen.height;
+        _freelookCam = virtualCam;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("delta" + eventData.delta);
         _freelookCam.m_XAxis.Value += eventData.delta.x * _horizonRatio;
         _freelookCam.m_YAxis.Value -= eventData.delta.y * _verticalRatio;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        Debug.Log(eventData.position);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+    }
+
+    private void Start()
+    {
+        _horizonRatio = 180f / Screen.width;
+        _verticalRatio = 1f / Screen.height;
     }
 }

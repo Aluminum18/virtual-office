@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1208042060442139533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2085429656223461603}
+  m_Layer: 0
+  m_Name: AimLook
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2085429656223461603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208042060442139533}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.586, y: 1.12, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7339500980596317684}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2186566240653052901
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,6 +205,68 @@ Transform:
   m_Father: {fileID: 7339500980840903432}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4622736209333689093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4274376821332560656}
+  - component: {fileID: 9078436663283009794}
+  - component: {fileID: 8873595907888459393}
+  m_Layer: 0
+  m_Name: ArrowSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4274376821332560656
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4622736209333689093}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.525}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7339500980596317684}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9078436663283009794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4622736209333689093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f85ec35c3e5d1e4885e95482bff2395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pooledObject: {fileID: 3811185808235616026, guid: f7327b1066e04544783cbb0e24d0e1f4,
+    type: 3}
+  _spawnPos: {fileID: 4274376821332560656}
+  _limitInstances: 10
+--- !u!114 &8873595907888459393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4622736209333689093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c9cc3e36def104a881bc99fe7df505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _arrowPool: {fileID: 9078436663283009794}
+  _arrowSpeed: 50
 --- !u!1 &6493921691798484494
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,12 +290,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6493921691798484494}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.223, y: 1.052, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7339500980840903492}
-  m_RootOrder: 3
+  m_Father: {fileID: 7339500980596317684}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7339500980596317687
 GameObject:
@@ -218,6 +310,7 @@ GameObject:
   - component: {fileID: 61005451}
   - component: {fileID: 61005452}
   - component: {fileID: 6265942845249610296}
+  - component: {fileID: 5723638257481661761}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -236,6 +329,9 @@ Transform:
   m_LocalPosition: {x: 1, y: 5.634, z: 8.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4274376821332560656}
+  - {fileID: 6092846164409728579}
+  - {fileID: 2085429656223461603}
   - {fileID: 7339500980840903492}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -330,6 +426,63 @@ MonoBehaviour:
   _joystick: {fileID: 11400000, guid: 492af0ab120cc884ba0e8ee04f895704, type: 2}
   _rotateSpeed: 360
   _offsetAngle: 5
+--- !u!114 &5723638257481661761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7339500980596317687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db39f91b2726e74bad90ca6d18b79ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startAttacking:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 61005452}
+        m_TargetAssemblyTypeName: CharacterAnimController, Assembly-CSharp
+        m_MethodName: PlayAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onAttackProjectileSpawn:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8873595907888459393}
+        m_TargetAssemblyTypeName: ArrowSpawner, Assembly-CSharp
+        m_MethodName: FireArrow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 61005452}
+        m_TargetAssemblyTypeName: CharacterAnimController, Assembly-CSharp
+        m_MethodName: StopAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _baseAttackTime: 0.8
+  _attackFactor: 1
+  CancelAttack: 0
 --- !u!114 &7361160587799405203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 67e4903d70c3a984dbdc388e7bd027a2, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 67e4903d70c3a984dbdc388e7bd027a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

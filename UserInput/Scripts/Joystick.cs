@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
@@ -8,6 +9,14 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     [Header("Reference")]
     [SerializeField]
     private Vector3Variable _joystickDirection;
+
+    [Header("Events out")]
+    [SerializeField]
+    private UnityEvent _onPointerDown;
+    [SerializeField]
+    private UnityEvent _onDrag;
+    [SerializeField]
+    private UnityEvent _onPointerUp;
 
     [Header("Config")]
     [SerializeField]
@@ -57,14 +66,18 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         _directionX = transform.position.x - _centerPos.x;
         _directionY = transform.position.y - _centerPos.y;
         _joystickDirection.Value = _worldCamTransform.right * _directionX + _worldCamTransform.forward * _directionY;
+
+        _onDrag.Invoke();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        _onPointerDown.Invoke();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        _onPointerUp.Invoke();
         BackToCenter();
     }
 

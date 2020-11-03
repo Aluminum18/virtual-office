@@ -18,4 +18,14 @@ public class CharacterAnimController : MonoBehaviour
         // Running param
         _animator.SetBool("isRunning", false);
     }
+
+    public void PlayAttack()
+    {
+        _animator.SetBool("isAttacking", true);
+    }
+
+    public void StopAttack()
+    {
+        _animator.SetBool("isAttacking", false);
+    }
 }
