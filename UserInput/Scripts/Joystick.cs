@@ -19,6 +19,11 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     private UnityEvent _onPointerUp;
 
     [Header("Config")]
+    [Tooltip("Joystick up directs to forward")]
+    [SerializeField]
+    private bool _mapUpToForward;
+    [SerializeField]
+    private float _triggerDistance;
     [SerializeField]
     private float _litmitDistance;
     [SerializeField]
@@ -53,6 +58,13 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         _positionVector = touchPointToWorld;
         _positionVector.z = touchPointToWorld.z + _parentCanvas.planeDistance;
 
+        if (Vector3.Distance(_centerPos, _positionVector) < _triggerDistance)
+        {
+            _joystickDirection.Value = Vector3.zero;
+            transform.position = _positionVector;
+            return;
+        }
+
         if (Vector3.Distance(_centerPos, _positionVector) >= _litmitDistance)
         {
             CalculateOverFlow(touchPointToWorld, out bool success);
@@ -65,7 +77,9 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         transform.position = _positionVector;
         _directionX = transform.position.x - _centerPos.x;
         _directionY = transform.position.y - _centerPos.y;
-        _joystickDirection.Value = _worldCamTransform.right * _directionX + _worldCamTransform.forward * _directionY;
+
+        _joystickDirection.Value = _worldCamTransform.right * _directionX + 
+           (_mapUpToForward ? _worldCamTransform.forward : _worldCamTransform.up) * _directionY;
 
         _onDrag.Invoke();
     }

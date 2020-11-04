@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b1337fff361a1041b83112e846d592d, type: 3}
-  m_Name: Var_UserInput_AimDirection
+  m_Script: {fileID: 11500000, guid: 22979d87ab1bf0e43b1903e258b1b1ea, type: 3}
+  m_Name: Var_Character_DecideToAttack
   m_EditorClassIdentifier: 
-  _value: {x: 0, y: 0, z: 0}
+  _value: 1

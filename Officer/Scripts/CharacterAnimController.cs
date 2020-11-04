@@ -6,16 +6,16 @@ public class CharacterAnimController : MonoBehaviour
 {
     [SerializeField]
     private Animator _animator;
+    [SerializeField]
+    private BoolVariable _decideToAttack;
 
     public void PlayRunAnim()
     {
-        // Running param
         _animator.SetBool("isRunning", true);
     }
 
     public void PlayIdle()
     {
-        // Running param
         _animator.SetBool("isRunning", false);
     }
 
@@ -24,8 +24,19 @@ public class CharacterAnimController : MonoBehaviour
         _animator.SetBool("isAttacking", true);
     }
 
-    public void StopAttack()
+    public void ResetAttackingFlag()
     {
         _animator.SetBool("isAttacking", false);
     }
+
+    public void HoldAttack()
+    {
+        if (_decideToAttack.Value)
+        {
+            _animator.speed = 1f;
+            return;
+        }
+        _animator.speed = 0f;
+    }
+
 }

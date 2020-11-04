@@ -14,13 +14,35 @@ public class CharacterAction : MonoBehaviour
     [SerializeField]
     private float _attackFactor = 1;
 
+    private float _timeToNextAttack = 0;
+
     public bool CancelAttack = false;
+
+    private bool _projectileReady = false;
+    private bool _lateAttack = false;
 
     public void StartAttack()
     {
+        if (_timeToNextAttack > 0)
+        {
+            return;
+        }
+
         CancelAttack = false;
+        _projectileReady = false;
         CountingUntilProjectile();
         _startAttacking?.Invoke();
+    }
+
+    public void DecideToAttack()
+    {
+        if (_projectileReady)
+        {
+            _onAttackProjectileSpawn.Invoke();
+            return;
+        }
+
+        _lateAttack = true;
     }
 
     private void CountingUntilProjectile()
@@ -30,19 +52,26 @@ public class CharacterAction : MonoBehaviour
 
     private IEnumerator IE_AtkToProjectile()
     {
-        float remainTime = _baseAttackTime * _attackFactor;
+        _timeToNextAttack = _baseAttackTime * _attackFactor;
         
-        while (remainTime > 0)
+        while (_timeToNextAttack > 0)
         {
             if (CancelAttack)
             {
+                _timeToNextAttack = 0;
                 yield break;
             }
 
-            remainTime -= Time.deltaTime;
+            _timeToNextAttack -= Time.deltaTime;
             yield return null;
         }
 
-        _onAttackProjectileSpawn?.Invoke();
+        _projectileReady = true;
+
+        if (_lateAttack)
+        {
+            _onAttackProjectileSpawn.Invoke();
+            _lateAttack = false;
+        }
     }
 }
