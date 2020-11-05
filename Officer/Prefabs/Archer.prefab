@@ -471,7 +471,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _baseAttackTime: 0.7
+  _attackRate: 2
   _attackFactor: 1
+  _timeToNextAttack: 0
   CancelAttack: 0
 --- !u!114 &7361160587799405203
 MonoBehaviour:
@@ -503,21 +505,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 7339500980833213602}
   _decideToAttack: {fileID: 11400000, guid: 6ee0cd550c299384dad8b91abf7adc07, type: 2}
---- !u!114 &1908833218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7339500980840476516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c9cc3e36def104a881bc99fe7df505, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _aimSpot: {fileID: 0}
-  _arrowPool: {fileID: 0}
-  _arrowSpeed: 0
 --- !u!1001 &7339500980840507842
 PrefabInstance:
   m_ObjectHideFlags: 0

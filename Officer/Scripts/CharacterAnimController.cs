@@ -27,9 +27,10 @@ public class CharacterAnimController : MonoBehaviour
     public void ResetAttackingFlag()
     {
         _animator.SetBool("isAttacking", false);
+        _decideToAttack.Value = false;
     }
 
-    public void HoldAttack()
+    public void CheckHoldAttack()
     {
         if (_decideToAttack.Value)
         {

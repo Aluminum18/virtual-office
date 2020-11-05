@@ -15,7 +15,7 @@ public class ScreenRayToWorld : MonoBehaviour
 
     public void ScreenRayToWorldPoint()
     {
-        Vector3 screenPoint = _uiCam.ViewportToScreenPoint(_screenTransform.pivot);
+        Vector3 screenPoint = _uiCam.WorldToScreenPoint(_screenTransform.position);
         var ray = _worldCam.ScreenPointToRay(screenPoint);
         Debug.DrawRay(ray.origin, ray.direction * 10f, Color.red, 10f);
 

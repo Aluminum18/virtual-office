@@ -10,19 +10,29 @@ public class CharacterAction : MonoBehaviour
     [SerializeField]
     private UnityEvent _onAttackProjectileSpawn;
     [SerializeField]
-    private float _baseAttackTime = 0.8f;
+    private float _baseAttackTime;
     [SerializeField]
-    private float _attackFactor = 1;
+    private float _attackRate;
+    [SerializeField]
+    private float _attackFactor;
 
+    [SerializeField]
     private float _timeToNextAttack = 0;
 
     public bool CancelAttack = false;
+
+    private bool _isAttacking = false;
 
     private bool _projectileReady = false;
     private bool _lateAttack = false;
 
     public void StartAttack()
     {
+        if (_isAttacking)
+        {
+            return;
+        }
+
         if (_timeToNextAttack > 0)
         {
             return;
@@ -38,11 +48,19 @@ public class CharacterAction : MonoBehaviour
     {
         if (_projectileReady)
         {
-            _onAttackProjectileSpawn.Invoke();
+            SpawnProjectile();
             return;
         }
 
         _lateAttack = true;
+    }
+
+    private void SpawnProjectile()
+    {
+        _projectileReady = false;
+        _timeToNextAttack = _attackRate;
+        _onAttackProjectileSpawn.Invoke();
+        StartCoroutine(IE_Reload());
     }
 
     private void CountingUntilProjectile()
@@ -52,17 +70,18 @@ public class CharacterAction : MonoBehaviour
 
     private IEnumerator IE_AtkToProjectile()
     {
-        _timeToNextAttack = _baseAttackTime * _attackFactor;
+        _isAttacking = true;
+
+        float timeToProjectile = _baseAttackTime * _attackFactor;
         
-        while (_timeToNextAttack > 0)
+        while (timeToProjectile > 0)
         {
             if (CancelAttack)
             {
-                _timeToNextAttack = 0;
                 yield break;
             }
 
-            _timeToNextAttack -= Time.deltaTime;
+            timeToProjectile -= Time.deltaTime;
             yield return null;
         }
 
@@ -70,8 +89,18 @@ public class CharacterAction : MonoBehaviour
 
         if (_lateAttack)
         {
-            _onAttackProjectileSpawn.Invoke();
+            SpawnProjectile();
             _lateAttack = false;
+        }
+        _isAttacking = false;
+    }
+
+    private IEnumerator IE_Reload()
+    {
+        while (_timeToNextAttack > 0)
+        {
+            _timeToNextAttack -= Time.deltaTime;
+            yield return null;
         }
     }
 }

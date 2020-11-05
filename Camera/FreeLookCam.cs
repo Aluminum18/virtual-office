@@ -2,12 +2,19 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class FreeLookCam : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField]
     private CinemachineFreeLook _freelookCam;
+    [SerializeField]
+    private Camera _uiCam;
+    [SerializeField]
+    private Vector3Variable _touchPoint;
+    [SerializeField]
+    private UnityEvent _onPointerDown;
 
     private float _horizonRatio;
     private float _verticalRatio;
@@ -26,6 +33,8 @@ public class FreeLookCam : MonoBehaviour, IDragHandler, IPointerDownHandler, IPo
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log(eventData.position);
+        _touchPoint.Value = _uiCam.ScreenToWorldPoint(eventData.position);
+        _onPointerDown.Invoke();
     }
 
     public void OnPointerUp(PointerEventData eventData)
