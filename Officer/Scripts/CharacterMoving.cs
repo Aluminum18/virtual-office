@@ -48,10 +48,7 @@ public class CharacterMoving : MonoBehaviour
         Normalize2Numbers(direction.x, direction.z, out float x, out float z);
         _direction.x = x;
         _direction.z = z;
-        Debug.Log("testx " + x);
-        Debug.Log("testy " + z);
 
-        Debug.Log("movingDir" + _direction);
         StartMove();
     }
 

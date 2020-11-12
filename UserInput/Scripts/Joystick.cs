@@ -67,11 +67,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
         if (Vector3.Distance(_centerPos, _positionVector) >= _litmitDistance)
         {
-            CalculateOverFlow(touchPointToWorld, out bool success);
-            if (!success)
-            {
-                return;
-            }
+            CalculateOverFlow2(touchPointToWorld);
         }
 
         transform.position = _positionVector;
@@ -137,6 +133,35 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         }
 
         success = true;
+    }
+
+    private void CalculateOverFlow2(Vector2 touchPoint)
+    {
+        float x = touchPoint.x - _centerPos.x;
+        float y = touchPoint.y - _centerPos.y;
+
+        if (x == 0f)
+        {
+            _positionVector.x = 0f;
+            _positionVector.y = 1f * Mathf.Sign(y);
+            return;
+        }
+
+        float tan = y / x;
+        if (tan == 0f)
+        {
+            _positionVector.y = 0f;
+            _positionVector.x = 1 * Mathf.Sign(x);
+            return;
+        }
+
+        float tanSqr = Mathf.Pow(tan, 2);
+
+        float xSqr = 1 / (tanSqr + 1);
+        float ySqr = tanSqr * xSqr;
+
+        _positionVector.x = Mathf.Sqrt(xSqr) * Mathf.Sign(x) * _litmitDistance + _centerPos.x;
+        _positionVector.y = Mathf.Sqrt(ySqr) * Mathf.Sign(y) * _litmitDistance + _centerPos.y;
     }
 
     private void BackToCenter()
