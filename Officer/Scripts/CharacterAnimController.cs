@@ -4,40 +4,54 @@ using UnityEngine;
 
 public class CharacterAnimController : MonoBehaviour
 {
+    private const int IDLE = 0;
+    private const int RUN = 1;
+    private const int FULL_ATTACK = 2;
+    private const int AIM = 3;
+    private const int SHOOT = 4;
+
     [SerializeField]
     private Animator _animator;
     [SerializeField]
     private BoolVariable _decideToAttack;
 
-    public void PlayRunAnim()
-    {
-        _animator.SetBool("isRunning", true);
-    }
-
     public void PlayIdle()
     {
-        _animator.SetBool("isRunning", false);
+        _animator.SetTrigger("Idle");
     }
 
-    public void PlayAttack()
+    public void PlayRun()
     {
-        _animator.SetBool("isAttacking", true);
-    }
-
-    public void ResetAttackingFlag()
-    {
-        _animator.SetBool("isAttacking", false);
-        _decideToAttack.Value = false;
-    }
-
-    public void CheckHoldAttack()
-    {
-        if (_decideToAttack.Value)
+        var currentAnimState = _animator.GetCurrentAnimatorStateInfo(0);
+        if (currentAnimState.IsName("RunForward_1"))
         {
-            _animator.speed = 1f;
             return;
         }
-        _animator.speed = 0f;
+
+        _animator.SetTrigger("Run");
     }
 
+    public void PlayAim()
+    {
+
+        _animator.SetTrigger("Aim");
+    }
+
+    public void PlayShoot()
+    {
+        _animator.SetTrigger("Shoot");
+    }
+
+    public void SetRunAimBlend(float blend)
+    {
+        _animator.SetFloat("MovingAim", blend);
+    }
+
+    /// <summary>
+    /// from 0 to 1; 0 ->
+    /// </summary>
+    public void SetStrafe(float strafe)
+    {
+
+    }
 }

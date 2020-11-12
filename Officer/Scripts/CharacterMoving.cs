@@ -9,6 +9,8 @@ public class CharacterMoving : MonoBehaviour
     [Header("Reference")]
     [SerializeField]
     private Vector3Variable _joystickDirection;
+    [SerializeField]
+    private StringVariable _characterState;
 
     [Header("Events out")]
     [SerializeField]
@@ -43,9 +45,13 @@ public class CharacterMoving : MonoBehaviour
 
     private void UpdateDirection(Vector3 direction)
     {
-        Vector3 normalizedDir = Vector3.Normalize(direction);
-        _direction.x = normalizedDir.x;
-        _direction.z = normalizedDir.z;
+        Normalize2Numbers(direction.x, direction.z, out float x, out float z);
+        _direction.x = x;
+        _direction.z = z;
+        Debug.Log("testx " + x);
+        Debug.Log("testy " + z);
+
+        Debug.Log("movingDir" + _direction);
         StartMove();
     }
 
@@ -73,5 +79,41 @@ public class CharacterMoving : MonoBehaviour
 
         _onStop.Invoke();
         _isMoving = false;
+    }
+
+
+    /// <summary>
+    /// find x and y in unit circle so that x/y = a/b (x and y same sign as a and b)
+    /// </summary>
+    private void Normalize2Numbers(float a, float b, out float x, out float y)
+    {
+        if (a == 0 && b == 0)
+        {
+            x = 0; y = 0;
+            return;
+        }
+
+        if (a == 0)
+        {
+            x = 0;
+            y = 1 * Mathf.Sign(b);
+            return;
+        }
+
+        float tan = b / a;
+        if (tan == 0)
+        {
+            y = 0;
+            x = 1f * Mathf.Sign(a);
+            return;
+        }
+
+        float tanSqr = Mathf.Pow(tan, 2);
+
+        float xSqr = 1 / (tanSqr + 1);
+        float ySqr = tanSqr * xSqr;
+
+        x = Mathf.Sqrt(xSqr) * Mathf.Sign(a);
+        y = Mathf.Sqrt(ySqr) * Mathf.Sign(b);
     }
 }

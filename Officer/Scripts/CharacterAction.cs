@@ -5,10 +5,19 @@ using UnityEngine.Events;
 
 public class CharacterAction : MonoBehaviour
 {
+    [Header("Reference")]
     [SerializeField]
-    private UnityEvent _startAttacking;
+    private StringVariable _characterState;
+
+    [Header("Events out")]
+    [SerializeField]
+    private UnityEvent _onPrepareProjectile;
+    [SerializeField]
+    private UnityEvent _onCancelAttack;
     [SerializeField]
     private UnityEvent _onAttackProjectileSpawn;
+
+    [Header("Config")]
     [SerializeField]
     private float _baseAttackTime;
     [SerializeField]
@@ -19,16 +28,37 @@ public class CharacterAction : MonoBehaviour
     [SerializeField]
     private float _timeToNextAttack = 0;
 
-    public bool CancelAttack = false;
+    public bool CancelAttack
+    {
+        get
+        {
+            return _cancelAttack;
+        }
+        set
+        {
+            _cancelAttack = value;
+
+            if (value)
+            {
+                _projectileReady = false;
+                _isAttacking = false;
+                _lateAttack = false;
+                _timeToNextAttack = 0;
+                _onCancelAttack.Invoke();
+            }
+        }
+    }
+
+    private bool _cancelAttack = false;
 
     private bool _isAttacking = false;
 
     private bool _projectileReady = false;
     private bool _lateAttack = false;
 
-    public void StartAttack()
+    public void PrepareProjectile()
     {
-        if (_isAttacking)
+        if (_isAttacking || _projectileReady)
         {
             return;
         }
@@ -38,13 +68,13 @@ public class CharacterAction : MonoBehaviour
             return;
         }
 
-        CancelAttack = false;
+        _cancelAttack = false;
         _projectileReady = false;
         CountingUntilProjectile();
-        _startAttacking?.Invoke();
+        _onPrepareProjectile?.Invoke();
     }
 
-    public void DecideToAttack()
+    public void Shoot()
     {
         if (_projectileReady)
         {
@@ -53,6 +83,11 @@ public class CharacterAction : MonoBehaviour
         }
 
         _lateAttack = true;
+    }
+
+    public void ChangeState(string state)
+    {
+        _characterState.Value = state;
     }
 
     private void SpawnProjectile()
@@ -76,7 +111,7 @@ public class CharacterAction : MonoBehaviour
         
         while (timeToProjectile > 0)
         {
-            if (CancelAttack)
+            if (_cancelAttack)
             {
                 yield break;
             }
@@ -102,5 +137,20 @@ public class CharacterAction : MonoBehaviour
             _timeToNextAttack -= Time.deltaTime;
             yield return null;
         }
+
+        ContinuePrepareProjectile();
+    }
+
+    private void ContinuePrepareProjectile()
+    {
+        if (_characterState.Value == CharacterState.STATE_READY_ATTACK)
+        {
+            PrepareProjectile();
+        }
+    }
+
+    private void OnEnable()
+    {
+        ChangeState("idle");
     }
 }

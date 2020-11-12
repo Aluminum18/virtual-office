@@ -26,7 +26,7 @@ public class ObjectPool : MonoBehaviour
             }
             else
             {
-                go = _usingOjects.Peek();
+                go = _usingOjects.Dequeue();
             }
         }
         else

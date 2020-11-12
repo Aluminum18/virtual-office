@@ -7,6 +7,8 @@ public class CharacterRotating : MonoBehaviour
     [Header("Reference")]
     [SerializeField]
     private Vector3Variable _joystick;
+    [SerializeField]
+    private StringVariable _characterState;
 
     [Header("Config")]
     [SerializeField]
@@ -48,6 +50,11 @@ public class CharacterRotating : MonoBehaviour
         Quaternion rotateTo = Quaternion.LookRotation(_direction);
         while (Quaternion.Angle(transform.rotation, rotateTo) > _offsetAngle)
         {
+            if (_characterState.Value == CharacterState.STATE_READY_ATTACK)
+            {
+                yield break;
+            }
+
             if (!_direction.Equals(Vector3.zero))
             {
                 rotateTo = Quaternion.LookRotation(_direction);
