@@ -10,10 +10,31 @@ public class CharacterAnimController : MonoBehaviour
     private const int AIM = 3;
     private const int SHOOT = 4;
 
+    [Header("Reference")]
+    [SerializeField]
+    private StringVariable _characterState;
+    [SerializeField]
+    private Vector3Variable _rawInputMovingJoystick;
+
+    [Header("Config")]
     [SerializeField]
     private Animator _animator;
-    [SerializeField]
-    private BoolVariable _decideToAttack;
+
+    private bool IsReadyAttackParam
+    {
+        get
+        {
+            return _animator.GetBool("ReadyAttack");
+        }
+    }
+
+    private bool IsMovingParam
+    {
+        get
+        {
+            return _animator.GetBool("Moving");
+        }
+    }
 
     public void PlayIdle()
     {
@@ -22,36 +43,51 @@ public class CharacterAnimController : MonoBehaviour
 
     public void PlayRun()
     {
-        var currentAnimState = _animator.GetCurrentAnimatorStateInfo(0);
-        if (currentAnimState.IsName("RunForward_1"))
-        {
-            return;
-        }
+        CheckAndSetLayerFollowingState();
 
         _animator.SetTrigger("Run");
     }
 
     public void PlayAim()
     {
+        CheckAndSetLayerFollowingState();
 
         _animator.SetTrigger("Aim");
     }
 
     public void PlayShoot()
     {
+        CheckAndSetLayerFollowingState();
         _animator.SetTrigger("Shoot");
     }
 
-    public void SetRunAimBlend(float blend)
+    public void SetStrafe()
     {
-        _animator.SetFloat("MovingAim", blend);
+        _animator.SetFloat("MovingAimX", _rawInputMovingJoystick.Value.x);
+        _animator.SetFloat("MovingAimY", _rawInputMovingJoystick.Value.y);
     }
 
-    /// <summary>
-    /// from 0 to 1; 0 ->
-    /// </summary>
-    public void SetStrafe(float strafe)
+    public void SetLayerWeight(int layerIndex, float weight)
     {
+        _animator.SetLayerWeight(layerIndex, weight);
+    }
 
+    public void UpdateReadyAttackState()
+    {
+        bool readyAttack = _characterState.Value == CharacterState.STATE_READY_ATTACK;
+        _animator.SetBool("ReadyAttack", readyAttack);
+    }
+
+    public void CheckAndSetLayerFollowingState()
+    {
+        if (_characterState.Value == CharacterState.STATE_READY_ATTACK)
+        {
+            SetLayerWeight(1, 1f);
+            SetLayerWeight(2, 1f);
+            return;
+        }
+
+        SetLayerWeight(1, 0f);
+        SetLayerWeight(2, 0f);
     }
 }

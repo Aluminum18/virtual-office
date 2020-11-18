@@ -52,6 +52,7 @@ public class CharacterRotating : MonoBehaviour
         {
             if (_characterState.Value == CharacterState.STATE_READY_ATTACK)
             {
+                _isRotating = false;
                 yield break;
             }
 

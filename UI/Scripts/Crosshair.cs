@@ -14,6 +14,8 @@ public class Crosshair : MonoBehaviour
     private FloatVariable _spread;
     [SerializeField]
     private FloatVariable _largestSpread;
+    [SerializeField]
+    private FloatVariable _movingCrosshairTime;
 
     [Header("Config")]
     [SerializeField]
@@ -45,7 +47,13 @@ public class Crosshair : MonoBehaviour
 
     public void ChangeCenter()
     {
-        transform.position = new Vector3(_aimScreenPos.Value.x, _aimScreenPos.Value.y, transform.position.z);
+        Vector3 newPos = new Vector3(_aimScreenPos.Value.x, _aimScreenPos.Value.y, transform.position.z);
+        LeanTween.move(gameObject, newPos, _movingCrosshairTime.Value).setEase(LeanTweenType.easeOutSine);
+    }
+
+    public void BackToCenter()
+    {
+        transform.localPosition = _centerPos.localPosition;
     }
 
     private void Start()

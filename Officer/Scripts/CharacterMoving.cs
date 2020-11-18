@@ -16,17 +16,26 @@ public class CharacterMoving : MonoBehaviour
     [SerializeField]
     private UnityEvent _onStartMove;
     [SerializeField]
+    private UnityEvent _onChangeDirection;
+    [SerializeField]
     private UnityEvent _onStop;
 
     [Header("Config")]
     [Tooltip("m/s")]
     [SerializeField]
     private float _moveSpeed;
+    [SerializeField]
+    private float _moveFactor;
 
     private bool _isMoving = false;
 
     private Vector3 _direction;
     private CharacterController _chaCon;
+
+    public void SetMoveFactor(float factor)
+    {
+        _moveFactor = factor;
+    }
 
     private void Awake()
     {
@@ -49,6 +58,15 @@ public class CharacterMoving : MonoBehaviour
         _direction.x = x;
         _direction.z = z;
 
+        _onChangeDirection.Invoke();
+
+        if (_direction.Equals(Vector3.zero))
+        {
+            _onStop.Invoke();
+            Debug.Log("TestStop");
+            return;
+        }
+
         StartMove();
     }
 
@@ -59,7 +77,7 @@ public class CharacterMoving : MonoBehaviour
             return;
         }
         _onStartMove.Invoke();
-
+        Debug.Log("TestStart");
         StartCoroutine(IE_Move());
     }  
 
@@ -69,12 +87,12 @@ public class CharacterMoving : MonoBehaviour
 
         while (!_direction.Equals(Vector3.zero))
         {
-            Debug.Log("direction" + _direction);
-            _chaCon.SimpleMove(_direction * _moveSpeed);
+            Debug.Log("Move");
+            _chaCon.SimpleMove(_direction * _moveSpeed * _moveFactor);
+
             yield return null;
         }
 
-        _onStop.Invoke();
         _isMoving = false;
     }
 

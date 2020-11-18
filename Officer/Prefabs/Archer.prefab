@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392fc19b177ec744e8faa783bc26d29f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterState: {fileID: 11400000, guid: bfed186c4d2d04144979767670530857, type: 2}
+  _rawInputMovingJoystick: {fileID: 11400000, guid: 0220127904b980941ab52d0eeaa36924,
+    type: 2}
   _animator: {fileID: 91252544516372910}
-  _decideToAttack: {fileID: 0}
 --- !u!1 &1208042060442139533
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,6 +240,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5723638257481661761}
+        m_TargetAssemblyTypeName: CharacterAction, Assembly-CSharp
+        m_MethodName: CheckCancelAttackOnMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onChangeDirection:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1168680051759200223}
+        m_TargetAssemblyTypeName: CharacterAnimController, Assembly-CSharp
+        m_MethodName: SetStrafe
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onStop:
     m_PersistentCalls:
       m_Calls:
@@ -254,6 +283,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _moveSpeed: 3
+  _moveFactor: 1
 --- !u!114 &6265942845249610296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,18 +328,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  _onCancelAttack:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1168680051759200223}
-        m_TargetAssemblyTypeName: CharacterAnimController, Assembly-CSharp
-        m_MethodName: PlayIdle
-        m_Mode: 1
+      - m_Target: {fileID: 61005451}
+        m_TargetAssemblyTypeName: CharacterMoving, Assembly-CSharp
+        m_MethodName: SetMoveFactor
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 0.5
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  _onCancelAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 61005451}
+        m_TargetAssemblyTypeName: CharacterMoving, Assembly-CSharp
+        m_MethodName: SetMoveFactor
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -331,6 +373,33 @@ MonoBehaviour:
       - m_Target: {fileID: 1168680051759200223}
         m_TargetAssemblyTypeName: CharacterAnimController, Assembly-CSharp
         m_MethodName: PlayShoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onStateChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1168680051759200223}
+        m_TargetAssemblyTypeName: CharacterAnimController, Assembly-CSharp
+        m_MethodName: UpdateReadyAttackState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1168680051759200223}
+        m_TargetAssemblyTypeName: CharacterAnimController, Assembly-CSharp
+        m_MethodName: CheckAndSetLayerFollowingState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

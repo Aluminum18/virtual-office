@@ -8,6 +8,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 {
     [Header("Reference")]
     [SerializeField]
+    private Vector3Variable _rawInputJoystick;
+    [SerializeField]
     private Vector3Variable _joystickDirection;
 
     [Header("Events out")]
@@ -73,6 +75,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         transform.position = _positionVector;
         _directionX = transform.position.x - _centerPos.x;
         _directionY = transform.position.y - _centerPos.y;
+
+        _rawInputJoystick.Value = (_positionVector - _centerPos) / _litmitDistance;
 
         _joystickDirection.Value = _worldCamTransform.right * _directionX + 
            (_mapUpToForward ? _worldCamTransform.forward : _worldCamTransform.up) * _directionY;
@@ -168,6 +172,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     {
         LeanTween.move(gameObject, _centerPos, 0.2f).setEase(LeanTweenType.linear);
         _joystickDirection.Value = Vector3.zero;
+        _rawInputJoystick.Value = Vector3.zero;
     }
 
     private int NormalizeDirection(float value)

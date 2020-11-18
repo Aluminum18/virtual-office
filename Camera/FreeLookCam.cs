@@ -12,8 +12,6 @@ public class FreeLookCam : MonoBehaviour, IDragHandler, IPointerDownHandler, IPo
     [SerializeField]
     private Camera _uiCam;
     [SerializeField]
-    private Vector3Variable _touchPoint;
-    [SerializeField]
     private UnityEvent _onPointerDown;
 
     private float _horizonRatio;
@@ -32,8 +30,6 @@ public class FreeLookCam : MonoBehaviour, IDragHandler, IPointerDownHandler, IPo
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log(eventData.position);
-        _touchPoint.Value = _uiCam.ScreenToWorldPoint(eventData.position);
         _onPointerDown.Invoke();
     }
 

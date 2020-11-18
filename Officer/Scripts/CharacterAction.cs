@@ -16,6 +16,8 @@ public class CharacterAction : MonoBehaviour
     private UnityEvent _onCancelAttack;
     [SerializeField]
     private UnityEvent _onAttackProjectileSpawn;
+    [SerializeField]
+    private UnityEvent _onStateChanged;
 
     [Header("Config")]
     [SerializeField]
@@ -88,7 +90,18 @@ public class CharacterAction : MonoBehaviour
     public void ChangeState(string state)
     {
         _characterState.Value = state;
+        _onStateChanged.Invoke();
     }
+
+    public void CheckCancelAttackOnMove()
+    {
+        if (_characterState.Value == CharacterState.STATE_READY_ATTACK)
+        {
+            return;
+        }
+        CancelAttack = true;
+    }
+
 
     private void SpawnProjectile()
     {
