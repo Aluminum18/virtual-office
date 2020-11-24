@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8889838765199946044}
   - component: {fileID: 8889838765199946045}
   m_Layer: 5
-  m_Name: LoginButton
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 8889838765375244727}
   - component: {fileID: 8889838765375244720}
   m_Layer: 5
-  m_Name: LoginText
+  m_Name: ButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

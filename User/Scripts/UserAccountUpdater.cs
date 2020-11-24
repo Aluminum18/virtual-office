@@ -7,19 +7,31 @@ using TMPro;
 using Firebase.Firestore;
 using Firebase.Extensions;
 using System;
+using UnityEngine.Events;
 
 public class UserAccountUpdater : MonoBehaviour
 {
+    [Header("Reference")]
+    [SerializeField]
+    private ThisPlayerAccountInfo _userAccount;
+
+    [Header("Events in")]
+    [SerializeField]
+    private GameEvent _onUserCreated;
+    [SerializeField]
+    private GameEvent _onUserSignedIn;
+
+    [Header("Unity Events")]
+    [SerializeField]
+    private UnityEvent _onUserAccountInfoReadyInSO;
+
+    [Header("Config")]
     [SerializeField]
     private TMP_InputField _password;
     [SerializeField]
     private TMP_InputField _fullName;
     [SerializeField]
     private TMP_InputField _displayName;
-
-    [Header("Events in")]
-    [SerializeField]
-    private GameEvent _onUserCreated;
 
     StringBuilder _sb = new StringBuilder();
 
@@ -39,7 +51,7 @@ public class UserAccountUpdater : MonoBehaviour
             displayName = _displayName.text,
             password = encodedPassword,
             dateCreated = dateCreated
-        };
+        };    
 
         var userRef = FirebaseFirestore.DefaultInstance.Collection(FireStoreCollection.USER_ACCOUNT).Document(userData.userId);
         userRef.SetAsync(userData, SetOptions.MergeAll).ContinueWithOnMainThread(
@@ -54,13 +66,41 @@ public class UserAccountUpdater : MonoBehaviour
             });
     }
 
+    private void UpdateAccountInfoToSO(params object[] args)
+    {
+        var userAuthInfo = (FirebaseUser)args[0];
+        var userRef = FirebaseFirestore.DefaultInstance.Collection(FireStoreCollection.USER_ACCOUNT).Document(userAuthInfo.UserId);
+
+        userRef.GetSnapshotAsync().ContinueWithOnMainThread(
+            getAccountInfoTask =>
+            {
+                if (getAccountInfoTask.IsFaulted)
+                {
+                    Debug.LogError(getAccountInfoTask.Exception.ToString());
+                    return;
+                }
+
+                FireStoreUserInfo accountData = getAccountInfoTask.Result.ConvertTo<FireStoreUserInfo>();
+
+                _userAccount.Id = accountData.userId;
+                _userAccount.FullName = accountData.fullName;
+                _userAccount.DisplayName = accountData.displayName;
+                _userAccount.Email = accountData.email;
+
+                _onUserAccountInfoReadyInSO.Invoke();
+            });
+
+    }
+
     private void OnEnable()
     {
         _onUserCreated.Subcribe(AddNewUserInfo);
+        _onUserSignedIn.Subcribe(UpdateAccountInfoToSO);
     }
 
     private void OnDisable()
     {
         _onUserCreated.Unsubcribe(AddNewUserInfo);
+        _onUserSignedIn.Unsubcribe(UpdateAccountInfoToSO);
     }
 }
