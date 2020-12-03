@@ -15,6 +15,8 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
     [Header("Reference")]
     [SerializeField]
     private RoomInfoSO _roomInfo;
+    [SerializeField]
+    private StringVariable _userId;
 
     [Header("Unity Events")]
     [SerializeField]
@@ -78,7 +80,7 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
 
     private void Start()
     {
-        SpawnCharacters();
+        SpawnThisPlayer();
     }
 
     private void ManageCharacter(GameObject character)
@@ -91,25 +93,16 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
         }
     }
 
-    private void SpawnCharacters()
+    private void SpawnThisPlayer()
     {
-        List<string> team1 = _roomInfo.Team1;
-        for (int i = 0; i < team1.Count; i++)
-        {
-            var character = Instantiate(_archerBlue, _team1SpawnPos.position + Vector3.right * i, Quaternion.identity);
-            AddPhotonPropsToObject(character, 1);
+        int teamNo = _roomInfo.Team1.Contains(_userId.Value) ? 1 : 2;
 
-            ManageCharacter(character);
-        }
+        List<string> team = teamNo == 1 ? _roomInfo.Team1 : _roomInfo.Team2;
 
-        List<string> team2 = _roomInfo.Team2;
-        for (int i = 0; i < team1.Count; i++)
-        {
-            var character = Instantiate(_archerRed, _team2SpawnPos.position + Vector3.left * i, Quaternion.identity);
-            AddPhotonPropsToObject(character, 2);
+        var character = Instantiate(teamNo == 1 ? _archerBlue : _archerRed, _team1SpawnPos.position + Vector3.right * team.Count, Quaternion.identity);
 
-            ManageCharacter(character);
-        }
+        AddPhotonPropsToObject(character, teamNo);
+        ManageCharacter(character);
     }
 
     private void SpawnCharacterResponseToEvent(EventData photonEvent)
