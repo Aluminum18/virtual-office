@@ -54,6 +54,16 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         _distanceSqr = _litmitDistance * _litmitDistance;
     }
 
+    public void SetDirectionOutHolder(Vector3Variable directionHolder)
+    {
+        _joystickDirection = directionHolder;
+    }
+
+    public void SetRawJoyStickInputHolder(Vector3Variable rawInputHolder)
+    {
+        _rawInputJoystick = rawInputHolder;
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
         Vector3 touchPointToWorld = _uiCam.ScreenToWorldPoint(eventData.position);

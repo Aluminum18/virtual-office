@@ -8,7 +8,7 @@ public class JoinRoomPopup : MonoBehaviour
 {
     [Header("Reference")]
     [SerializeField]
-    private RoomSO _roomOptions;
+    private RoomOptionsSO _roomOptions;
 
     [Header("Config")]
     [SerializeField]
@@ -35,5 +35,10 @@ public class JoinRoomPopup : MonoBehaviour
         }
 
         _roomOptions.RoomName = _roomName.text;
+    }
+
+    private void Start()
+    {
+        UpdateJoinButtonStatus();
     }
 }

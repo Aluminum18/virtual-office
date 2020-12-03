@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase;
 using Firebase.Extensions;
-using Firebase.Auth;
+using Firebase.Firestore;
 using UnityEngine.Events;
 
 public class FirebaseInitializer : MonoBehaviour
@@ -43,5 +43,13 @@ public class FirebaseInitializer : MonoBehaviour
     private void RaiseEvent()
     {
         _onFirebaseInitialized?.Invoke();
+    }
+
+    /// <summary>
+    /// https://github.com/firebase/quickstart-unity/issues/845
+    /// </summary>
+    private void OnApplicationQuit()
+    {
+        FirebaseFirestore.DefaultInstance.App.Dispose();
     }
 }

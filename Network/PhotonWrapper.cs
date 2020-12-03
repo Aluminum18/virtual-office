@@ -10,13 +10,15 @@ public class PhotonWrapper : MonoBehaviourPunCallbacks
     [SerializeField]
     private StringVariable _version;
     [SerializeField]
-    private RoomSO _roomOptions;
+    private RoomOptionsSO _roomOptions;
 
     [Header("Events out")]
     [SerializeField]
     private GameEvent _onRoomCreated;
     [SerializeField]
     private GameEvent _onJoinedRoom;
+    [SerializeField]
+    private GameEvent _onLeftRoom;
 
     public void Connect()
     {
@@ -24,7 +26,6 @@ public class PhotonWrapper : MonoBehaviourPunCallbacks
         {
             return;
         }
-
         PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.GameVersion = _version.Value;
     }
@@ -39,7 +40,7 @@ public class PhotonWrapper : MonoBehaviourPunCallbacks
 
         if (string.IsNullOrEmpty(_roomOptions.RoomName))
         {
-            _roomOptions.RoomName = System.DateTime.Now.ToString();
+            _roomOptions.RoomName = System.DateTime.Now.Ticks.ToString();
         }
         PhotonNetwork.CreateRoom(_roomOptions.RoomName, roomOption);
     }
@@ -70,6 +71,11 @@ public class PhotonWrapper : MonoBehaviourPunCallbacks
         _onJoinedRoom?.Raise();
     }
 
+    public override void OnLeftRoom()
+    {
+        _onLeftRoom?.Raise();
+    }
+
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         Debug.LogError($"fail to join room error code: [{returnCode}] message: [{message}]");
@@ -78,5 +84,20 @@ public class PhotonWrapper : MonoBehaviourPunCallbacks
     private void Awake()
     {
         Connect();
+    }
+
+    private void OnApplicationQuit()
+    {
+        CheckStatusAndLeaveRoomIfNeeded();
+    }
+
+    private void CheckStatusAndLeaveRoomIfNeeded()
+    {
+        if (!PhotonNetwork.InRoom)
+        {
+            return;
+        }
+
+        PhotonNetwork.LeaveRoom();
     }
 }

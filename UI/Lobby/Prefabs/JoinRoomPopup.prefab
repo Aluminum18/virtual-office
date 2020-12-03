@@ -198,7 +198,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5682905562463347969}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -270,7 +270,19 @@ MonoBehaviour:
   _showFromStart: 0
   _onAllElementsShown:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5682905562463347974}
+        m_TargetAssemblyTypeName: JoinRoomPopup, Assembly-CSharp
+        m_MethodName: UpdateJoinButtonStatus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onAllElementsHided:
     m_PersistentCalls:
       m_Calls: []
@@ -430,7 +442,7 @@ PrefabInstance:
     - target: {fileID: 8254081806457896120, guid: bc6aacd89aa4beb49b3d35dec65b7793,
         type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8254081806457896120, guid: bc6aacd89aa4beb49b3d35dec65b7793,
         type: 3}
@@ -506,6 +518,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254081806457896120, guid: bc6aacd89aa4beb49b3d35dec65b7793,
+        type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5682905562463347974}
+    - target: {fileID: 8254081806457896120, guid: bc6aacd89aa4beb49b3d35dec65b7793,
+        type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: JoinRoomPopup, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254081806457896120, guid: bc6aacd89aa4beb49b3d35dec65b7793,
+        type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: UpdateJoinButtonStatus
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254081806457896120, guid: bc6aacd89aa4beb49b3d35dec65b7793,
+        type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254081806457896120, guid: bc6aacd89aa4beb49b3d35dec65b7793,
+        type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254081806457896120, guid: bc6aacd89aa4beb49b3d35dec65b7793,
+        type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8254081806457896121, guid: bc6aacd89aa4beb49b3d35dec65b7793,
         type: 3}

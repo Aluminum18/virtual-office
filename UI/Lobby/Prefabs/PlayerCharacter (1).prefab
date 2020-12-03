@@ -293,6 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5474691578196627735}
+  - component: {fileID: 1384209956858523414}
   m_Layer: 5
   m_Name: PlayerCharacter (1)
   m_TagString: Untagged
@@ -322,3 +323,20 @@ RectTransform:
   m_AnchoredPosition: {x: -532, y: 292.39}
   m_SizeDelta: {x: 120.22, y: 124.73}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1384209956858523414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5474691578196627734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f329ad8f2d3c9e14d9439a564be79774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _roomInfo: {fileID: 11400000, guid: d329bc1c382927d41af5d597862934e2, type: 2}
+  _onRoomInfoSOChange: {fileID: 11400000, guid: f2eb7ad72f82d0c4e8b411ee623414e1,
+    type: 2}
+  _position: 0
+  _playerName: {fileID: 4556095326087360496}
