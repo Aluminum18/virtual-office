@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fab794d21cd6e74e9e5dcba1a0e01c1, type: 3}
-  m_Name: Evt_Player1_OnAim
+  m_Script: {fileID: 11500000, guid: 0b1337fff361a1041b83112e846d592d, type: 3}
+  m_Name: Var_Player_Direction
   m_EditorClassIdentifier: 
-  _eventExplaination: 
-  _logWhenRaise: 0
+  _value: {x: 0, y: 0, z: 0}

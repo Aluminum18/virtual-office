@@ -6,7 +6,7 @@ public class CharacterAttribute : MonoBehaviour
 {
     [Header("Reference")]
     [SerializeField]
-    private StringVariable _userId;
+    private StringVariable _thisClientUserId;
 
     [Header("Config")]
     [SerializeField]
@@ -15,7 +15,25 @@ public class CharacterAttribute : MonoBehaviour
     private Transform _camLook;
     [SerializeField]
     private Transform _aimLook;
+    public string AssignedUserId;
 
+    public bool IsThisPlayer
+    {
+        get
+        {
+            var characterAtt = GetComponent<CharacterAttribute>();
+            if (characterAtt == null)
+            {
+                return false;
+            }
+
+            if (!_thisClientUserId.Value.Equals(characterAtt.AssignedUserId))
+            {
+                return false;
+            }
+            return true;
+        }
+    }
     public Transform Follow
     {
         get
@@ -38,16 +56,4 @@ public class CharacterAttribute : MonoBehaviour
         }
 
     }
-    public string UserId
-    {
-        get
-        {
-            return _userId.Value;
-        }
-        set
-        {
-            _userId.Value = value;
-        }
-    }
-
 }

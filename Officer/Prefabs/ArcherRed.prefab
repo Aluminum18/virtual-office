@@ -15,6 +15,8 @@ MonoBehaviour:
   _characterState: {fileID: 11400000, guid: bfed186c4d2d04144979767670530857, type: 2}
   _rawInputMovingJoystick: {fileID: 11400000, guid: 0220127904b980941ab52d0eeaa36924,
     type: 2}
+  _userId: {fileID: 0}
+  _onCancelAim: {fileID: 0}
   _animator: {fileID: 1733638433968821853}
 --- !u!1001 &1733638433961534269
 PrefabInstance:

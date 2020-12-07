@@ -51,7 +51,7 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
                     {
                         continue;
                     }
-                    _playerMap[playerAtt.UserId] = _managedCharacters[i];
+                    _playerMap[playerAtt.AssignedUserId] = _managedCharacters[i];
                 }
             }
             return _playerMap;
@@ -96,10 +96,14 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
     private void SpawnThisPlayer()
     {
         int teamNo = _roomInfo.Team1.Contains(_userId.Value) ? 1 : 2;
+        Vector3 teamPos = teamNo == 1 ? _team1SpawnPos.localPosition : _team2SpawnPos.localPosition;
 
         List<string> team = teamNo == 1 ? _roomInfo.Team1 : _roomInfo.Team2;
 
-        var character = Instantiate(teamNo == 1 ? _archerBlue : _archerRed, _team1SpawnPos.position + Vector3.right * team.Count, Quaternion.identity);
+        var character = Instantiate(
+            teamNo == 1 ? _archerBlue : _archerRed,
+            teamPos + Vector3.right * team.Count,
+            Quaternion.identity);
 
         AddPhotonPropsToObject(character, teamNo);
         ManageCharacter(character);

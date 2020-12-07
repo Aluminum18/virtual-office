@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fab794d21cd6e74e9e5dcba1a0e01c1, type: 3}
-  m_Name: Evt_Player1_OnCancelAim
+  m_Name: Evt_Player_OnCancelAim
   m_EditorClassIdentifier: 
-  _eventExplaination: 
+  _eventExplanation: 
   _logWhenRaise: 0

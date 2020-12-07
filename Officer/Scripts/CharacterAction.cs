@@ -9,6 +9,14 @@ public class CharacterAction : MonoBehaviour
     [SerializeField]
     private StringVariable _characterState;
 
+    [Header("Events in (user input)")]
+    [SerializeField]
+    private GameEvent _onAim;
+    [SerializeField]
+    private GameEvent _onCancelAim;
+    [SerializeField]
+    private GameEvent _onShoot;
+
     [Header("Events out")]
     [SerializeField]
     private UnityEvent _onPrepareProjectile;
@@ -58,7 +66,7 @@ public class CharacterAction : MonoBehaviour
     private bool _projectileReady = false;
     private bool _lateAttack = false;
 
-    public void PrepareProjectile()
+    public void PrepareProjectile(params object[] args)
     {
         if (_isAttacking || _projectileReady)
         {
@@ -76,7 +84,7 @@ public class CharacterAction : MonoBehaviour
         _onPrepareProjectile?.Invoke();
     }
 
-    public void Shoot()
+    public void Shoot(params object[] args)
     {
         if (_projectileReady)
         {
@@ -87,9 +95,15 @@ public class CharacterAction : MonoBehaviour
         _lateAttack = true;
     }
 
-    public void ChangeState(string state)
+    public void ChangeToAttackState(params object[] args)
     {
-        _characterState.Value = state;
+        _characterState.Value = "attack";
+        _onStateChanged.Invoke();
+    }
+
+    public void ChangeToIdleState(params object[] args)
+    {
+        _characterState.Value = "idle";
         _onStateChanged.Invoke();
     }
 
@@ -101,7 +115,6 @@ public class CharacterAction : MonoBehaviour
         }
         CancelAttack = true;
     }
-
 
     private void SpawnProjectile()
     {
@@ -162,8 +175,67 @@ public class CharacterAction : MonoBehaviour
         }
     }
 
+    private void SubcribeInput()
+    {
+        if (!IsThisPlayer())
+        {
+            return;
+        }
+
+        _onAim?.Subcribe(ChangeToAttackState);
+        _onAim?.Subcribe(PrepareProjectile);
+
+        _onCancelAim?.Subcribe(ChangeToIdleState);
+        _onCancelAim?.Subcribe(CancelAttackFunc);
+
+        _onShoot?.Subcribe(PrepareProjectile);
+        _onShoot?.Subcribe(Shoot);
+    }
+
+    private void UnsubcribeInput()
+    {
+        if (!IsThisPlayer())
+        {
+            return;
+        }
+
+        _onAim?.Unsubcribe(ChangeToAttackState);
+        _onAim?.Unsubcribe(PrepareProjectile);
+
+        _onCancelAim?.Unsubcribe(ChangeToIdleState);
+        _onCancelAim?.Unsubcribe(CancelAttackFunc);
+
+        _onShoot?.Unsubcribe(PrepareProjectile);
+        _onShoot?.Unsubcribe(Shoot);
+    }    
+
+    /// <summary>
+    /// Bridge for subcribe event
+    /// </summary>
+    private void CancelAttackFunc(params object[] args)
+    {
+        CancelAttack = true;
+    }
+
+    private bool IsThisPlayer()
+    {
+        var characterAtt = GetComponent<CharacterAttribute>();
+        if (characterAtt == null)
+        {
+            return false;
+        }
+
+        return characterAtt.IsThisPlayer;
+    }
+
     private void OnEnable()
     {
-        ChangeState("idle");
+        SubcribeInput();
+        ChangeToIdleState();
+    }
+
+    private void OnDisable()
+    {
+        UnsubcribeInput();
     }
 }

@@ -7,7 +7,7 @@ public class ControlPanel : MonoBehaviour
 {
     [Header("Reference")]
     [SerializeField]
-    private InputValueHolders _inputPacks;
+    private InputValueHolders _inputValueHolders;
 
     [Header("Config")]
     [SerializeField]
@@ -25,7 +25,7 @@ public class ControlPanel : MonoBehaviour
 
     public void AttachInputHolderToUI(int playerNo)
     {
-        InputValueHolder inputHolder = _inputPacks.GetInputValueHolder(playerNo);
+        InputValueHolder inputHolder = _inputValueHolders.GetInputValueHolder(playerNo);
         if (inputHolder == null)
         {
             return;

@@ -15,6 +15,12 @@ public class CharacterAnimController : MonoBehaviour
     private StringVariable _characterState;
     [SerializeField]
     private Vector3Variable _rawInputMovingJoystick;
+    [SerializeField]
+    private StringVariable _userId;
+
+    [Header("Events in (User input)")]
+    [SerializeField]
+    private GameEvent _onCancelAim;
 
     [Header("Config")]
     [SerializeField]
@@ -34,6 +40,37 @@ public class CharacterAnimController : MonoBehaviour
         {
             return _animator.GetBool("Moving");
         }
+    }
+
+    private void SubcribeInput()
+    {
+        var characterAtt = GetComponent<CharacterAttribute>();
+        if (characterAtt == null)
+        {
+            return;
+        }
+
+        if (characterAtt.IsThisPlayer)
+        {
+            return;
+        }
+
+        _onCancelAim.Subcribe(PlayerIdleFunc);
+    }
+
+    private void PlayerIdleFunc(params object[] args)
+    {
+        PlayIdle();
+    }
+
+    private void OnEnable()
+    {
+        SubcribeInput();
+    }
+
+    private void OnDisable()
+    {
+        _onCancelAim?.Unsubcribe(PlayerIdleFunc);
     }
 
     public void PlayIdle()

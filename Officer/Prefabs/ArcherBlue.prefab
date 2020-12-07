@@ -15,7 +15,58 @@ MonoBehaviour:
   _characterState: {fileID: 11400000, guid: bfed186c4d2d04144979767670530857, type: 2}
   _rawInputMovingJoystick: {fileID: 11400000, guid: 0220127904b980941ab52d0eeaa36924,
     type: 2}
+  _userId: {fileID: 0}
+  _onCancelAim: {fileID: 0}
   _animator: {fileID: 91252544516372910}
+--- !u!114 &2954631826529638605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91252544506874472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 1
+    Name: Run
+  - Type: 9
+    SynchronizeType: 1
+    Name: Idle
+  - Type: 9
+    SynchronizeType: 1
+    Name: Aim
+  - Type: 9
+    SynchronizeType: 1
+    Name: Shoot
+  - Type: 9
+    SynchronizeType: 1
+    Name: FullAttack
+  - Type: 1
+    SynchronizeType: 1
+    Name: MovingAimX
+  - Type: 1
+    SynchronizeType: 1
+    Name: MovingAimY
+  - Type: 4
+    SynchronizeType: 1
+    Name: Moving
+  - Type: 4
+    SynchronizeType: 1
+    Name: ReadyAttack
+  m_SynchronizeLayers:
+  - SynchronizeType: 1
+    LayerIndex: 0
+  - SynchronizeType: 1
+    LayerIndex: 1
+  - SynchronizeType: 1
+    LayerIndex: 2
 --- !u!1 &1208042060442139533
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +334,7 @@ GameObject:
   - component: {fileID: 5723638257481661761}
   - component: {fileID: 8064291609965087670}
   - component: {fileID: 4553366722181270138}
-  - component: {fileID: 701601149}
+  - component: {fileID: 8814190100408984116}
   m_Layer: 0
   m_Name: ArcherBlue
   m_TagString: Untagged
@@ -429,6 +480,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterState: {fileID: 11400000, guid: bfed186c4d2d04144979767670530857, type: 2}
+  _onAim: {fileID: 11400000, guid: 055915cbaf7b0a34fa21cbfb131af35c, type: 2}
+  _onCancelAim: {fileID: 11400000, guid: f37a336395dbf1c4abb99d8b4e15aeaf, type: 2}
+  _onShoot: {fileID: 11400000, guid: bfcbf449ad4777d4f8cbef8bb2a630b4, type: 2}
   _onPrepareProjectile:
     m_PersistentCalls:
       m_Calls:
@@ -554,10 +608,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82147c9331708df4d839178789d0e646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _userId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
+  _thisClientUserId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
   _camFollow: {fileID: 7339500980596317684}
   _camLook: {fileID: 6092846164409728579}
   _aimLook: {fileID: 2085429656223461603}
+  AssignedUserId: nFqqDhSGtybUHQ5T6AeIc9cxNdk2
 --- !u!114 &4553366722181270138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,11 +632,12 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 701601149}
+  - {fileID: 8814190100408984116}
+  - {fileID: 2954631826529638605}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &701601149
+--- !u!114 &8814190100408984116
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
