@@ -46,6 +46,11 @@ public class CharacterAction : MonoBehaviour
         }
         set
         {
+            if (_cancelAttack == value)
+            {
+                return;
+            }
+
             _cancelAttack = value;
 
             if (value)
