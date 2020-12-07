@@ -14,7 +14,6 @@ public class LocalRoomInfoUpdater : MonoBehaviour
     [SerializeField]
     private RoomInfoAccessor _roomInfoDBAccessor;
 
-
     [Header("Events in")]
     [SerializeField]
     private GameEvent _onCreatedRoom;

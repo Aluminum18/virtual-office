@@ -17,6 +17,8 @@ public class RoomInfoAccessor : MonoBehaviour
     [Header("Events in")]
     [SerializeField]
     private GameEvent _onRoomPlayerDataChangedFromLocal;
+    [SerializeField]
+    private GameEvent _onPlayerReady;
 
     [Header("Events out")]
     [SerializeField]
@@ -107,6 +109,44 @@ public class RoomInfoAccessor : MonoBehaviour
             });
     }
 
+    private void UpdateReadyPlayerCount(params object[] args)
+    {
+        var db = FirebaseFirestore.DefaultInstance;
+
+        _sb.Clear();
+        _sb.Append(FireStoreCollection.MULTIPLAYER_ROOM).Append("/").Append(_roomOptions.RoomName);
+        var roomRef = db.Document(_sb.ToString());
+
+        db.RunTransactionAsync(
+            transaction =>
+            {
+                return transaction.GetSnapshotAsync(roomRef).ContinueWithOnMainThread(
+                    readTask =>
+                    {
+                        if (readTask.IsFaulted)
+                        {
+                            Debug.LogError("Fail to read room info", this);
+                            return;
+                        }
+                        var roomData = readTask.Result.ConvertTo<FireStoreRoomData>();
+                        roomData.readyOnRoyaleCount++;
+
+                        transaction.Set(roomRef, roomData, SetOptions.MergeAll);
+                    }
+                    );
+            }).ContinueWithOnMainThread(
+            transactionTask =>
+            {
+                if (transactionTask.IsFaulted)
+                {
+                    Debug.LogError("Fail to Update Ready Count", this);
+                    return;
+                }
+
+                Debug.Log("Update Ready Count success!", this);
+            });
+    }
+
     private void ListenRoomInfoChange()
     {
         if (_currentRoomName.Equals(_roomOptions.RoomName))
@@ -159,11 +199,13 @@ public class RoomInfoAccessor : MonoBehaviour
     private void OnEnable()
     {
         _onRoomPlayerDataChangedFromLocal.Subcribe(UpdateRoomPlayerInfoToDB);
+        _onPlayerReady.Subcribe(UpdateReadyPlayerCount);
     }
 
     private void OnDisable()
     {
         _onRoomPlayerDataChangedFromLocal.Unsubcribe(UpdateRoomPlayerInfoToDB);
+        _onPlayerReady.Unsubcribe(UpdateReadyPlayerCount);
     }
 
     private void OnApplicationQuit()

@@ -18,6 +18,10 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
     [SerializeField]
     private StringVariable _userId;
 
+    [Header("Events in")]
+    [SerializeField]
+    private GameEvent _onAllPlayersReady;
+
     [Header("Unity Events")]
     [SerializeField]
     private UnityEvent _onAllCharSpawned;
@@ -70,17 +74,14 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
 
     private void OnEnable()
     {
+        _onAllPlayersReady.Subcribe(SpawnThisPlayer);
         PhotonNetwork.AddCallbackTarget(this);
     }
 
     private void OnDisable()
     {
+        _onAllPlayersReady.Unsubcribe(SpawnThisPlayer);
         PhotonNetwork.RemoveCallbackTarget(this);
-    }
-
-    private void Start()
-    {
-        SpawnThisPlayer();
     }
 
     private void ManageCharacter(GameObject character)
@@ -93,7 +94,7 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
         }
     }
 
-    private void SpawnThisPlayer()
+    private void SpawnThisPlayer(params object[] args)
     {
         int teamNo = _roomInfo.Team1.Contains(_userId.Value) ? 1 : 2;
         Vector3 teamPos = teamNo == 1 ? _team1SpawnPos.localPosition : _team2SpawnPos.localPosition;

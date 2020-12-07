@@ -13,12 +13,29 @@ public class RoomInfoSO : ScriptableObject
     private GameEvent _onRoomPlayerChangedFromLocal;
     [SerializeField]
     private GameEvent _onLocalRoomPlayerModified;
+    [SerializeField]
+    private GameEvent _onAllPlayerReady;
 
     [Header("Inspec")]
     [SerializeField]
     private List<string> _team1List;
     [SerializeField]
     private List<string> _team2List;
+    [SerializeField]
+    private int _readyCount;
+
+    private int ReadyCount
+    {
+        set
+        {
+            _readyCount = value;
+
+            if (_readyCount == PlayerCount)
+            {
+                _onAllPlayerReady?.Raise();
+            }
+        }
+    }
 
     public List<string> Team1
     {
@@ -161,6 +178,7 @@ public class RoomInfoSO : ScriptableObject
 
         _team1List = roomData.team1;
         _team2List = roomData.team2;
+        ReadyCount = roomData.readyOnRoyaleCount;
 
         _onLocalRoomPlayerModified?.Raise();
     }

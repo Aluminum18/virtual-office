@@ -63,7 +63,6 @@ public class CharacterMoving : MonoBehaviour
         if (_direction.Equals(Vector3.zero))
         {
             _onStop.Invoke();
-            Debug.Log("TestStop");
             return;
         }
 
@@ -77,7 +76,6 @@ public class CharacterMoving : MonoBehaviour
             return;
         }
         _onStartMove.Invoke();
-        Debug.Log("TestStart");
         StartCoroutine(IE_Move());
     }  
 
@@ -87,7 +85,6 @@ public class CharacterMoving : MonoBehaviour
 
         while (!_direction.Equals(Vector3.zero))
         {
-            Debug.Log("Move");
             _chaCon.SimpleMove(_direction * _moveSpeed * _moveFactor);
 
             yield return null;

@@ -13,5 +13,8 @@ public class FireStoreRoomData
     [FirestoreProperty]
     public List<string> team2 { get; set; }
     [FirestoreProperty]
+    public int readyOnRoyaleCount { get; set; }
+    [FirestoreProperty]
     public int maxPlayerPerTeam { get; set; }
+
 }
