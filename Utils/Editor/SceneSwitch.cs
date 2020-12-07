@@ -6,11 +6,13 @@ using UnityEditor;
 
 public static class SceneSwitch
 {
-    private const string MAIN_SCENE = "Assets/Scenes/main.unity";
-    private const string SPLASH_SCENE = "Assets/Scenes/splash.unity";
-    private const string LOBBY_SCENE = "Assets/Scenes/lobby.unity";
-    private const string ROYALE_SCENE = "Assets/Scenes/RoyaleScene.unity";
-    private const string ROOM_SCENE = "Assets/Scenes/room.unity";
+    private const string MAIN_SCENE = SCENE_FOLDER      + "main.unity";
+    private const string SPLASH_SCENE = SCENE_FOLDER    + "splash.unity";
+    private const string LOBBY_SCENE = SCENE_FOLDER     + "lobby.unity";
+    private const string ROYALE_SCENE = SCENE_FOLDER    + "RoyaleScene.unity";
+    private const string ROOM_SCENE = SCENE_FOLDER      + "room.unity";
+
+    private const string SCENE_FOLDER = "Assets/Game/Scenes/";
 
     [MenuItem("ChangeScene/To main")]
     public static void ToMainScene()
