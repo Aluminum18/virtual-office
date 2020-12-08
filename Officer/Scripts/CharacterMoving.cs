@@ -10,7 +10,7 @@ public class CharacterMoving : MonoBehaviour
     [SerializeField]
     private Vector3Variable _joystickDirection;
     [SerializeField]
-    private StringVariable _characterState;
+    private StringVariable _userId;
 
     [Header("Events out")]
     [SerializeField]
@@ -32,18 +32,58 @@ public class CharacterMoving : MonoBehaviour
     private Vector3 _direction;
     private CharacterController _chaCon;
 
+    private bool IsThisPlayer
+    {
+        get
+        {
+            var att = GetComponent<CharacterAttribute>();
+            if (att == null)
+            {
+                return true;
+            }
+
+            if (att.AssignedUserId == _userId.Value)
+            {
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+
     public void SetMoveFactor(float factor)
     {
         _moveFactor = factor;
     }
 
-    private void Awake()
+    private void OnEnable ()
     {
+        CheckAndSubcribeInput();
+    }
+
+    private void CheckAndSubcribeInput()
+    {
+        if (_joystickDirection == null)
+        {
+            return;
+        }
+
+        if (!IsThisPlayer)
+        {
+            return;
+        }
+
         _joystickDirection.OnValueChange += UpdateDirection;
     }
 
     private void OnDisable()
     {
+        if (_joystickDirection == null)
+        {
+            return;
+        }
+
         _joystickDirection.OnValueChange -= UpdateDirection;
     }
 
@@ -92,7 +132,6 @@ public class CharacterMoving : MonoBehaviour
 
         _isMoving = false;
     }
-
 
     /// <summary>
     /// find x and y in unit circle so that x/y = a/b (x and y same sign as a and b)

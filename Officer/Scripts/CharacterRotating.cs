@@ -8,6 +8,8 @@ public class CharacterRotating : MonoBehaviour
     [SerializeField]
     private Vector3Variable _joystick;
     [SerializeField]
+    private StringVariable _userId;
+    [SerializeField]
     private StringVariable _characterState;
 
     [Header("Config")]
@@ -19,6 +21,25 @@ public class CharacterRotating : MonoBehaviour
 
     private bool _isRotating;
     private Vector3 _direction;
+
+    private bool IsThisPlayer
+    {
+        get
+        {
+            var att = GetComponent<CharacterAttribute>();
+            if (att == null)
+            {
+                return true;
+            }
+
+            if (att.AssignedUserId == _userId.Value)
+            {
+                return true;
+            }
+
+            return false;
+        }
+    }
 
     private void UpdateDirection(Vector3 direction)
     {
@@ -70,6 +91,21 @@ public class CharacterRotating : MonoBehaviour
 
     private void OnEnable()
     {
+        CheckAndSubcribeInput();
+    }
+
+    private void CheckAndSubcribeInput()
+    {
+        if (_joystick == null)
+        {
+            return;
+        }
+
+        if (!IsThisPlayer)
+        {
+            return;
+        }
+
         _joystick.OnValueChange += UpdateDirection;
     }
 
