@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fab794d21cd6e74e9e5dcba1a0e01c1, type: 3}
   m_Name: Evt_User_OnPlayerReady
   m_EditorClassIdentifier: 
-  _eventExplanation: 
+  _eventExplanation: Handled by RoomInfoDBAccessor
   _logWhenRaise: 0

@@ -106,6 +106,8 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
             teamPos + Vector3.right * team.Count,
             Quaternion.identity);
 
+        character.GetComponent<CharacterAttribute>().AssignedUserId = _userId.Value;
+
         AddPhotonPropsToObject(character, teamNo);
         ManageCharacter(character);
     }
@@ -117,9 +119,11 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
         Quaternion rotation = (Quaternion)data[1];
         int viewId = (int)data[2];
         int team = (int)data[3];
+        string userId = (string)data[4];
 
         var character = Instantiate(team == 1 ? _archerBlue : _archerRed, position, rotation);
         character.GetComponent<PhotonView>().ViewID = viewId;
+        character.GetComponent<CharacterAttribute>().AssignedUserId = userId;
 
         ManageCharacter(character);
     }
@@ -149,7 +153,8 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
             go.transform.position,
             go.transform.rotation,
             photonView.ViewID,
-            team
+            team,
+            _userId.Value
         };
 
         RaiseEventOptions eventOptions = new RaiseEventOptions
