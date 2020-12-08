@@ -5,5 +5,5 @@ using UnityEngine;
 public static class PhotonEventCode
 {
     public const byte MANUAL_CHARACTER_SPAWNED = 0;
-    public const byte LOAD_ROYALE_SCENE = 1;
+    public const byte LOAD_SCENE = 1;
 }

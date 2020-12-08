@@ -25,11 +25,16 @@ public class NetworkLoadScene : MonoBehaviour, IOnEventCallback
             Reliability = true
         };
 
-        PhotonNetwork.RaiseEvent(PhotonEventCode.LOAD_ROYALE_SCENE, nextSceneName, eventOptions, sendOptions);
+        PhotonNetwork.RaiseEvent(PhotonEventCode.LOAD_SCENE, nextSceneName, eventOptions, sendOptions);
     }
 
     public void OnEvent(EventData photonEvent)
     {
+        if (photonEvent.Code != PhotonEventCode.LOAD_SCENE)
+        {
+            return;
+        }
+
         string nextSceneName = (string)photonEvent.CustomData;
 
         _sceneLoader.LoadNextSceneWithName(nextSceneName);

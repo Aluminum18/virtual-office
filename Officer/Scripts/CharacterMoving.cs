@@ -51,7 +51,6 @@ public class CharacterMoving : MonoBehaviour
         }
     }
 
-
     public void SetMoveFactor(float factor)
     {
         _moveFactor = factor;
