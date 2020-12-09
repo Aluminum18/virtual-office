@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterAnimController : MonoBehaviour
 {
-    private const int IDLE = 0;
+    private const string IDLE = "Idle";
     private const int RUN = 1;
     private const int FULL_ATTACK = 2;
     private const int AIM = 3;
