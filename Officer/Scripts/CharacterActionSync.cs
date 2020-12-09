@@ -25,7 +25,7 @@ public class CharacterActionSync : MonoBehaviour
     [PunRPC]
     public void PrepareProjectileRPC(string userId)
     {
-        if (_userId.Value != _characterAtt.AssignedUserId)
+        if (userId != _characterAtt.AssignedUserId)
         {
             return;
         }
@@ -39,7 +39,7 @@ public class CharacterActionSync : MonoBehaviour
     [PunRPC]
     public void CancelAttackRPC(string userId)
     {
-        if (_userId.Value != _characterAtt.AssignedUserId)
+        if (userId != _characterAtt.AssignedUserId)
         {
             return;
         }
@@ -54,7 +54,7 @@ public class CharacterActionSync : MonoBehaviour
     [PunRPC]
     public void SpawnProjectTileRPC(string userId)
     {
-        if (_userId.Value != _characterAtt.AssignedUserId)
+        if (userId != _characterAtt.AssignedUserId)
         {
             return;
         }
@@ -69,7 +69,7 @@ public class CharacterActionSync : MonoBehaviour
     [PunRPC]
     public void ChangeStateRPC(string userId, string state)
     {
-        if (_userId.Value != _characterAtt.AssignedUserId)
+        if (userId != _characterAtt.AssignedUserId)
         {
             return;
         }
