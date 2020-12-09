@@ -89,7 +89,7 @@ public class CharacterRotating : MonoBehaviour
         _isRotating = false;
     }
 
-    private void OnEnable()
+    private void Start()
     {
         CheckAndSubcribeInput();
     }

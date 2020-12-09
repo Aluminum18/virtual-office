@@ -56,11 +56,6 @@ public class CharacterMoving : MonoBehaviour
         _moveFactor = factor;
     }
 
-    private void OnEnable ()
-    {
-        CheckAndSubcribeInput();
-    }
-
     private void CheckAndSubcribeInput()
     {
         if (_joystickDirection == null)
@@ -88,6 +83,7 @@ public class CharacterMoving : MonoBehaviour
 
     private void Start()
     {
+        CheckAndSubcribeInput();
         _chaCon = GetComponent<CharacterController>();
     }
 
