@@ -8,6 +8,8 @@ public class CharacterAction : MonoBehaviour
     [Header("Reference")]
     [SerializeField]
     private StringVariable _characterState;
+    [SerializeField]
+    private CharacterActionSync _actionSync;
 
     [Header("Events in (user input)")]
     [SerializeField]
@@ -38,6 +40,15 @@ public class CharacterAction : MonoBehaviour
     [SerializeField]
     private float _timeToNextAttack = 0;
 
+
+    private bool _cancelAttack = false;
+
+    private bool _isAttacking = false;
+
+    private bool _projectileReady = false;
+    private bool _lateAttack = false;
+
+    #region Action could be network awared
     public bool CancelAttack
     {
         get
@@ -63,13 +74,6 @@ public class CharacterAction : MonoBehaviour
             }
         }
     }
-
-    private bool _cancelAttack = false;
-
-    private bool _isAttacking = false;
-
-    private bool _projectileReady = false;
-    private bool _lateAttack = false;
 
     public void PrepareProjectile(params object[] args)
     {
@@ -111,7 +115,7 @@ public class CharacterAction : MonoBehaviour
         _characterState.Value = "idle";
         _onStateChanged.Invoke();
     }
-
+    #endregion
     public void CheckCancelAttackOnMove()
     {
         if (_characterState.Value == CharacterState.STATE_READY_ATTACK)

@@ -58,11 +58,6 @@ public class CharacterAnimController : MonoBehaviour
         _onCancelAim.Subcribe(PlayerIdleFunc);
     }
 
-    private void PlayerIdleFunc(params object[] args)
-    {
-        PlayIdle();
-    }
-
     private void OnEnable()
     {
         SubcribeInput();
@@ -104,11 +99,6 @@ public class CharacterAnimController : MonoBehaviour
         _animator.SetFloat("MovingAimY", _rawInputMovingJoystick.Value.y);
     }
 
-    public void SetLayerWeight(int layerIndex, float weight)
-    {
-        _animator.SetLayerWeight(layerIndex, weight);
-    }
-
     public void UpdateReadyAttackState()
     {
         bool readyAttack = _characterState.Value == CharacterState.STATE_READY_ATTACK;
@@ -127,4 +117,15 @@ public class CharacterAnimController : MonoBehaviour
         SetLayerWeight(1, 0f);
         SetLayerWeight(2, 0f);
     }
+
+    private void SetLayerWeight(int layerIndex, float weight)
+    {
+        _animator.SetLayerWeight(layerIndex, weight);
+    }
+
+    private void PlayerIdleFunc(params object[] args)
+    {
+        PlayIdle();
+    }
+
 }
