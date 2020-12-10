@@ -17,6 +17,8 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
     private RoomInfoSO _roomInfo;
     [SerializeField]
     private StringVariable _userId;
+    [SerializeField]
+    private InputValueHolders _inputHolders;
 
     [Header("Events in")]
     [SerializeField]
@@ -94,6 +96,30 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
         }
     }
 
+    private void MapPlayerToInputHolder(GameObject character)
+    {
+        var characterAtt = character.GetComponent<CharacterAttribute>();
+        if (characterAtt == null)
+        {
+            return;
+        }
+
+        int chaPos = _roomInfo.GetPlayerPos(characterAtt.AssignedUserId);
+        if (chaPos == -1)
+        {
+            return;
+        }
+
+        InputValueHolder holder = _inputHolders.GetInputValueHolder(chaPos);
+        if (holder == null)
+        {
+            return;
+        }
+        characterAtt.AnimController.SetInputCharacterState(holder.CharacterState);
+        character.GetComponent<CharacterRotating>().SetCharacterState(holder.CharacterState);
+        character.GetComponent<CharacterAction>().SetInputCharacterState(holder.CharacterState);
+    }
+
     private void SpawnThisPlayer(params object[] args)
     {
         int teamNo = _roomInfo.Team1.Contains(_userId.Value) ? 1 : 2;
@@ -110,6 +136,7 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
 
         AddPhotonPropsToObject(character, teamNo);
         ManageCharacter(character);
+        MapPlayerToInputHolder(character);
     }
 
     private void SpawnCharacterResponseToEvent(EventData photonEvent)
@@ -126,6 +153,7 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
         character.GetComponent<CharacterAttribute>().AssignedUserId = userId;
 
         ManageCharacter(character);
+        MapPlayerToInputHolder(character);
     }
 
     private void AddPhotonPropsToObject(GameObject go, int team)

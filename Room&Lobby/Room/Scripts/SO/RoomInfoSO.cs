@@ -99,6 +99,22 @@ public class RoomInfoSO : ScriptableObject
         return _team1List[posInList];
     }
 
+    public int GetPlayerPos(string userId)
+    {
+        if (_team1List.Contains(userId))
+        {
+            return _team1List.IndexOf(userId) + 1;
+        }
+
+        if (_team2List.Contains(userId))
+        {
+            return _team2List.IndexOf(userId) + _roomOption.MaxPlayersPerTeam + 1;
+        }
+
+        Debug.LogError($"Cannot find position of userId [{userId}]", this);
+        return -1;
+    }
+
     public void AddToTeam1(string playerId, bool notifyChanged = false)
     {
         if (_team1List.Count >= _roomOption.MaxPlayersPerTeam)

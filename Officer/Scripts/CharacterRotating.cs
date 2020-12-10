@@ -41,6 +41,11 @@ public class CharacterRotating : MonoBehaviour
         }
     }
 
+    public void SetCharacterState(StringVariable inputCharacterState)
+    {
+        _characterState = inputCharacterState;
+    }
+
     private void UpdateDirection(Vector3 direction)
     {
         if (direction.Equals(Vector3.zero))

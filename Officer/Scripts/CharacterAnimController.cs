@@ -28,6 +28,11 @@ public class CharacterAnimController : MonoBehaviour
     [SerializeField]
     private CharacterAttribute _characterAtt;
 
+    public void SetInputCharacterState(StringVariable characterState)
+    {
+        _characterState = characterState;
+    }
+
     private bool IsReadyAttackParam
     {
         get

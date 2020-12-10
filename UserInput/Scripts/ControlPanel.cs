@@ -52,17 +52,17 @@ public class ControlPanel : MonoBehaviour
             shoot.Raise();
         });
 
-        var skill1 = inputHolder.OnSkill1;
-        _skill1Button.onClick.AddListener(() =>
-        {
-            skill1.Raise();
-        });
+        //var skill1 = inputHolder.OnSkill1;
+        //_skill1Button.onClick.AddListener(() =>
+        //{
+        //    skill1.Raise();
+        //});
 
-        var skill2 = inputHolder.OnSkill2;
-        _skill2Button.onClick.AddListener(() =>
-        {
-            skill2.Raise();
-        });
+        //var skill2 = inputHolder.OnSkill2;
+        //_skill2Button.onClick.AddListener(() =>
+        //{
+        //    skill2.Raise();
+        //});
     }
 
     public void DetachInputHolderFromUI()
@@ -72,8 +72,8 @@ public class ControlPanel : MonoBehaviour
         _aimButton.onClick.RemoveAllListeners();
         _cancelAimButton.onClick.RemoveAllListeners();
         _shootButton.onClick.RemoveAllListeners();
-        _skill1Button.onClick.RemoveAllListeners();
-        _skill2Button.onClick.RemoveAllListeners();
+        //_skill1Button.onClick.RemoveAllListeners();
+        //_skill2Button.onClick.RemoveAllListeners();
     }
 
     private void OnDisable()

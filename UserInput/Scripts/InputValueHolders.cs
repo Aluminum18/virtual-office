@@ -41,6 +41,8 @@ public class InputValueHolder
     public int PlayerNo;
     public Vector3Variable JoyStickDirection;
     public Vector3Variable JoyStickRaw;
+    public Vector3Variable AimSpot;
+    public StringVariable CharacterState;
     public GameEvent OnShoot;
     public GameEvent OnAim;
     public GameEvent OnCancelAim;

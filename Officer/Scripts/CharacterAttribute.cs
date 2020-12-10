@@ -15,6 +15,8 @@ public class CharacterAttribute : MonoBehaviour
     private Transform _camLook;
     [SerializeField]
     private Transform _aimLook;
+    [SerializeField]
+    private CharacterAnimController _animController;
     public string AssignedUserId;
 
     public bool IsThisPlayer
@@ -55,5 +57,12 @@ public class CharacterAttribute : MonoBehaviour
             return _aimLook;
         }
 
+    }
+    public CharacterAnimController AnimController
+    {
+        get
+        {
+            return _animController;
+        }
     }
 }

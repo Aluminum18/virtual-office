@@ -73,6 +73,11 @@ public class CharacterAction : MonoBehaviour
         }
     }
 
+    public void SetInputCharacterState(StringVariable characterState)
+    {
+        _characterState = characterState;
+    }
+
     public void PrepareProjectile(params object[] args)
     {
         if (_isAttacking || _projectileReady)

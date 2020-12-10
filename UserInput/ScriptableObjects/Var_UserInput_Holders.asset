@@ -14,51 +14,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputValueHolderList:
   - PlayerNo: 0
-    JoyStickDirection: {fileID: 11400000, guid: 79601002818f2414eb597c0833e10da5,
+    JoyStickDirection: {fileID: 11400000, guid: 492af0ab120cc884ba0e8ee04f895704,
       type: 2}
-    JoyStickRaw: {fileID: 11400000, guid: be668b4f3a63db644bb038dabb5ced44, type: 2}
+    JoyStickRaw: {fileID: 11400000, guid: 0220127904b980941ab52d0eeaa36924, type: 2}
+    AimSpot: {fileID: 11400000, guid: c64996ae82b72694dabb27c7077c9928, type: 2}
+    CharacterState: {fileID: 11400000, guid: bfed186c4d2d04144979767670530857, type: 2}
     OnShoot: {fileID: 11400000, guid: bfcbf449ad4777d4f8cbef8bb2a630b4, type: 2}
     OnAim: {fileID: 11400000, guid: 055915cbaf7b0a34fa21cbfb131af35c, type: 2}
     OnCancelAim: {fileID: 11400000, guid: f37a336395dbf1c4abb99d8b4e15aeaf, type: 2}
     OnSkill1: {fileID: 0}
     OnSkill2: {fileID: 0}
   - PlayerNo: 0
-    JoyStickDirection: {fileID: 0}
-    JoyStickRaw: {fileID: 0}
-    OnShoot: {fileID: 0}
-    OnAim: {fileID: 0}
-    OnCancelAim: {fileID: 0}
+    JoyStickDirection: {fileID: 11400000, guid: 5650280bb8ada2a418d2589a1d7cc14c,
+      type: 2}
+    JoyStickRaw: {fileID: 11400000, guid: 2b26255ac7a83a245a4eb7617b91ef62, type: 2}
+    AimSpot: {fileID: 11400000, guid: c8cc95735b76f7a4aa959b56274ebb40, type: 2}
+    CharacterState: {fileID: 11400000, guid: 065cb89147b55e3429703072984ab62b, type: 2}
+    OnShoot: {fileID: 11400000, guid: 44fd2d5c7c80a1d4c9841d12399c2ef7, type: 2}
+    OnAim: {fileID: 11400000, guid: f0cca889f9734e947a0247c4f70225d1, type: 2}
+    OnCancelAim: {fileID: 11400000, guid: 372127a1609a26a4284e246b992f850b, type: 2}
     OnSkill1: {fileID: 0}
     OnSkill2: {fileID: 0}
   - PlayerNo: 0
-    JoyStickDirection: {fileID: 0}
-    JoyStickRaw: {fileID: 0}
-    OnShoot: {fileID: 0}
-    OnAim: {fileID: 0}
-    OnCancelAim: {fileID: 0}
+    JoyStickDirection: {fileID: 11400000, guid: 1d07b881ac46e604686836c956153f6a,
+      type: 2}
+    JoyStickRaw: {fileID: 11400000, guid: 5341c87717bddb047b62d2df91371c28, type: 2}
+    AimSpot: {fileID: 11400000, guid: 3c52f41f604d4be48bffd8d871cbe8ef, type: 2}
+    CharacterState: {fileID: 11400000, guid: 3e1ea974658306b4aa5e552f3b29281b, type: 2}
+    OnShoot: {fileID: 11400000, guid: dd4269d1054d79c4e851071999dd7cc6, type: 2}
+    OnAim: {fileID: 11400000, guid: ec5368ed12044724abc06c4ecd4cf8f8, type: 2}
+    OnCancelAim: {fileID: 11400000, guid: f3ddf5d11fb800244b006fef6faa78ac, type: 2}
     OnSkill1: {fileID: 0}
     OnSkill2: {fileID: 0}
   - PlayerNo: 0
-    JoyStickDirection: {fileID: 0}
-    JoyStickRaw: {fileID: 0}
-    OnShoot: {fileID: 0}
-    OnAim: {fileID: 0}
-    OnCancelAim: {fileID: 0}
+    JoyStickDirection: {fileID: 11400000, guid: e4c60c66df4711f428891a808cb47132,
+      type: 2}
+    JoyStickRaw: {fileID: 11400000, guid: 91e730b20e618b24aa4eeb6798f4d02d, type: 2}
+    AimSpot: {fileID: 11400000, guid: 75b3526716bb2724db68fbd4da7d565f, type: 2}
+    CharacterState: {fileID: 11400000, guid: feedaecc71ce7974783bf230fd858f63, type: 2}
+    OnShoot: {fileID: 11400000, guid: 353cdf412fea73b439bcdc8aa15beef9, type: 2}
+    OnAim: {fileID: 11400000, guid: 0f3b09579ca307e4d8167000802232b5, type: 2}
+    OnCancelAim: {fileID: 11400000, guid: b26089e07f4672a4a82626568308448f, type: 2}
     OnSkill1: {fileID: 0}
     OnSkill2: {fileID: 0}
   - PlayerNo: 0
-    JoyStickDirection: {fileID: 0}
-    JoyStickRaw: {fileID: 0}
-    OnShoot: {fileID: 0}
-    OnAim: {fileID: 0}
-    OnCancelAim: {fileID: 0}
+    JoyStickDirection: {fileID: 11400000, guid: 2623c3a77509b894a8faad3ff924967e,
+      type: 2}
+    JoyStickRaw: {fileID: 11400000, guid: 1c4f42f0a5ac3304f91b7ee880f66c4d, type: 2}
+    AimSpot: {fileID: 11400000, guid: d01a3bc07ff09c54e8619df5f845d187, type: 2}
+    CharacterState: {fileID: 11400000, guid: 4dba6694a3621a64f80295ffb9810e4c, type: 2}
+    OnShoot: {fileID: 11400000, guid: dcc0fa0da97960d4b83c7a627de39ff4, type: 2}
+    OnAim: {fileID: 11400000, guid: dc87c6a650b92694fb4f9f27b385019d, type: 2}
+    OnCancelAim: {fileID: 11400000, guid: 93730c6b260268746bab54ebb32d4f66, type: 2}
     OnSkill1: {fileID: 0}
     OnSkill2: {fileID: 0}
   - PlayerNo: 0
-    JoyStickDirection: {fileID: 0}
-    JoyStickRaw: {fileID: 0}
-    OnShoot: {fileID: 0}
-    OnAim: {fileID: 0}
-    OnCancelAim: {fileID: 0}
+    JoyStickDirection: {fileID: 11400000, guid: 8794146595f0f074681c26e8484dbda4,
+      type: 2}
+    JoyStickRaw: {fileID: 11400000, guid: c11e899dd7be1554c92a7e5a085a42ae, type: 2}
+    AimSpot: {fileID: 11400000, guid: c2d989db2ad2b6e409c4066553e2addd, type: 2}
+    CharacterState: {fileID: 11400000, guid: af4842ef5311a414787bd8413700dc9c, type: 2}
+    OnShoot: {fileID: 11400000, guid: b3d35f9f4c3aa314c86aa9861b9baf61, type: 2}
+    OnAim: {fileID: 11400000, guid: 3656c32a5f7fc4b4da5d8023b8abf939, type: 2}
+    OnCancelAim: {fileID: 11400000, guid: 3b420cb8467d0534c8f0af7ac06c03a2, type: 2}
     OnSkill1: {fileID: 0}
     OnSkill2: {fileID: 0}

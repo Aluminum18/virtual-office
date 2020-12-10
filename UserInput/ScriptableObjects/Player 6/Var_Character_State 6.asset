@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a20bb84c6ad4c04892e0f829119fe2a, type: 3}
-  m_Name: Var_Character_State
+  m_Name: Var_Character_State 6
   m_EditorClassIdentifier: 
   _value: 
