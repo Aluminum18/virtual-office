@@ -235,17 +235,13 @@ public class CharacterAction : MonoBehaviour
         return characterAtt.IsThisPlayer;
     }
 
-    private void OnEnable()
-    {
-        SubcribeInput();
-    }
-
     private void Start()
     {
+        SubcribeInput();
         ChangeToIdleState();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         UnsubcribeInput();
     }

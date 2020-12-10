@@ -71,7 +71,7 @@ public class CharacterMoving : MonoBehaviour
         _joystickDirection.OnValueChange += UpdateDirection;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         if (_joystickDirection == null)
         {
