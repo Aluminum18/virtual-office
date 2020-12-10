@@ -72,7 +72,6 @@ public class CharacterAnimController : MonoBehaviour
 
     public void PlayIdle()
     {
-        Debug.Log("Play idle");
         _animator.SetTrigger("Idle");
     }
 

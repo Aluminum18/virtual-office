@@ -18,6 +18,7 @@ MonoBehaviour:
   _userId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
   _onCancelAim: {fileID: 11400000, guid: f37a336395dbf1c4abb99d8b4e15aeaf, type: 2}
   _animator: {fileID: 1733638433968821853}
+  _characterAtt: {fileID: 2616382094832163973}
 --- !u!1001 &1733638433961534269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246,3 +247,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5450868309715588915}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2616382094832163973 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8064291609965087670, guid: 145e4762876f94e47a16e01ade026458,
+    type: 3}
+  m_PrefabInstance: {fileID: 5450868309715588915}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82147c9331708df4d839178789d0e646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
