@@ -237,6 +237,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArcherRed
       objectReference: {fileID: 0}
+    - target: {fileID: 8064291609965087670, guid: 145e4762876f94e47a16e01ade026458,
+        type: 3}
+      propertyPath: _animController
+      value: 
+      objectReference: {fileID: 8478682289011821870}
     m_RemovedComponents:
     - {fileID: 91252544516372910, guid: 145e4762876f94e47a16e01ade026458, type: 3}
     - {fileID: 1168680051759200223, guid: 145e4762876f94e47a16e01ade026458, type: 3}

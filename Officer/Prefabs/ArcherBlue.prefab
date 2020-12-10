@@ -614,6 +614,7 @@ MonoBehaviour:
   _camFollow: {fileID: 7339500980596317684}
   _camLook: {fileID: 6092846164409728579}
   _aimLook: {fileID: 2085429656223461603}
+  _animController: {fileID: 1168680051759200223}
   AssignedUserId: nFqqDhSGtybUHQ5T6AeIc9cxNdk2
 --- !u!114 &4553366722181270138
 MonoBehaviour:
