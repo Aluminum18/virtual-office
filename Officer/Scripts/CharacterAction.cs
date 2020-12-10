@@ -8,8 +8,6 @@ public class CharacterAction : MonoBehaviour
     [Header("Reference")]
     [SerializeField]
     private StringVariable _characterState;
-    [SerializeField]
-    private CharacterActionSync _actionSync;
 
     [Header("Events in (user input)")]
     [SerializeField]

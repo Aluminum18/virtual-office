@@ -18,6 +18,7 @@ MonoBehaviour:
   _userId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
   _onCancelAim: {fileID: 11400000, guid: f37a336395dbf1c4abb99d8b4e15aeaf, type: 2}
   _animator: {fileID: 91252544516372910}
+  _characterAtt: {fileID: 8064291609965087670}
 --- !u!1 &1208042060442139533
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +434,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterState: {fileID: 11400000, guid: bfed186c4d2d04144979767670530857, type: 2}
-  _actionSync: {fileID: 0}
   _onAim: {fileID: 11400000, guid: 055915cbaf7b0a34fa21cbfb131af35c, type: 2}
   _onCancelAim: {fileID: 11400000, guid: f37a336395dbf1c4abb99d8b4e15aeaf, type: 2}
   _onShoot: {fileID: 11400000, guid: bfcbf449ad4777d4f8cbef8bb2a630b4, type: 2}
@@ -501,18 +501,6 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 1
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1168680051759200223}
-        m_TargetAssemblyTypeName: CharacterAnimController, Assembly-CSharp
-        m_MethodName: PlayIdle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2

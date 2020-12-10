@@ -25,6 +25,8 @@ public class CharacterAnimController : MonoBehaviour
     [Header("Config")]
     [SerializeField]
     private Animator _animator;
+    [SerializeField]
+    private CharacterAttribute _characterAtt;
 
     private bool IsReadyAttackParam
     {
@@ -44,13 +46,13 @@ public class CharacterAnimController : MonoBehaviour
 
     private void SubcribeInput()
     {
-        var characterAtt = GetComponent<CharacterAttribute>();
-        if (characterAtt == null)
+        if (_characterAtt == null)
         {
+            Debug.LogError("Missing CharacterAttribute!", this);
             return;
         }
 
-        if (characterAtt.IsThisPlayer)
+        if (!_characterAtt.IsThisPlayer)
         {
             return;
         }
@@ -58,18 +60,19 @@ public class CharacterAnimController : MonoBehaviour
         _onCancelAim.Subcribe(PlayerIdleFunc);
     }
 
-    private void OnEnable()
+    private void Start()
     {
         SubcribeInput();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         _onCancelAim?.Unsubcribe(PlayerIdleFunc);
     }
 
     public void PlayIdle()
     {
+        Debug.Log("Play idle");
         _animator.SetTrigger("Idle");
     }
 
