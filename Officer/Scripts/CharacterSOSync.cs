@@ -104,7 +104,7 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
 
         object[] data = new object[]
         {
-            _userId,
+            _userId.Value,
             eventData
         };
 
