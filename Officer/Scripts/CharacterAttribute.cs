@@ -16,6 +16,8 @@ public class CharacterAttribute : MonoBehaviour
     [SerializeField]
     private Transform _aimLook;
     [SerializeField]
+    private ArrowSpawner _arrowSpawner;
+    [SerializeField]
     private CharacterAnimController _animController;
     public string AssignedUserId;
 
@@ -63,6 +65,13 @@ public class CharacterAttribute : MonoBehaviour
         get
         {
             return _animController;
+        }
+    }
+    public ArrowSpawner ArrowSpawner
+    {
+        get
+        {
+            return _arrowSpawner;
         }
     }
 }

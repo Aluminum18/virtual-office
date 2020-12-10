@@ -20,6 +20,16 @@ public class ArrowSpawner : MonoBehaviour
     [SerializeField]
     private float _arrowSpeed;
 
+    public void SetAimSpotInput(Vector3Variable aimSpot)
+    {
+        _aimSpot = aimSpot;
+    }
+
+    public void SetState(StringVariable state)
+    {
+        _charaterState = state;
+    }
+
     public void FireArrow()
     {
         GameObject arrow = _arrowPool.Spawn();
