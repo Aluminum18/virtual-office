@@ -667,6 +667,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _userId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
   _characterState: {fileID: 11400000, guid: bfed186c4d2d04144979767670530857, type: 2}
+  _photonView: {fileID: 4553366722181270138}
+  _characterAction: {fileID: 5723638257481661761}
+  _characterAtt: {fileID: 8064291609965087670}
 --- !u!1001 &91252544506907854
 PrefabInstance:
   m_ObjectHideFlags: 0

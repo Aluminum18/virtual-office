@@ -5,8 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PhotonView))]
-[RequireComponent(typeof(CharacterAction))]
 public class CharacterActionSync : MonoBehaviour
 {
     [SerializeField]
@@ -14,8 +12,12 @@ public class CharacterActionSync : MonoBehaviour
     [SerializeField]
     private StringVariable _characterState;
 
+    [Header("Config")]
+    [SerializeField]
     private PhotonView _photonView;
+    [SerializeField]
     private CharacterAction _characterAction;
+    [SerializeField]
     private CharacterAttribute _characterAtt;
 
     public void CallPrepareProjectTile()
@@ -82,12 +84,5 @@ public class CharacterActionSync : MonoBehaviour
         {
             _characterAction.ChangeToAttackState();
         }
-    }
-
-    private void OnEnable()
-    {
-        _photonView = GetComponent<PhotonView>();
-        _characterAction = GetComponent<CharacterAction>();
-        _characterAtt = GetComponent<CharacterAttribute>();
     }
 }
