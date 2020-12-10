@@ -238,6 +238,10 @@ public class CharacterAction : MonoBehaviour
     private void OnEnable()
     {
         SubcribeInput();
+    }
+
+    private void Start()
+    {
         ChangeToIdleState();
     }
 
