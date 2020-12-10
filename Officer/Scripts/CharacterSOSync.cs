@@ -27,7 +27,7 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
             return;
         }
 
-        byte eventCode = (byte)photonEvent[1];
+        byte eventCode = photonEvent.Code;
         switch (eventCode)
         {
             case PhotonEventCode.CHARACTER_DIRECTION_SO_CHANGE:
