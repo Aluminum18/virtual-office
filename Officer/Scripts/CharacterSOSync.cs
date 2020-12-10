@@ -130,6 +130,16 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
         RegisterEvents();
     }
 
+    private void OnEnable()
+    {
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+
+    private void OnDisable()
+    {
+        PhotonNetwork.RemoveCallbackTarget(this);
+    }
+
     private void OnDestroy()
     {
         UnregisterEvents();
