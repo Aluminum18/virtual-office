@@ -20,7 +20,8 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
 
     public void OnEvent(EventData photonEvent)
     {
-        string changedUserId = (string)photonEvent[0];
+        object[] data = (object[])photonEvent.CustomData;
+        string changedUserId = (string)data[0];
         if (_attribute.AssignedUserId != changedUserId)
         {
             return;
@@ -31,17 +32,17 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
         {
             case PhotonEventCode.CHARACTER_DIRECTION_SO_CHANGE:
                 {
-                    UpdateDirectionChange((Vector3)photonEvent[1]);
+                    UpdateDirectionChange((Vector3)data[1]);
                     break;
                 }
             case PhotonEventCode.CHARACTER_RAW_JOYSTICK_SO_CHANGE:
                 {
-                    UpdateRawJoystickChange((Vector3)photonEvent[1]);
+                    UpdateRawJoystickChange((Vector3)data[1]);
                     break;
                 }
             case PhotonEventCode.CHARACTER_AIM_SPOT_SO_CHANGE:
                 {
-                    UpdateAimSpotChange((Vector3)photonEvent[1]);
+                    UpdateAimSpotChange((Vector3)data[1]);
                     break;
                 }
             default:
