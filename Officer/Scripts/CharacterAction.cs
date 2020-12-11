@@ -194,11 +194,6 @@ public class CharacterAction : MonoBehaviour
 
     private void SubcribeInput()
     {
-        if (!IsThisPlayer())
-        {
-            return;
-        }
-
         _onAim?.Subcribe(ChangeToAttackState);
         _onAim?.Subcribe(PrepareProjectile);
 
@@ -227,17 +222,6 @@ public class CharacterAction : MonoBehaviour
     private void CancelAttackFunc(params object[] args)
     {
         CancelAttack = true;
-    }
-
-    private bool IsThisPlayer()
-    {
-        var characterAtt = GetComponent<CharacterAttribute>();
-        if (characterAtt == null)
-        {
-            return false;
-        }
-
-        return characterAtt.IsThisPlayer;
     }
 
     private void Start()
