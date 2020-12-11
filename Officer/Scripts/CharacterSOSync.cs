@@ -52,6 +52,11 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
                     UpdateAimSpotChange((Vector3)data[1]);
                     break;
                 }
+            case PhotonEventCode.CHARACTER_STATE_SO_CHANGE:
+                {
+                    UpdateState((string)data[1]);
+                    break;
+                }
             default:
                 {
                     return;
