@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 4553366722181270138}
   - component: {fileID: 3829496766423676446}
   - component: {fileID: 1838227923238309917}
+  - component: {fileID: 6551512810069615709}
   m_Layer: 0
   m_Name: ArcherBlue
   m_TagString: Untagged
@@ -635,7 +636,8 @@ MonoBehaviour:
   observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 6551512810069615709}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -672,6 +674,21 @@ MonoBehaviour:
   _photonView: {fileID: 4553366722181270138}
   _characterAction: {fileID: 5723638257481661761}
   _characterAtt: {fileID: 8064291609965087670}
+--- !u!114 &6551512810069615709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7339500980596317687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1001 &91252544506907854
 PrefabInstance:
   m_ObjectHideFlags: 0
