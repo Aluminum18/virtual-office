@@ -116,11 +116,17 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
             return;
         }
         characterAtt.AnimController.SetInputCharacterState(holder.CharacterState);
+
         var arrowSpawner = characterAtt.ArrowSpawner;
         arrowSpawner.SetAimSpotInput(holder.AimSpot);
         arrowSpawner.SetState(holder.CharacterState);
 
-        character.GetComponent<CharacterRotating>().SetCharacterState(holder.CharacterState);
+        character.GetComponent<CharacterMoving>().SetInputJoystickDirection(holder.JoyStickDirection);
+
+        var rotating = character.GetComponent<CharacterRotating>();
+        rotating.SetJoystickInputDirection(holder.JoyStickDirection);
+        rotating.SetCharacterState(holder.CharacterState);
+
         character.GetComponent<CharacterAction>().SetInputCharacterState(holder.CharacterState);
     }
 

@@ -46,6 +46,12 @@ public class CharacterRotating : MonoBehaviour
         _characterState = inputCharacterState;
     }
 
+    public void SetJoystickInputDirection(Vector3Variable joystickDirection)
+    {
+        _joystick = joystickDirection;
+        CheckAndSubcribeInput();
+    }
+
     private void UpdateDirection(Vector3 direction)
     {
         if (direction.Equals(Vector3.zero))
@@ -92,11 +98,6 @@ public class CharacterRotating : MonoBehaviour
         }
 
         _isRotating = false;
-    }
-
-    private void Start()
-    {
-        CheckAndSubcribeInput();
     }
 
     private void CheckAndSubcribeInput()
