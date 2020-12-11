@@ -69,11 +69,6 @@ public class CharacterMoving : MonoBehaviour
             return;
         }
 
-        if (!IsThisPlayer)
-        {
-            return;
-        }
-
         _joystickDirection.OnValueChange += UpdateDirection;
     }
 

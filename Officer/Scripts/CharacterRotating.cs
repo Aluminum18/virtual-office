@@ -107,11 +107,6 @@ public class CharacterRotating : MonoBehaviour
             return;
         }
 
-        if (!IsThisPlayer)
-        {
-            return;
-        }
-
         _joystick.OnValueChange += UpdateDirection;
     }
 

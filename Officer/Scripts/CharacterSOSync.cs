@@ -66,6 +66,7 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
 
     private void UpdateDirectionChange(Vector3 newDirection)
     {
+        Debug.Log("Update direction");
         _thisInputHolder.JoyStickDirection.Value = newDirection;
     }
 
