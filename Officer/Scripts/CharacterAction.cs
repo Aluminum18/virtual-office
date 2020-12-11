@@ -73,9 +73,12 @@ public class CharacterAction : MonoBehaviour
         }
     }
 
-    public void SetInputCharacterState(StringVariable characterState)
+    public void SetInput(InputValueHolder inputHolder)
     {
-        _characterState = characterState;
+        _characterState = inputHolder.CharacterState;
+        _onShoot = inputHolder.OnShoot;
+        _onAim = inputHolder.OnAim;
+        _onCancelAim = inputHolder.OnCancelAim;
     }
 
     public void PrepareProjectile(params object[] args)
