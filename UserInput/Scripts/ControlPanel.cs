@@ -8,6 +8,10 @@ public class ControlPanel : MonoBehaviour
     [Header("Reference")]
     [SerializeField]
     private InputValueHolders _inputValueHolders;
+    [SerializeField]
+    private StringVariable _userId;
+    [SerializeField]
+    private RoomInfoSO _roomInfo;
 
     [Header("Config")]
     [SerializeField]
@@ -23,8 +27,10 @@ public class ControlPanel : MonoBehaviour
     [SerializeField]
     private Button _skill2Button;
 
-    public void AttachInputHolderToUI(int playerNo)
+    public void AttachInputHolderToUI()
     {
+        int playerNo = _roomInfo.GetPlayerPos(_userId.Value);
+
         InputValueHolder inputHolder = _inputValueHolders.GetInputValueHolder(playerNo);
         if (inputHolder == null)
         {
