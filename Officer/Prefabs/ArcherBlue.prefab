@@ -287,7 +287,6 @@ GameObject:
   - component: {fileID: 8064291609965087670}
   - component: {fileID: 4553366722181270138}
   - component: {fileID: 3829496766423676446}
-  - component: {fileID: 1838227923238309917}
   - component: {fileID: 6551512810069615709}
   m_Layer: 0
   m_Name: ArcherBlue
@@ -478,18 +477,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1838227923238309917}
-        m_TargetAssemblyTypeName: CharacterActionSync, Assembly-CSharp
-        m_MethodName: CallPrepareProjectTile
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
   _onCancelAttack:
     m_PersistentCalls:
       m_Calls:
@@ -502,18 +489,6 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 1
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1838227923238309917}
-        m_TargetAssemblyTypeName: CharacterActionSync, Assembly-CSharp
-        m_MethodName: CallCancelAttack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -544,18 +519,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1838227923238309917}
-        m_TargetAssemblyTypeName: CharacterActionSync, Assembly-CSharp
-        m_MethodName: CallSpawnProjectTile
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   _onStateChanged:
     m_PersistentCalls:
       m_Calls:
@@ -574,18 +537,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1168680051759200223}
         m_TargetAssemblyTypeName: CharacterAnimController, Assembly-CSharp
         m_MethodName: CheckAndSetLayerFollowingState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1838227923238309917}
-        m_TargetAssemblyTypeName: CharacterActionSync, Assembly-CSharp
-        m_MethodName: CallChangeState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -657,23 +608,6 @@ MonoBehaviour:
   _inputHolders: {fileID: 11400000, guid: 75f103630de616c46a4bf2333c129deb, type: 2}
   _attribute: {fileID: 8064291609965087670}
   _roomInfo: {fileID: 11400000, guid: d329bc1c382927d41af5d597862934e2, type: 2}
---- !u!114 &1838227923238309917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7339500980596317687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab06867511641840a04ebf48a61d908, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _userId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
-  _characterState: {fileID: 11400000, guid: bfed186c4d2d04144979767670530857, type: 2}
-  _photonView: {fileID: 4553366722181270138}
-  _characterAction: {fileID: 5723638257481661761}
-  _characterAtt: {fileID: 8064291609965087670}
 --- !u!114 &6551512810069615709
 MonoBehaviour:
   m_ObjectHideFlags: 0

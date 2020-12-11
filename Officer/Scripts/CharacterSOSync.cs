@@ -23,7 +23,10 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
         byte eventCode = photonEvent.Code;
         if (eventCode != PhotonEventCode.CHARACTER_DIRECTION_SO_CHANGE &&
             eventCode != PhotonEventCode.CHARACTER_RAW_JOYSTICK_SO_CHANGE &&
-            eventCode != PhotonEventCode.CHARACTER_AIM_SPOT_SO_CHANGE)
+            eventCode != PhotonEventCode.CHARACTER_AIM_SPOT_SO_CHANGE &&
+            eventCode != PhotonEventCode.CHARACTER_ON_SHOOT &&
+            eventCode != PhotonEventCode.CHARACTER_ON_AIM &&
+            eventCode != PhotonEventCode.CHARACTER_ON_CANCEL_AIM)
         {
             return;
         }
@@ -55,6 +58,21 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
             case PhotonEventCode.CHARACTER_STATE_SO_CHANGE:
                 {
                     UpdateState((string)data[1]);
+                    break;
+                }
+            case PhotonEventCode.CHARACTER_ON_SHOOT:
+                {
+                    OnShootResponse();
+                    break;
+                }
+            case PhotonEventCode.CHARACTER_ON_AIM:
+                {
+                    OnAimResponse();
+                    break;
+                }
+            case PhotonEventCode.CHARACTER_ON_CANCEL_AIM:
+                {
+                    OnCancelAimResponse();
                     break;
                 }
             default:
@@ -100,6 +118,33 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
     private void UpdateAimSpotChange(Vector3 newAimSpot)
     {
         _thisInputHolder.AimSpot.Value = newAimSpot;
+    }
+
+    private void OnShoot(params object[] args)
+    {
+        RaiseSOChangeEvent(PhotonEventCode.CHARACTER_ON_SHOOT, null);
+    }
+    private void OnShootResponse()
+    {
+        _thisInputHolder.OnShoot.Raise();
+    }
+
+    private void OnAim(params object[] args)
+    {
+        RaiseSOChangeEvent(PhotonEventCode.CHARACTER_ON_AIM, null);
+    }
+    private void OnAimResponse()
+    {
+        _thisInputHolder.OnAim.Raise();
+    }
+
+    private void OnCancelAim(params object[] args)
+    {
+        RaiseSOChangeEvent(PhotonEventCode.CHARACTER_ON_CANCEL_AIM, null);
+    }
+    private void OnCancelAimResponse()
+    {
+        _thisInputHolder.OnCancelAim.Raise();
     }
 
     private void RaiseSOChangeEvent(byte eventCode, object eventData)
@@ -171,9 +216,14 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
             return;
         }
 
+        _thisInputHolder.CharacterState.OnValueChange += OnStateChange;
         _thisInputHolder.JoyStickDirection.OnValueChange += OnDirectionChange;
         _thisInputHolder.JoyStickRaw.OnValueChange += OnRawJoystickChange;
         _thisInputHolder.AimSpot.OnValueChange += OnAimSpotChange;
+
+        _thisInputHolder.OnShoot.Subcribe(OnShoot);
+        _thisInputHolder.OnAim.Subcribe(OnAim);
+        _thisInputHolder.OnCancelAim.Subcribe(OnCancelAim);
     }
 
     private void UnregisterEvents()
@@ -183,8 +233,13 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
             return;
         }
 
+        _thisInputHolder.CharacterState.OnValueChange -= OnStateChange;
         _thisInputHolder.JoyStickDirection.OnValueChange -= OnDirectionChange;
         _thisInputHolder.JoyStickRaw.OnValueChange -= OnRawJoystickChange;
         _thisInputHolder.AimSpot.OnValueChange -= OnAimSpotChange;
+
+        _thisInputHolder.OnShoot.Unsubcribe(OnShoot);
+        _thisInputHolder.OnAim.Unsubcribe(OnAim);
+        _thisInputHolder.OnCancelAim.Unsubcribe(OnCancelAim);
     }
 }
