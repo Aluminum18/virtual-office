@@ -211,11 +211,6 @@ public class CharacterAction : MonoBehaviour
 
     private void UnsubcribeInput()
     {
-        if (!IsThisPlayer())
-        {
-            return;
-        }
-
         _onAim?.Unsubcribe(ChangeToAttackState);
         _onAim?.Unsubcribe(PrepareProjectile);
 
