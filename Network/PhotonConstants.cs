@@ -10,4 +10,5 @@ public static class PhotonEventCode
     public const byte CHARACTER_DIRECTION_SO_CHANGE = 2;
     public const byte CHARACTER_RAW_JOYSTICK_SO_CHANGE = 3;
     public const byte CHARACTER_AIM_SPOT_SO_CHANGE = 4;
+    public const byte CHARACTER_STATE_SO_CHANGE = 5;
 }

@@ -59,11 +59,19 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
         }
     }
 
+    private void OnStateChange(string newState)
+    {
+        RaiseSOChangeEvent(PhotonEventCode.CHARACTER_STATE_SO_CHANGE, newState);
+    }
+    private void UpdateState(string newState)
+    {
+        _thisInputHolder.CharacterState.Value = newState;
+    }
+
     private void OnDirectionChange(Vector3 newDirection)
     {
         RaiseSOChangeEvent(PhotonEventCode.CHARACTER_DIRECTION_SO_CHANGE, newDirection);
     }
-
     private void UpdateDirectionChange(Vector3 newDirection)
     {
         Debug.Log("Update direction");
@@ -75,7 +83,6 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
         RaiseSOChangeEvent(PhotonEventCode.CHARACTER_RAW_JOYSTICK_SO_CHANGE, newRawJoystick);
 
     }
-
     private void UpdateRawJoystickChange(Vector3 newRawJoystick)
     {
         _thisInputHolder.JoyStickRaw.Value = newRawJoystick;
@@ -85,7 +92,6 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
     {
         RaiseSOChangeEvent(PhotonEventCode.CHARACTER_AIM_SPOT_SO_CHANGE, newAimSpot);
     }
-
     private void UpdateAimSpotChange(Vector3 newAimSpot)
     {
         _thisInputHolder.AimSpot.Value = newAimSpot;
