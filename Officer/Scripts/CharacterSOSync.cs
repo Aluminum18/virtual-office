@@ -18,6 +18,23 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
 
     private InputValueHolder _thisInputHolder;
 
+    public void RegisterInput()
+    {
+        if (_thisInputHolder == null)
+        {
+            return;
+        }
+
+        _thisInputHolder.CharacterState.OnValueChange += OnStateChange;
+        _thisInputHolder.JoyStickDirection.OnValueChange += OnDirectionChange;
+        _thisInputHolder.JoyStickRaw.OnValueChange += OnRawJoystickChange;
+        _thisInputHolder.AimSpot.OnValueChange += OnAimSpotChange;
+
+        _thisInputHolder.OnShoot.Subcribe(OnShoot);
+        _thisInputHolder.OnAim.Subcribe(OnAim);
+        _thisInputHolder.OnCancelAim.Subcribe(OnCancelAim);
+    }
+
     public void OnEvent(EventData photonEvent)
     {
         byte eventCode = photonEvent.Code;
@@ -190,8 +207,6 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
     {
         _attribute = GetComponent<CharacterAttribute>();
         _thisInputHolder = _inputHolders.GetInputValueHolder(_roomInfo.GetPlayerPos(_attribute.AssignedUserId));
-
-        RegisterEvents();
     }
 
     private void OnEnable()
@@ -206,27 +221,10 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
 
     private void OnDestroy()
     {
-        UnregisterEvents();
+        UnregisterInput();
     }
 
-    private void RegisterEvents()
-    {
-        if (_thisInputHolder == null)
-        {
-            return;
-        }
-
-        _thisInputHolder.CharacterState.OnValueChange += OnStateChange;
-        _thisInputHolder.JoyStickDirection.OnValueChange += OnDirectionChange;
-        _thisInputHolder.JoyStickRaw.OnValueChange += OnRawJoystickChange;
-        _thisInputHolder.AimSpot.OnValueChange += OnAimSpotChange;
-
-        _thisInputHolder.OnShoot.Subcribe(OnShoot);
-        _thisInputHolder.OnAim.Subcribe(OnAim);
-        _thisInputHolder.OnCancelAim.Subcribe(OnCancelAim);
-    }
-
-    private void UnregisterEvents()
+    private void UnregisterInput()
     {
         if (_thisInputHolder == null)
         {

@@ -128,6 +128,8 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
         rotating.SetCharacterState(holder.CharacterState);
 
         character.GetComponent<CharacterAction>().SetInputCharacterState(holder.CharacterState);
+
+        character.GetComponent<CharacterSOSync>().RegisterInput();
     }
 
     private void SpawnThisPlayer(params object[] args)
