@@ -20,6 +20,14 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
 
     public void OnEvent(EventData photonEvent)
     {
+        byte eventCode = photonEvent.Code;
+        if (eventCode != PhotonEventCode.CHARACTER_DIRECTION_SO_CHANGE &&
+            eventCode != PhotonEventCode.CHARACTER_RAW_JOYSTICK_SO_CHANGE &&
+            eventCode != PhotonEventCode.CHARACTER_AIM_SPOT_SO_CHANGE)
+        {
+            return;
+        }
+
         object[] data = (object[])photonEvent.CustomData;
         string changedUserId = (string)data[0];
         if (_attribute.AssignedUserId != changedUserId)
@@ -27,7 +35,6 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
             return;
         }
 
-        byte eventCode = photonEvent.Code;
         switch (eventCode)
         {
             case PhotonEventCode.CHARACTER_DIRECTION_SO_CHANGE:
@@ -50,7 +57,6 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
                     return;
                 }
         }
-
     }
 
     private void OnDirectionChange(Vector3 newDirection)
