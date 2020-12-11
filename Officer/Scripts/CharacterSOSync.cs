@@ -20,6 +20,9 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
 
     public void RegisterInput()
     {
+        _attribute = GetComponent<CharacterAttribute>();
+        _thisInputHolder = _inputHolders.GetInputValueHolder(_roomInfo.GetPlayerPos(_attribute.AssignedUserId));
+
         if (_thisInputHolder == null)
         {
             return;
@@ -201,12 +204,6 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
         };
 
         PhotonNetwork.RaiseEvent(eventCode, data, eventOptions, sendOptions);
-    }
-
-    private void Start()
-    {
-        _attribute = GetComponent<CharacterAttribute>();
-        _thisInputHolder = _inputHolders.GetInputValueHolder(_roomInfo.GetPlayerPos(_attribute.AssignedUserId));
     }
 
     private void OnEnable()
