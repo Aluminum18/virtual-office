@@ -79,6 +79,8 @@ public class CharacterAction : MonoBehaviour
         _onShoot = inputHolder.OnShoot;
         _onAim = inputHolder.OnAim;
         _onCancelAim = inputHolder.OnCancelAim;
+
+        SubcribeInput();
     }
 
     public void PrepareProjectile(params object[] args)

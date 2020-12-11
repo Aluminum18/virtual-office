@@ -40,7 +40,10 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
 
     public void OnEvent(EventData photonEvent)
     {
+
         byte eventCode = photonEvent.Code;
+        Debug.Log($"Receive event [{eventCode}]");
+
         if (eventCode != PhotonEventCode.CHARACTER_DIRECTION_SO_CHANGE &&
             eventCode != PhotonEventCode.CHARACTER_RAW_JOYSTICK_SO_CHANGE &&
             eventCode != PhotonEventCode.CHARACTER_AIM_SPOT_SO_CHANGE &&
@@ -203,6 +206,7 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
             Reliability = true
         };
 
+        Debug.Log($"Send event [{eventCode}]");
         PhotonNetwork.RaiseEvent(eventCode, data, eventOptions, sendOptions);
     }
 
