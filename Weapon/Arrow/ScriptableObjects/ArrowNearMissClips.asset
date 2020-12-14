@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c452719aa93254f9b1f00efc373548, type: 3}
+  m_Name: ArrowNearMissClips
+  m_EditorClassIdentifier: 
+  _clips:
+  - {fileID: 8300000, guid: 57bacc81129c55f4c8f762ee37bfc59f, type: 3}
+  - {fileID: 8300000, guid: 2f159ef27a7f3124b924979f81d68d32, type: 3}
+  - {fileID: 8300000, guid: fff0369302c10f1478aad648af7e066f, type: 3}
+  - {fileID: 8300000, guid: 39df3822d06ce5c4fa2e1379f02a06bc, type: 3}
+  - {fileID: 8300000, guid: b0c3e0f7098f4354695c36cb0a40988e, type: 3}
+  - {fileID: 8300000, guid: 222ce5b086c3a134aa20f0f572ea647f, type: 3}
+  - {fileID: 8300000, guid: d1fc58f9cc75eba4b8e4891222d3351c, type: 3}
+  - {fileID: 8300000, guid: 34d184a45a1d2344787d52e603586f06, type: 3}
+  - {fileID: 8300000, guid: e2888e18936a2e64d8469e223ec7ba4e, type: 3}

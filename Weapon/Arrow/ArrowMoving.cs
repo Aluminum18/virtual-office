@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ArrowMoving : MonoBehaviour
 {
+    [Header("Unity Events")]
+    [SerializeField]
+    private UnityEvent _onArrowStartMove;
+    [SerializeField]
+    private UnityEvent _onArrowStop;
+
+    [Header("Config")]
     [SerializeField]
     private Transform _rootTransform;
     [SerializeField]
     private Collider _collider;
-    [SerializeField]
-    private Joint _joint;
     [SerializeField]
     private Rigidbody _rb;
 
@@ -21,30 +27,21 @@ public class ArrowMoving : MonoBehaviour
 
     public void MoveForward(float speed)
     {
+        _onArrowStartMove.Invoke();
         _rb.velocity = transform.forward * speed;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("hit target: " + other.name, other.gameObject);
-        //var hitBody = other.GetComponent<Rigidbody>();
-        //if (hitBody != null)
-        //{
-        //    JointToHit(hitBody);
-        //    return;
-        //}
 
         StopMoving();
-    }
-
-    private void JointToHit(Rigidbody rb)
-    {
-        _joint.connectedBody = rb;
     }
 
     private void StopMoving()
     {
         _rb.velocity = Vector3.zero;
         _rootTransform.position += _rootTransform.forward * 0.1f;
+        _onArrowStop.Invoke();
     }
 }

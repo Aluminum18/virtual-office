@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c452719aa93254f9b1f00efc373548, type: 3}
+  m_Name: ArrowHitObjectClips
+  m_EditorClassIdentifier: 
+  _clips:
+  - {fileID: 8300000, guid: e420bf0577405d64987fb5ff2fa613eb, type: 3}
+  - {fileID: 8300000, guid: 7e117c321f7631d46a69c1f586dd4836, type: 3}
+  - {fileID: 8300000, guid: 48384af85e3ced9488aa3481ee13c66b, type: 3}
+  - {fileID: 8300000, guid: 8db383d5b19f73e41b0733cf0222dd1b, type: 3}
