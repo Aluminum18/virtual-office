@@ -192,7 +192,7 @@ public class CharacterAction : MonoBehaviour
         }
     }
 
-    private void SubcribeInput()
+    public void SubcribeInput()
     {
         _onAim?.Subcribe(ChangeToAttackState);
         _onAim?.Subcribe(PrepareProjectile);
@@ -226,7 +226,6 @@ public class CharacterAction : MonoBehaviour
 
     private void Start()
     {
-        SubcribeInput();
         ChangeToIdleState();
     }
 

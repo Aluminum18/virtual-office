@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Evt_Player_OnShoot
   m_EditorClassIdentifier: 
   _eventExplanation: 
-  _logWhenRaise: 0
+  _logWhenRaise: 1

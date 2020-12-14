@@ -33,6 +33,38 @@ public class CharacterAnimController : MonoBehaviour
         _characterState = characterState;
     }
 
+    public void SubcribeInput()
+    {
+        if (_characterAtt == null)
+        {
+            Debug.LogError("Missing CharacterAttribute!", this);
+            return;
+        }
+
+        if (!_characterAtt.IsThisPlayer)
+        {
+            return;
+        }
+
+        _onCancelAim.Subcribe(PlayerIdleFunc);
+    }
+
+    public void UnsubcribeInput()
+    {
+        if (_characterAtt == null)
+        {
+            Debug.LogError("Missing CharacterAttribute!", this);
+            return;
+        }
+
+        if (!_characterAtt.IsThisPlayer)
+        {
+            return;
+        }
+
+        _onCancelAim.Unsubcribe(PlayerIdleFunc);
+    }
+
     private bool IsReadyAttackParam
     {
         get
@@ -49,22 +81,6 @@ public class CharacterAnimController : MonoBehaviour
         }
     }
 
-    private void SubcribeInput()
-    {
-        if (_characterAtt == null)
-        {
-            Debug.LogError("Missing CharacterAttribute!", this);
-            return;
-        }
-
-        if (!_characterAtt.IsThisPlayer)
-        {
-            return;
-        }
-
-        _onCancelAim.Subcribe(PlayerIdleFunc);
-    }
-
     private void Start()
     {
         SubcribeInput();
@@ -72,7 +88,7 @@ public class CharacterAnimController : MonoBehaviour
 
     private void OnDestroy()
     {
-        _onCancelAim?.Unsubcribe(PlayerIdleFunc);
+        UnsubcribeInput();
     }
 
     public void PlayIdle()

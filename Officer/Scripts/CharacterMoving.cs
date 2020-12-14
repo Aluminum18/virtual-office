@@ -62,7 +62,7 @@ public class CharacterMoving : MonoBehaviour
         CheckAndSubcribeInput();
     }
 
-    private void CheckAndSubcribeInput()
+    public void CheckAndSubcribeInput()
     {
         if (_joystickDirection == null)
         {

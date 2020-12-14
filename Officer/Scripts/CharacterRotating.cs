@@ -100,7 +100,7 @@ public class CharacterRotating : MonoBehaviour
         _isRotating = false;
     }
 
-    private void CheckAndSubcribeInput()
+    public void CheckAndSubcribeInput()
     {
         if (_joystick == null)
         {
