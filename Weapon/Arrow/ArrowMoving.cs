@@ -19,6 +19,8 @@ public class ArrowMoving : MonoBehaviour
     [SerializeField]
     private Rigidbody _rb;
 
+    public bool IsMoving { get; set; }
+
     public void HeadTo(Vector3 destination)
     {
         Vector3 direction = destination - transform.position;
@@ -27,8 +29,8 @@ public class ArrowMoving : MonoBehaviour
 
     public void MoveForward(float speed)
     {
-        _onArrowStartMove.Invoke();
         _rb.velocity = transform.forward * speed;
+        _onArrowStartMove.Invoke();
     }
 
     private void OnTriggerEnter(Collider other)

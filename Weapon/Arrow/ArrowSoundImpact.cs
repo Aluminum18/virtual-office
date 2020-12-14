@@ -17,7 +17,7 @@ public class ArrowSoundImpact : MonoBehaviour
     private static Camera _mainCamera;
     private Rigidbody _rb;
 
-    private void Start()
+    private void Awake()
     {
         if (_mainCamera == null)
         {
@@ -49,6 +49,7 @@ public class ArrowSoundImpact : MonoBehaviour
         {
             yield return null;
             float currentDistanceToMainCam = Vector3.Distance(gameObject.transform.localPosition, _mainCamera.gameObject.transform.localPosition);
+            Debug.Log(currentDistanceToMainCam);
 
             if (currentDistanceToMainCam > lastDistanceToMainCam)
             {
