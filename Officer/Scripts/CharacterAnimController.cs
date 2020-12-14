@@ -10,11 +10,13 @@ public class CharacterAnimController : MonoBehaviour
     private const int AIM = 3;
     private const int SHOOT = 4;
 
-    [Header("Reference")]
+    [Header("Reference - assigned in run time")]
     [SerializeField]
     private StringVariable _characterState;
     [SerializeField]
     private Vector3Variable _rawInputMovingJoystick;
+
+    [Header("Reference")]
     [SerializeField]
     private StringVariable _userId;
 
@@ -28,9 +30,12 @@ public class CharacterAnimController : MonoBehaviour
     [SerializeField]
     private CharacterAttribute _characterAtt;
 
-    public void SetInputCharacterState(StringVariable characterState)
+    public void SetInput(InputValueHolder inputHolder)
     {
-        _characterState = characterState;
+        _characterState = inputHolder.CharacterState;
+        _onCancelAim = inputHolder.OnCancelAim;
+
+        SubcribeInput();
     }
 
     public void SubcribeInput()
@@ -79,11 +84,6 @@ public class CharacterAnimController : MonoBehaviour
         {
             return _animator.GetBool("Moving");
         }
-    }
-
-    private void Start()
-    {
-        SubcribeInput();
     }
 
     private void OnDestroy()

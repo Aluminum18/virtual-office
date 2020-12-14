@@ -115,7 +115,6 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
         {
             return;
         }
-        characterAtt.AnimController.SetInputCharacterState(holder.CharacterState);
 
         var arrowSpawner = characterAtt.ArrowSpawner;
         arrowSpawner.SetAimSpotInput(holder.AimSpot);
@@ -128,6 +127,8 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
         rotating.SetCharacterState(holder.CharacterState);
 
         character.GetComponent<CharacterAction>().SetInput(holder);
+
+        characterAtt.AnimController.SetInput(holder);
 
         character.GetComponent<CharacterSOSync>().RegisterInput();
     }
