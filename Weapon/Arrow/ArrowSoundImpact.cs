@@ -48,6 +48,8 @@ public class ArrowSoundImpact : MonoBehaviour
         while (!_rb.velocity.Equals(Vector3.zero))
         {
             yield return null;
+            yield return null;
+            yield return null;
             float currentDistanceToMainCam = Vector3.Distance(gameObject.transform.localPosition, _mainCamera.gameObject.transform.localPosition);
             Debug.Log(currentDistanceToMainCam);
 
@@ -56,7 +58,7 @@ public class ArrowSoundImpact : MonoBehaviour
                 yield break;
             }
 
-            if (currentDistanceToMainCam <= _triggerNearMissDistance)
+            if (currentDistanceToMainCam < _triggerNearMissDistance)
             {
                 PlayNearMiss();
                 yield break;
