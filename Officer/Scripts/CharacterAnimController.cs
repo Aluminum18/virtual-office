@@ -57,11 +57,6 @@ public class CharacterAnimController : MonoBehaviour
             return;
         }
 
-        if (!_characterAtt.IsThisPlayer)
-        {
-            return;
-        }
-
         _onCancelAim.Unsubcribe(PlayerIdleFunc);
     }
 
