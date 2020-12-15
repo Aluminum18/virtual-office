@@ -19,7 +19,7 @@ public class ArrowMoving : MonoBehaviour
     [SerializeField]
     private Rigidbody _rb;
 
-    public bool IsMoving { get; set; }
+    private static Vector3 _inactiveArrowPos = new Vector3(-99f, -99f, -99f);
 
     public void HeadTo(Vector3 destination)
     {
@@ -33,17 +33,17 @@ public class ArrowMoving : MonoBehaviour
         _onArrowStartMove.Invoke();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("hit target: " + other.name, other.gameObject);
-
-        StopMoving();
-    }
-
-    private void StopMoving()
+    public void StopMoving()
     {
         _rb.velocity = Vector3.zero;
-        _rootTransform.position += _rootTransform.forward * 0.1f;
+        _rootTransform.localPosition += _rootTransform.forward * 0.1f;
         _onArrowStop.Invoke();
+    }
+
+    public void MoveToPoolPos()
+    {
+        _rb.velocity = Vector3.zero;
+        _onArrowStop.Invoke();
+        _rootTransform.localPosition = _inactiveArrowPos;
     }
 }

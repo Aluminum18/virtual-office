@@ -10,6 +10,8 @@ public class ArrowSoundImpact : MonoBehaviour
     [SerializeField]
     private SfxList _hitObjectClips;
     [SerializeField]
+    private SfxList _hitFleshClips;
+    [SerializeField]
     private AudioSource _audioSource;
     [SerializeField]
     private float _triggerNearMissDistance;
@@ -35,6 +37,11 @@ public class ArrowSoundImpact : MonoBehaviour
     public void PlayHitObject()
     {
         _audioSource.PlayOneShot(_hitObjectClips.GetRamdomClip());
+    }
+
+    public void PlayHitFlesh()
+    {
+        _audioSource.PlayOneShot(_hitFleshClips.GetRamdomClip());
     }
 
     public void CheckAndPlayNearMiss()

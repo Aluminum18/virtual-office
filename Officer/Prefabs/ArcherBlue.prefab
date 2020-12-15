@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 4553366722181270138}
   - component: {fileID: 3829496766423676446}
   - component: {fileID: 6551512810069615709}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: ArcherBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}

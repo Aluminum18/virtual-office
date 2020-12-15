@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c452719aa93254f9b1f00efc373548, type: 3}
+  m_Name: ArrowHitFlesh
+  m_EditorClassIdentifier: 
+  _clips:
+  - {fileID: 8300000, guid: f98972ed37447724ba963dbbbc6970a9, type: 3}
+  - {fileID: 8300000, guid: e8a37db166c2eca49a186e0cbae01223, type: 3}
+  - {fileID: 8300000, guid: efd42f8d0ad04cf428c6c33c0ffb37e5, type: 3}
+  - {fileID: 8300000, guid: 69f7cf21c0ab3054aa6bbd4fea2c4d21, type: 3}
+  - {fileID: 8300000, guid: 2ad2f181b08e5cf4c86ad6150df22f9b, type: 3}

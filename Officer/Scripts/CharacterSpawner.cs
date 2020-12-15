@@ -142,7 +142,7 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
 
         var character = Instantiate(
             teamNo == 1 ? _archerBlue : _archerRed,
-            teamPos + Vector3.right * team.Count,
+            teamPos + Vector3.right * team.Count * 5f,
             Quaternion.identity);
 
         character.GetComponent<CharacterAttribute>().AssignedUserId = _userId.Value;
