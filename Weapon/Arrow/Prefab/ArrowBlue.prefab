@@ -211,18 +211,6 @@ MonoBehaviour:
   _onArrowStop:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5159815139757730044}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 7231185383377154182}
         m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
         m_MethodName: set_enabled
@@ -361,6 +349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 849552516452709070}
   - component: {fileID: 2626076289191233730}
+  - component: {fileID: 4135951546410880937}
   m_Layer: 0
   m_Name: Trail
   m_TagString: Untagged
@@ -489,6 +478,20 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &4135951546410880937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5159815139757730044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b615d74dfd2c694439e3653965b0102a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _disabledObject: {fileID: 849552516452709070}
+  _disableAfter: 5
 --- !u!1001 &3028958606025435327
 PrefabInstance:
   m_ObjectHideFlags: 0
