@@ -106,6 +106,11 @@ public class CharacterAnimController : MonoBehaviour
         _animator.SetTrigger("Shoot");
     }
 
+    public void PlayGetHit()
+    {
+        _animator.SetTrigger("GetHit");
+    }
+
     public void SetStrafe()
     {
         _animator.SetFloat("MovingAimX", _rawInputMovingJoystick.Value.x);

@@ -15,6 +15,7 @@ public class CharacterAttEditor : Editor
             myTarget.GetComponent<CharacterMoving>().CheckAndSubcribeInput();
             myTarget.GetComponent<CharacterRotating>().CheckAndSubcribeInput();
             myTarget.GetComponent<CharacterAction>().SubcribeInput();
+            myTarget.GetComponent<CharacterAction>().SubcribeInMapInfo();
             myTarget.AnimController.SubcribeInput();
         }
     }

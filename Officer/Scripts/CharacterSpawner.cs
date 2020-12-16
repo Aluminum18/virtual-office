@@ -19,6 +19,8 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
     private StringVariable _userId;
     [SerializeField]
     private InputValueHolders _inputHolders;
+    [SerializeField]
+    private PlayersInMapInfoSO _playersInMapInfo;
 
     [Header("Events in")]
     [SerializeField]
@@ -111,7 +113,9 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
         }
 
         InputValueHolder holder = _inputHolders.GetInputValueHolder(chaPos);
-        if (holder == null)
+        PlayerInMapInfo playerInMapInfo = _playersInMapInfo.GetPlayerInfo(chaPos);
+        if (holder == null ||
+            playerInMapInfo == null)
         {
             return;
         }
@@ -126,7 +130,9 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
         rotating.SetJoystickInputDirection(holder.JoyStickDirection);
         rotating.SetCharacterState(holder.CharacterState);
 
-        character.GetComponent<CharacterAction>().SetInput(holder);
+        var charAction = character.GetComponent<CharacterAction>();
+        charAction.SetInput(holder);
+        charAction.SetInMapInfo(playerInMapInfo);
 
         characterAtt.AnimController.SetInput(holder);
 

@@ -12,22 +12,29 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
     [SerializeField]
     private InputValueHolders _inputHolders;
     [SerializeField]
+    private PlayersInMapInfoSO _playersInMapInfo;
+    [SerializeField]
     private CharacterAttribute _attribute;
     [SerializeField]
     private RoomInfoSO _roomInfo;
 
     private InputValueHolder _thisInputHolder;
+    private PlayerInMapInfo _thisPlayerInMapInfo;
 
     public void RegisterInput()
     {
         _attribute = GetComponent<CharacterAttribute>();
-        _thisInputHolder = _inputHolders.GetInputValueHolder(_roomInfo.GetPlayerPos(_attribute.AssignedUserId));
+        int playerPos = _roomInfo.GetPlayerPos(_attribute.AssignedUserId);
+        _thisInputHolder = _inputHolders.GetInputValueHolder(playerPos);
+        _thisPlayerInMapInfo = _playersInMapInfo.GetPlayerInfo(playerPos);
 
-        if (_thisInputHolder == null)
+        if (_thisInputHolder == null ||
+            _thisPlayerInMapInfo ==  null)
         {
             return;
         }
 
+        // Input
         _thisInputHolder.CharacterState.OnValueChange += OnStateChange;
         _thisInputHolder.JoyStickDirection.OnValueChange += OnDirectionChange;
         _thisInputHolder.JoyStickRaw.OnValueChange += OnRawJoystickChange;
@@ -36,6 +43,9 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
         _thisInputHolder.OnShoot.Subcribe(OnShoot);
         _thisInputHolder.OnAim.Subcribe(OnAim);
         _thisInputHolder.OnCancelAim.Subcribe(OnCancelAim);
+
+        // Info
+        _thisPlayerInMapInfo.Hp.OnValueChange += OnHpChanged;
     }
 
     public void OnEvent(EventData photonEvent)
@@ -49,7 +59,8 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
             eventCode != PhotonEventCode.CHARACTER_AIM_SPOT_SO_CHANGE &&
             eventCode != PhotonEventCode.CHARACTER_ON_SHOOT &&
             eventCode != PhotonEventCode.CHARACTER_ON_AIM &&
-            eventCode != PhotonEventCode.CHARACTER_ON_CANCEL_AIM)
+            eventCode != PhotonEventCode.CHARACTER_ON_CANCEL_AIM &&
+            eventCode != PhotonEventCode.CHARACTER_ON_HP_CHANGED)
         {
             return;
         }
@@ -96,6 +107,11 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
             case PhotonEventCode.CHARACTER_ON_CANCEL_AIM:
                 {
                     OnCancelAimResponse();
+                    break;
+                }
+            case PhotonEventCode.CHARACTER_ON_HP_CHANGED:
+                {
+                    OnHpChanged((float)data[1]);
                     break;
                 }
             default:
@@ -170,6 +186,15 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
         _thisInputHolder.OnCancelAim.Raise();
     }
 
+    private void OnHpChanged(float newHp)
+    {
+        RaiseSOChangeEvent(PhotonEventCode.CHARACTER_ON_HP_CHANGED, newHp);
+    }
+    private void UpdateHpChanged(float newHp)
+    {
+        _thisPlayerInMapInfo.Hp.Value = newHp;
+    }
+
     private void RaiseSOChangeEvent(byte eventCode, object eventData)
     {
         if (!_attribute.IsThisPlayer)
@@ -227,11 +252,13 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
 
     private void UnregisterInput()
     {
-        if (_thisInputHolder == null)
+        if (_thisInputHolder == null ||
+            _thisPlayerInMapInfo == null)
         {
             return;
         }
 
+        // input
         _thisInputHolder.CharacterState.OnValueChange -= OnStateChange;
         _thisInputHolder.JoyStickDirection.OnValueChange -= OnDirectionChange;
         _thisInputHolder.JoyStickRaw.OnValueChange -= OnRawJoystickChange;
@@ -240,5 +267,8 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
         _thisInputHolder.OnShoot.Unsubcribe(OnShoot);
         _thisInputHolder.OnAim.Unsubcribe(OnAim);
         _thisInputHolder.OnCancelAim.Unsubcribe(OnCancelAim);
+
+        // info
+        _thisPlayerInMapInfo.Hp.OnValueChange -= OnHpChanged;
     }
 }

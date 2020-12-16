@@ -10,12 +10,13 @@ public class HPBar : MonoBehaviour
     [SerializeField]
     private Slider _hpSlider;
 
-    private void OnEnable()
+    public void SetHpVariable(FloatVariable hp)
     {
+        _hp = hp;
         _hp.OnValueChange += UpdateHPValue;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         _hp.OnValueChange -= UpdateHPValue;
     }

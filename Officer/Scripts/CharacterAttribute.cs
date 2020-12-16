@@ -7,6 +7,10 @@ public class CharacterAttribute : MonoBehaviour
     [Header("Reference")]
     [SerializeField]
     private StringVariable _thisClientUserId;
+    [SerializeField]
+    private PlayersInMapInfoSO _playerInMapInfo;
+    [SerializeField]
+    private RoomInfoSO _roomInfo;
 
     [Header("Config")]
     [SerializeField]
@@ -74,4 +78,18 @@ public class CharacterAttribute : MonoBehaviour
             return _arrowSpawner;
         }
     }
+
+    private PlayerInMapInfo _inMapInfo;
+    public PlayerInMapInfo InMapInfo
+    {
+        get
+        {
+            if (_inMapInfo == null)
+            {
+                _inMapInfo = _playerInMapInfo.GetPlayerInfo(_roomInfo.GetPlayerPos(AssignedUserId));
+            }
+            return _inMapInfo;
+        }
+    }
+
 }

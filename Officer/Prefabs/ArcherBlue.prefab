@@ -470,6 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterState: {fileID: 11400000, guid: bfed186c4d2d04144979767670530857, type: 2}
+  _characterHp: {fileID: 0}
   _onAim: {fileID: 11400000, guid: 055915cbaf7b0a34fa21cbfb131af35c, type: 2}
   _onCancelAim: {fileID: 11400000, guid: f37a336395dbf1c4abb99d8b4e15aeaf, type: 2}
   _onShoot: {fileID: 11400000, guid: bfcbf449ad4777d4f8cbef8bb2a630b4, type: 2}
@@ -582,6 +583,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _onTookDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1168680051759200223}
+        m_TargetAssemblyTypeName: CharacterAnimController, Assembly-CSharp
+        m_MethodName: PlayGetHit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onHealed:
+    m_PersistentCalls:
+      m_Calls: []
   _baseAttackTime: 0.7
   _attackRate: 2
   _attackFactor: 1
@@ -599,6 +618,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _thisClientUserId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
+  _playerInMapInfo: {fileID: 11400000, guid: b77b48bc1268bd645b067cb2fd1d3a2a, type: 2}
+  _roomInfo: {fileID: 11400000, guid: d329bc1c382927d41af5d597862934e2, type: 2}
   _camFollow: {fileID: 7339500980596317684}
   _camLook: {fileID: 6092846164409728579}
   _aimLook: {fileID: 2085429656223461603}
@@ -642,6 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _userId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
   _inputHolders: {fileID: 11400000, guid: 75f103630de616c46a4bf2333c129deb, type: 2}
+  _playersInMapInfo: {fileID: 11400000, guid: b77b48bc1268bd645b067cb2fd1d3a2a, type: 2}
   _attribute: {fileID: 8064291609965087670}
   _roomInfo: {fileID: 11400000, guid: d329bc1c382927d41af5d597862934e2, type: 2}
 --- !u!114 &6551512810069615709

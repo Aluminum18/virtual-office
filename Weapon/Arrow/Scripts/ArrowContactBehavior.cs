@@ -54,6 +54,8 @@ public class ArrowContactBehavior : MonoBehaviour
             return;
         }
 
+        characterAtt.InMapInfo.Hp.Value -= 20f;
+
         _onContactPlayer.Invoke();
     }
 }

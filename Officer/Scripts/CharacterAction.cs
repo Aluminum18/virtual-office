@@ -5,9 +5,11 @@ using UnityEngine.Events;
 
 public class CharacterAction : MonoBehaviour
 {
-    [Header("Reference")]
+    [Header("Reference - assigned in runtime")]
     [SerializeField]
     private StringVariable _characterState;
+    [SerializeField]
+    private FloatVariable _characterHp;
 
     [Header("Events in (user input)")]
     [SerializeField]
@@ -26,6 +28,10 @@ public class CharacterAction : MonoBehaviour
     private UnityEvent _onAttackProjectileSpawn;
     [SerializeField]
     private UnityEvent _onStateChanged;
+    [SerializeField]
+    private UnityEvent _onTookDamage;
+    [SerializeField]
+    private UnityEvent _onHealed;
 
     [Header("Config")]
     [SerializeField]
@@ -81,6 +87,12 @@ public class CharacterAction : MonoBehaviour
         _onCancelAim = inputHolder.OnCancelAim;
 
         SubcribeInput();
+    }
+
+    public void SetInMapInfo(PlayerInMapInfo info)
+    {
+        _characterHp = info.Hp;
+        SubcribeInMapInfo();
     }
 
     public void PrepareProjectile(params object[] args)
@@ -192,6 +204,19 @@ public class CharacterAction : MonoBehaviour
         }
     }
 
+    private void TakeDamageOrHeal(float newHp)
+    {
+        float change = _characterHp.LastChange;
+        if (change < 0f)
+        {
+            _onTookDamage.Invoke();
+        }
+        else if (change > 0f)
+        {
+            _onHealed.Invoke();
+        }
+    }
+
     public void SubcribeInput()
     {
         _onAim?.Subcribe(ChangeToAttackState);
@@ -216,6 +241,16 @@ public class CharacterAction : MonoBehaviour
         _onShoot?.Unsubcribe(Shoot);
     }    
 
+    public void SubcribeInMapInfo()
+    {
+        _characterHp.OnValueChange += TakeDamageOrHeal;
+    }
+
+    private void UnsubcribeInMapInfo()
+    {
+        _characterHp.OnValueChange -= TakeDamageOrHeal;
+    }
+
     /// <summary>
     /// Bridge for subcribe event
     /// </summary>
@@ -232,5 +267,6 @@ public class CharacterAction : MonoBehaviour
     private void OnDestroy()
     {
         UnsubcribeInput();
+        UnsubcribeInMapInfo();
     }
 }
