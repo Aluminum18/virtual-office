@@ -177,6 +177,16 @@ PrefabInstance:
       propertyPath: _onStateChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: CheckAndSetLayerFollowingState
       objectReference: {fileID: 0}
+    - target: {fileID: 5723638257481661761, guid: 145e4762876f94e47a16e01ade026458,
+        type: 3}
+      propertyPath: _onTookDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8478682289011821870}
+    - target: {fileID: 5723638257481661761, guid: 145e4762876f94e47a16e01ade026458,
+        type: 3}
+      propertyPath: _onTookDamage.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayGetHit
+      objectReference: {fileID: 0}
     - target: {fileID: 7339500980596317684, guid: 145e4762876f94e47a16e01ade026458,
         type: 3}
       propertyPath: m_LocalPosition.x
