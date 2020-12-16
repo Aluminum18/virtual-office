@@ -92,6 +92,10 @@ public class CharacterAction : MonoBehaviour
     public void SetInMapInfo(PlayerInMapInfo info)
     {
         _characterHp = info.Hp;
+
+        //temp
+        _characterHp.Value = 100f;
+
         SubcribeInMapInfo();
     }
 
