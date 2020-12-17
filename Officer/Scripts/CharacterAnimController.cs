@@ -106,9 +106,20 @@ public class CharacterAnimController : MonoBehaviour
         _animator.SetTrigger("Shoot");
     }
 
+    private AnimatorStateInfo _stateBeforeHit;
     public void PlayGetHit()
     {
+        _stateBeforeHit = _animator.GetCurrentAnimatorStateInfo(0);
         _animator.SetTrigger("GetHit");
+    }
+
+    public void PlayAfterHit()
+    {
+        if (!_stateBeforeHit.IsName("Run"))
+        {
+            return;
+        }
+        PlayRun();
     }
 
     public void SetStrafe()

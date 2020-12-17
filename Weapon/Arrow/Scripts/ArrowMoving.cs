@@ -36,7 +36,7 @@ public class ArrowMoving : MonoBehaviour
     public void StopMoving()
     {
         _rb.velocity = Vector3.zero;
-        _rootTransform.localPosition += _rootTransform.forward * 0.1f;
+        _rootTransform.localPosition -= _rootTransform.forward * 0.5f;
         _onArrowStop.Invoke();
     }
 
