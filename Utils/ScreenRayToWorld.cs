@@ -8,6 +8,8 @@ public class ScreenRayToWorld : MonoBehaviour
     [SerializeField]
     private Vector3Variable _output;
     [SerializeField]
+    private Vector3Variable _boundDirection;
+    [SerializeField]
     private RoomInfoSO _roomInfo;
     [SerializeField]
     private StringVariable _userId;
@@ -37,7 +39,8 @@ public class ScreenRayToWorld : MonoBehaviour
     {
         Vector3 screenPoint = _uiCam.WorldToScreenPoint(_screenTransform.position);
         var ray = _worldCam.ScreenPointToRay(screenPoint);
-        Debug.DrawRay(ray.origin, ray.direction * 10f, Color.red, 10f);
+
+        //Debug.DrawRay(ray.origin, ray.direction * 200f, Color.red, 0.1f);
 
         if (!Physics.Raycast(ray, out RaycastHit hit, 200f))
         {
@@ -45,6 +48,26 @@ public class ScreenRayToWorld : MonoBehaviour
         }
 
         _output.Value = hit.point;
-
     }
+
+    private void Update()
+    {
+        ScreenRayToWorldBound();
+    }
+
+    private void ScreenRayToWorldBound()
+    {
+        Vector3 screenPoint = _uiCam.WorldToScreenPoint(_screenTransform.position);
+        var ray = _worldCam.ScreenPointToRay(screenPoint);
+
+        //Debug.DrawRay(ray.origin, ray.direction * 200f, Color.red, 0.1f);
+
+        if (!Physics.Raycast(ray, out RaycastHit hit, 200f, 1 << 14))
+        {
+            return;
+        }
+
+        _boundDirection.Value = hit.point;
+    }
+
 }
