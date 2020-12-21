@@ -46,6 +46,7 @@ public class ArrowMoving : MonoBehaviour
     public void HeadForward(float speed)
     {
         _rb.velocity = transform.forward * speed;
+        _onArrowStartMove.Invoke();
     }
 
     private IEnumerator IE_RotateToTarget(Vector3 target, float speed)
