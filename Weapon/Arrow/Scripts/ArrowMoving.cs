@@ -18,23 +18,64 @@ public class ArrowMoving : MonoBehaviour
     private Collider _collider;
     [SerializeField]
     private Rigidbody _rb;
+    [SerializeField]
+    private float _maxAngular = -10f;
+    [SerializeField]
+    private float _maxDistanceForMaxAngular = 30f;
 
+    private float _rotateSpeed;
     private static Vector3 _inactiveArrowPos = new Vector3(-99f, -99f, -99f);
 
-    public void HeadTo(Vector3 destination)
+    public void HeadTo(Vector3 destination, float speed)
     {
         Vector3 direction = destination - transform.position;
-        transform.rotation = Quaternion.LookRotation(direction);
+
+        Quaternion headToTarget = Quaternion.LookRotation(direction);
+        transform.rotation = headToTarget;
+
+        transform.Rotate(transform.right, _maxAngular * direction.magnitude / _maxDistanceForMaxAngular);
+
+        if (transform.rotation.eulerAngles.y < -90f)
+        {
+            transform.rotation = headToTarget;
+        }
+
+        StartCoroutine(IE_RotateToTarget(destination, speed));
     }
 
-    public void MoveForward(float speed)
+    public void HeadForward(float speed)
     {
         _rb.velocity = transform.forward * speed;
+    }
+
+    private IEnumerator IE_RotateToTarget(Vector3 target, float speed)
+    {
+        yield return null;
+        Quaternion rotateTo = Quaternion.LookRotation(target - transform.position);
+
+        float distanceAngle = Quaternion.Angle(transform.rotation, rotateTo);
+        float timeToTarget = (transform.position - target).magnitude / speed;
+        _rotateSpeed = Quaternion.Angle(transform.rotation, rotateTo) / timeToTarget * 2f;
+
         _onArrowStartMove.Invoke();
+
+        while (distanceAngle > 1f)
+        {
+            Debug.Log("rotate " + Quaternion.Angle(transform.rotation, rotateTo));
+            _rb.velocity = transform.forward * speed;
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateTo, _rotateSpeed * Time.deltaTime);
+            rotateTo = Quaternion.LookRotation(target - transform.position);
+            yield return null;
+        }
+
+        transform.rotation = rotateTo;
     }
 
     public void StopMoving()
     {
+        StopAllCoroutines();
+
         _rb.velocity = Vector3.zero;
         _rootTransform.localPosition -= _rootTransform.forward * 0.5f;
         _onArrowStop.Invoke();

@@ -37,11 +37,15 @@ public class ArrowSpawner : MonoBehaviour
 
         _onSpawnArrow.Invoke();
 
+
         if (_charaterState.Value.Equals(CharacterState.STATE_READY_ATTACK))
         {
-            arrowMoving.HeadTo(_aimSpot.Value);
+            arrowMoving.HeadTo(_aimSpot.Value, _arrowSpeed);
+        }
+        else
+        {
+            arrowMoving.HeadForward(_arrowSpeed);
         }
 
-        arrowMoving.MoveForward(_arrowSpeed);
     }
 }

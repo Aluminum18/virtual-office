@@ -226,6 +226,7 @@ MonoBehaviour:
   _rootTransform: {fileID: 5780069460046052722}
   _collider: {fileID: 7231185383377154182}
   _rb: {fileID: 3175942976942789106}
+  _rotateSpeed: 180
 --- !u!82 &8144205249131641977
 AudioSource:
   m_ObjectHideFlags: 0
@@ -504,6 +505,10 @@ PrefabInstance:
       value: ArrowModel
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 97be332209b43ac45869fe9bec6e89e3, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97be332209b43ac45869fe9bec6e89e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -516,6 +521,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 97be332209b43ac45869fe9bec6e89e3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97be332209b43ac45869fe9bec6e89e3, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.5
       objectReference: {fileID: 0}
@@ -526,14 +535,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 97be332209b43ac45869fe9bec6e89e3, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 97be332209b43ac45869fe9bec6e89e3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 97be332209b43ac45869fe9bec6e89e3, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 97be332209b43ac45869fe9bec6e89e3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
