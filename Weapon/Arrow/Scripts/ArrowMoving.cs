@@ -33,7 +33,7 @@ public class ArrowMoving : MonoBehaviour
         Quaternion headToTarget = Quaternion.LookRotation(direction);
         transform.rotation = headToTarget;
 
-        transform.Rotate(transform.right, _maxAngular * direction.magnitude / _maxDistanceForMaxAngular);
+        transform.Rotate(_maxAngular * direction.magnitude / _maxDistanceForMaxAngular, 0f , 0f);
 
         if (transform.rotation.eulerAngles.y < -90f)
         {
