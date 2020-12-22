@@ -24,7 +24,6 @@ public class CharacterRotating : MonoBehaviour
     private bool _isRotating;
     private Vector3 _direction;
 
-    private bool _isAiming = false;
     private Vector3 _aimingDirection = Vector3.zero;
 
     private bool IsThisPlayer
@@ -105,51 +104,10 @@ public class CharacterRotating : MonoBehaviour
         _isRotating = false;
     }
 
-    private void ToAimSpot(Vector3 aimSpot)
-    {
-        if (_characterState.Value == CharacterState.STATE_IDLE)
-        {
-            return;
-        }
-
-        if (_isAiming)
-        {
-            return;
-        }
-        //StartCoroutine(IE_ToAimSpot());
-    }
-
-    private IEnumerator IE_ToAimSpot()
-    {
-        _isAiming = true;
-
-        // Rotate around Y only
-        _aimingDirection.x = _aimSpot.Value.x - transform.position.x;
-        _aimingDirection.z = _aimSpot.Value.z - transform.position.z;
-        Quaternion rotateTo = Quaternion.LookRotation(_aimingDirection);
-
-        while(Quaternion.Angle(transform.rotation, rotateTo) > _offsetAngle)
-        {
-            if (_characterState.Value == CharacterState.STATE_IDLE)
-            {
-                _isRotating = false;
-                yield break;
-            }
-
-            _aimingDirection.x = _aimSpot.Value.x - transform.position.x;
-            _aimingDirection.z = _aimSpot.Value.z - transform.position.z;
-            rotateTo = Quaternion.LookRotation(_aimingDirection);
-
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateTo, _rotateSpeed * Time.deltaTime);
-            yield return null;
-        }
-
-        _isAiming = false;
-    }
-
     private void Update()
     {
-        if (_characterState.Value == CharacterState.STATE_IDLE)
+        if (_characterState.Value == CharacterState.STATE_IDLE 
+            || !IsThisPlayer)
         {
             return;
         }
@@ -174,13 +132,11 @@ public class CharacterRotating : MonoBehaviour
         }
 
         _joystick.OnValueChange += UpdateDirection;
-        _aimSpot.OnValueChange += ToAimSpot;
     }
 
     private void OnDestroy()
     {
         _joystick.OnValueChange -= UpdateDirection;
-        _aimSpot.OnValueChange -= ToAimSpot;
     }
 
 }
