@@ -226,7 +226,8 @@ MonoBehaviour:
   _rootTransform: {fileID: 5780069460046052722}
   _collider: {fileID: 7231185383377154182}
   _rb: {fileID: 3175942976942789106}
-  _rotateSpeed: 180
+  _maxAngular: -5
+  _maxDistanceForMaxAngular: 30
 --- !u!82 &8144205249131641977
 AudioSource:
   m_ObjectHideFlags: 0

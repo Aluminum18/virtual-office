@@ -21,6 +21,8 @@ public class CharacterAction : MonoBehaviour
 
     [Header("Events out")]
     [SerializeField]
+    private UnityEvent _onEnable;
+    [SerializeField]
     private UnityEvent _onPrepareProjectile;
     [SerializeField]
     private UnityEvent _onCancelAttack;
@@ -32,6 +34,8 @@ public class CharacterAction : MonoBehaviour
     private UnityEvent _onTookDamage;
     [SerializeField]
     private UnityEvent _onHealed;
+    [SerializeField]
+    private UnityEvent _onDefeated;
 
     [Header("Config")]
     [SerializeField]
@@ -210,6 +214,12 @@ public class CharacterAction : MonoBehaviour
 
     private void TakeDamageOrHeal(float newHp)
     {
+        if (_characterHp.Value <= 0f)
+        {
+            _onDefeated.Invoke();
+            return;
+        }
+
         float change = _characterHp.LastChange;
         if (change < 0f)
         {
@@ -218,7 +228,7 @@ public class CharacterAction : MonoBehaviour
         else if (change > 0f)
         {
             _onHealed.Invoke();
-        }
+        }      
     }
 
     public void SubcribeInput()
@@ -261,6 +271,11 @@ public class CharacterAction : MonoBehaviour
     private void CancelAttackFunc(params object[] args)
     {
         CancelAttack = true;
+    }
+
+    private void OnEnable()
+    {
+        _onEnable.Invoke();
     }
 
     private void Start()
