@@ -44,6 +44,8 @@ public class CharacterAction : MonoBehaviour
     private float _attackRate;
     [SerializeField]
     private float _attackFactor;
+    [SerializeField]
+    private GameObject _forceShot;
 
     [SerializeField]
     private float _timeToNextAttack = 0;
@@ -151,6 +153,25 @@ public class CharacterAction : MonoBehaviour
             return;
         }
         CancelAttack = true;
+    }
+
+    public void ActiveDefeatedForceShot(Vector3 contactPoint, Quaternion contactRotation, Vector3 direction)
+    {
+        _forceShot.SetActive(true);
+        _forceShot.transform.SetPositionAndRotation(contactPoint, contactRotation);
+
+        StartCoroutine(IE_ActiveDefeatedForceShot(contactPoint, contactRotation, direction));
+    }
+    private IEnumerator IE_ActiveDefeatedForceShot(Vector3 contactPoint, Quaternion contactRotation, Vector3 direction)
+    {
+        _forceShot.transform.SetPositionAndRotation(contactPoint, contactRotation);
+        float time = 0.3f;
+        while (time > 0)
+        {
+            _forceShot.transform.Translate(direction * Time.deltaTime);
+            yield return null;
+            time -= Time.deltaTime;
+        }
     }
 
     private void SpawnProjectile()
@@ -276,6 +297,7 @@ public class CharacterAction : MonoBehaviour
     private void OnEnable()
     {
         _onEnable.Invoke();
+        _forceShot.SetActive(false);
     }
 
     private void Start()

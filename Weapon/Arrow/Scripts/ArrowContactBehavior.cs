@@ -10,6 +10,8 @@ public class ArrowContactBehavior : MonoBehaviour
     [SerializeField]
     private UnityEvent _onContactPlayer;
 
+    private Rigidbody _rb;
+
     public void OnTriggerEnter(Collider other)
     {
         InteractWithCollider(other);
@@ -56,6 +58,19 @@ public class ArrowContactBehavior : MonoBehaviour
 
         characterAtt.InMapInfo.Hp.Value -= 20f;
 
+        var characterAction = collider.GetComponent<CharacterAction>();
+        if (characterAction == null)
+        {
+            return;
+        }
+
+        characterAction.ActiveDefeatedForceShot(transform.position - transform.forward, transform.rotation, _rb.velocity);
+
         _onContactPlayer.Invoke();
+    }
+
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody>();
     }
 }

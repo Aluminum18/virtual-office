@@ -29,6 +29,7 @@ public class CharacterRagDollActivate : MonoBehaviour
 
         for (int i = 0; i < _rbs.Count; i++)
         {
+            _rbs[i].detectCollisions = active;
             _rbs[i].isKinematic = !active;
         }
     }
