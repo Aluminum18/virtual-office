@@ -157,21 +157,6 @@ public class CharacterAction : MonoBehaviour
 
     public void ActiveDefeatedForceShot(Vector3 contactPoint, Quaternion contactRotation, Vector3 direction)
     {
-        _forceShot.SetActive(true);
-        _forceShot.transform.SetPositionAndRotation(contactPoint, contactRotation);
-
-        StartCoroutine(IE_ActiveDefeatedForceShot(contactPoint, contactRotation, direction));
-    }
-    private IEnumerator IE_ActiveDefeatedForceShot(Vector3 contactPoint, Quaternion contactRotation, Vector3 direction)
-    {
-        _forceShot.transform.SetPositionAndRotation(contactPoint, contactRotation);
-        float time = 0.3f;
-        while (time > 0)
-        {
-            _forceShot.transform.Translate(direction * Time.deltaTime);
-            yield return null;
-            time -= Time.deltaTime;
-        }
     }
 
     private void SpawnProjectile()
