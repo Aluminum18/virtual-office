@@ -57,6 +57,12 @@ public class ArrowContactBehavior : MonoBehaviour
         }
 
         characterAtt.InMapInfo.Hp.Value -= 20f;
+        _onContactPlayer.Invoke();
+
+        if (characterAtt.InMapInfo.Hp.Value > 0)
+        {
+            return;
+        }
 
         var characterAction = collider.GetComponent<CharacterAction>();
         if (characterAction == null)
@@ -64,9 +70,8 @@ public class ArrowContactBehavior : MonoBehaviour
             return;
         }
 
-        characterAction.ActiveDefeatedForceShot(transform.position - transform.forward, transform.rotation, _rb.velocity);
+        characterAction.ActiveDefeatedForceShot(transform.position, transform.rotation, _rb.velocity);
 
-        _onContactPlayer.Invoke();
     }
 
     private void Start()
