@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Firebase.Unity.Editor;
+//using Firebase.Unity.Editor;
 using UnityEngine.Events;
 
 public class RealTimeDBInitializer : MonoBehaviour
@@ -12,7 +12,7 @@ public class RealTimeDBInitializer : MonoBehaviour
     public void Init()
     {
 #if UNITY_EDITOR
-        Firebase.FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://fir-test-d1e63.firebaseio.com/");
+        //Firebase.FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://fir-test-d1e63.firebaseio.com/");
 #endif
         _onRealTimeDBInitialized?.Invoke();
     }
