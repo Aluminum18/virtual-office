@@ -18,4 +18,14 @@ public class SfxList : ScriptableObject
         }
         return _clips[UnityEngine.Random.Range(0, clipCount)];
     }
+
+    public AudioClip GetClip(int index)
+    {
+        if (_clips.Count <= index)
+        {
+            Debug.Log($"invalid index [{index}]");
+            return null;
+        }
+        return _clips[index];
+    }
 }
