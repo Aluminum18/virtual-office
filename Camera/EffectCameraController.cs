@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class EffectCameraController : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class EffectCameraController : MonoBehaviour
     private Transform _eagleVisionSphere;
     [SerializeField]
     private float _eagleVisionLauchTime = 0.3f;
+    [SerializeField]
+    private Vignette _eVisionVolume;
 
     [SerializeField]
     private UnityEvent _onEVisionBegin;
@@ -23,39 +27,30 @@ public class EffectCameraController : MonoBehaviour
     {
         StopAllCoroutines();
 
-        StartCoroutine(IE_ScaleEableVisionSphere(active));
+        StartCoroutine(IE_ScaleEagleVisionSphere(active));
     }
 
-    private IEnumerator IE_ScaleEableVisionSphere(bool active)
+    private IEnumerator IE_ScaleEagleVisionSphere(bool active)
     {
         _mainCam.enabled = false;
         _xRayCam.enabled = true;
 
+        Vector3 to;
         if (active)
         {
+            to = Vector3.one * 120f;
             _onEVisionBegin.Invoke();
         }
         else
         {
+            to = Vector3.zero;
             _onEVisionStop.Invoke();
         }
 
-        float time = _eagleVisionLauchTime;
-        float scaleFactor = 120 / time * Time.deltaTime * (active ? 1 : -1);
-        float scale = _eagleVisionSphere.localScale.x;
-        while (time > 0)
-        {
-            scale += scaleFactor;
-            Debug.Log("Scale" + scale);
+        LeanTween.scale(_eagleVisionSphere.gameObject, to, _eagleVisionLauchTime).setEase(LeanTweenType.easeInOutQuad);
 
-            time -= Time.deltaTime;
-            _eagleVisionSphere.localScale = Vector3.one * scale;
-            yield return null;
-        }
-
+        yield return new WaitForSeconds(_eagleVisionLauchTime);
         _xRayCam.enabled = active;
         _mainCam.enabled = !active;
-
-        _eagleVisionSphere.localScale = active ? 120 * Vector3.one : Vector3.zero;
     }
 }

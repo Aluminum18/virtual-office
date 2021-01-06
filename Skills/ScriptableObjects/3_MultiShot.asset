@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143f9f711e8ce2c40b46fe582c55b0e6, type: 3}
+  m_Name: 3_MultiShot
+  m_EditorClassIdentifier: 
+  SkillId: 3
+  SkillIcon: {fileID: 21300000, guid: 1fe96bdecd5ae674680d8e420fdd6d9c, type: 3}
+  SkillPic: {fileID: 0}
+  SkillType: 0
+  SkillName: Multi-shot
+  SkillDesc: 
+  Cooldown: 60
+  Cost: 3
+  Damage: 40
+  Duration: 0
