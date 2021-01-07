@@ -3073,6 +3073,10 @@ PrefabInstance:
       propertyPath: _skillList
       value: 
       objectReference: {fileID: 11400000, guid: e890b51e014d5cf4d99519a5488eedb6, type: 2}
+    - target: {fileID: -4186474833301375879, guid: 422172bce63db8f4c89d4d14e2edbf83, type: 3}
+      propertyPath: _roomDataPunSync
+      value: 
+      objectReference: {fileID: 1444883708}
     - target: {fileID: 7163224753843011480, guid: 422172bce63db8f4c89d4d14e2edbf83, type: 3}
       propertyPath: m_Name
       value: SkillPickPopup

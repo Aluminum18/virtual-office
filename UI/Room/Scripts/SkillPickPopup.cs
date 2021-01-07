@@ -29,8 +29,11 @@ public class SkillPickPopup : ScrollList<SkillSO>
     [Header("Config")]
     [SerializeField]
     private List<SkillSlot> _skillSlots;
+    [SerializeField]
+    private RoomDataSync _roomDataPunSync;
 
     Dictionary<int, SkillItem> _skillItemsMap = new Dictionary<int, SkillItem>();
+    private bool _isDirty = false;
 
     public void PickSkill(int skillId)
     {
@@ -39,6 +42,8 @@ public class SkillPickPopup : ScrollList<SkillSO>
         CalculateRemainPoint();
 
         UpdateSkillItemsAndSlots();
+
+        _isDirty = true;
     }
 
     public void EjectSkill(int skillId)
@@ -48,6 +53,18 @@ public class SkillPickPopup : ScrollList<SkillSO>
         CalculateRemainPoint();
 
         UpdateSkillItemsAndSlots();
+
+        _isDirty = true;
+    }
+
+    public void SubmitChange()
+    {
+        if (!_isDirty)
+        {
+            return;
+        }
+
+        _roomDataPunSync.NotifyPickedSkillsChange();
     }
 
     protected override void DoOnEnable()
