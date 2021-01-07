@@ -24,21 +24,33 @@ public class SkillPickPopup : ScrollList<SkillSO>
 
     [Header("Config")]
     [SerializeField]
-    private TMP_Text _pointText;
-    [SerializeField]
     private List<SkillSlot> _skillSlots;
 
     Dictionary<int, SkillItem> _skillItemsMap = new Dictionary<int, SkillItem>();
+
+    public void PickSkill(int skillId)
+    {
+        _pickedSkills.Add(skillId);
+
+        CalculateRemainPoint();
+
+        UpdateSkillItemsAndSlots();
+    }
+
+    public void EjectSkill(int skillId)
+    {
+        _pickedSkills.Remove(skillId);
+
+        CalculateRemainPoint();
+
+        UpdateSkillItemsAndSlots();
+    }
 
     protected override void DoOnEnable()
     {
         _dataList = _skillList.SkillList;
         SetPickedSkillSO();
-    }
-
-    protected override void DoOnDisable()
-    {
-        _pickedSkills.OnListChanged -= UpdateInfos;
+        SetSkillSlotsParent();
     }
 
     protected override void DoOnAllItemsCreated()
@@ -57,34 +69,28 @@ public class SkillPickPopup : ScrollList<SkillSO>
                 continue;
             }
             _skillItemsMap[item.SkillId] = item;
-
-            item.SetPickedSkills(_pickedSkills);
+            item.SetParent(this);
         }
 
-        UpdateInfos();
+        UpdateSkillItemsAndSlots();
     }
 
     private void SetPickedSkillSO()
     {
-        _pickedSkills = _allPlayersPickedSkills[_roomInfo.GetPlayerPos(_thisUserId.Value)];
-        _pickedSkills.OnListChanged += UpdateInfos;
-
-        SetSkillSlotPickSkillsSO();
+        _pickedSkills = _allPlayersPickedSkills[_roomInfo.GetPlayerPos(_thisUserId.Value) - 1];
     }
 
-    private void SetSkillSlotPickSkillsSO()
+    private void SetSkillSlotsParent()
     {
         var pickedList = _pickedSkills.List;
         for (int i = 0; i < _skillSlots.Count; i++)
         {
-            _skillSlots[i].SetPickedSkills(_pickedSkills);
+            _skillSlots[i].SetParent(this);
         }
     }
 
-    private void UpdateInfos()
+    private void UpdateSkillItemsAndSlots()
     {
-        UpdatePoint();
-
         UpdateSkillItems();
 
         UpdateSkillSlots();
@@ -121,7 +127,7 @@ public class SkillPickPopup : ScrollList<SkillSO>
         }
     }
 
-    private void UpdatePoint()
+    private void CalculateRemainPoint()
     {
         var list = _pickedSkills.List;
         _remainPoint.Value = 10;
@@ -129,7 +135,5 @@ public class SkillPickPopup : ScrollList<SkillSO>
         {
             _remainPoint.Value -= _skillList.GetSkillCost(list[i]);
         }
-
-        _pointText.text = _remainPoint.Value.ToString();
     }
 }

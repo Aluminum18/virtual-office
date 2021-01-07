@@ -16,10 +16,6 @@ public class SkillItem : MonoBehaviour, IScrollListItem<SkillSO>
     [SerializeField]
     private int _skillId;
 
-    [Header("Reference - assigned at runtime")]
-    [SerializeField]
-    private IntegerListVariable _pickedSkills;
-
     [Header("Config")]
     [SerializeField]
     private Image _selectedFrame;
@@ -44,6 +40,8 @@ public class SkillItem : MonoBehaviour, IScrollListItem<SkillSO>
     [SerializeField]
     private Button _pickButton;
 
+    private SkillPickPopup _parent;
+
     public int SkillId
     {
         get
@@ -56,11 +54,6 @@ public class SkillItem : MonoBehaviour, IScrollListItem<SkillSO>
     private const string DAMAGE_PAT = "Damage: {0}";
     private const string DURATION_PAT = "Duration: {0} second(s)";
     private const string COOLDOWN_PAT = "Cooldown: {0} second(s)";
-
-    public void SetPickedSkills(IntegerListVariable skillList)
-    {
-        _pickedSkills = skillList;
-    }
 
     public void SetUp(SkillSO data)
     {
@@ -80,36 +73,36 @@ public class SkillItem : MonoBehaviour, IScrollListItem<SkillSO>
         UpdateSkillItemStatus(false);
     }
 
+    public void SetParent(SkillPickPopup parent)
+    {
+        _parent = parent;
+    }
+
     public void PickSkill()
     {
-        _pickedSkills.Add(_skillId);
+        _parent.PickSkill(_skillId);
     }
 
     private Color32 _originCostTextColor = new Color32(147, 57, 0, 255);
     public void UpdateSkillItemStatus(bool isPicked)
     {
-        SetPickButtonStatus(!isPicked);
         SetSelectedFrameStatus(isPicked);
 
         int cost = _skillList.GetSkillCost(_skillId);
-        if (_remainPoint.Value < cost && !isPicked)
+        bool unavailable = _remainPoint.Value < cost && !isPicked;
+        if (unavailable)
         {
             SetPickButtonStatus(false);
             _costText.color = Color.red;
             return;
         }
+
+        SetPickButtonStatus(true);
         _costText.color = _originCostTextColor;
     }
 
     private void SetPickButtonStatus(bool active)
     {
-        _pickButton.interactable = false;
-
-        if (_pickedSkills != null && _pickedSkills.List.Count >= 4)
-        {
-            return;
-        }      
-
         _pickButton.interactable = active;
     }
 

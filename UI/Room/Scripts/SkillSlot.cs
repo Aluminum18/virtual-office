@@ -12,8 +12,6 @@ public class SkillSlot : MonoBehaviour
     [Header("Assigned at runtime")]
     [SerializeField]
     private int _skillId;
-    [SerializeField]
-    private IntegerListVariable _pickedSkills;
 
     [Header("Config")]
     [SerializeField]
@@ -23,9 +21,11 @@ public class SkillSlot : MonoBehaviour
     [SerializeField]
     private Button _ejectButton;
 
-    public void SetPickedSkills(IntegerListVariable pickedSkills)
+    private SkillPickPopup _parent;
+
+    public void SetParent(SkillPickPopup parent)
     {
-        _pickedSkills = pickedSkills;
+        _parent = parent;
     }
 
     public void AssignSkill(int skillId)
@@ -35,7 +35,7 @@ public class SkillSlot : MonoBehaviour
 
     public void EjectSkill()
     {
-        _pickedSkills.Remove(_skillId);
+        _parent.EjectSkill(_skillId);
     }
 
     public void SetStatus(bool active)

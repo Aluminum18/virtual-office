@@ -13,13 +13,10 @@ MonoBehaviour:
   m_Name: RoomInfos
   m_EditorClassIdentifier: 
   _roomOption: {fileID: 11400000, guid: 2e8c0739fedc538489f90649e8a76c17, type: 2}
-  _onRoomPlayerChangedFromLocal: {fileID: 11400000, guid: 54d6b8af90d826c43b8b142d37af6c53,
-    type: 2}
-  _onLocalRoomPlayerModified: {fileID: 11400000, guid: f2eb7ad72f82d0c4e8b411ee623414e1,
-    type: 2}
+  _onRoomPlayerChangedFromLocal: {fileID: 11400000, guid: 54d6b8af90d826c43b8b142d37af6c53, type: 2}
+  _onLocalRoomPlayerModified: {fileID: 11400000, guid: f2eb7ad72f82d0c4e8b411ee623414e1, type: 2}
   _onAllPlayerReady: {fileID: 11400000, guid: d1e8de5ce1c710c47802a9e56be85133, type: 2}
   _team1List:
   - nFqqDhSGtybUHQ5T6AeIc9cxNdk2
-  _team2List:
-  - 2
+  _team2List: []
   _readyCount: 0
