@@ -7,6 +7,7 @@ public static class PhotonEventCode
     public const byte MANUAL_CHARACTER_SPAWNED = 0;
     public const byte LOAD_SCENE = 1;
 
+    // Character
     public const byte CHARACTER_DIRECTION_SO_CHANGE = 2;
     public const byte CHARACTER_RAW_JOYSTICK_SO_CHANGE = 3;
     public const byte CHARACTER_AIM_SPOT_SO_CHANGE = 4;
@@ -15,4 +16,7 @@ public static class PhotonEventCode
     public const byte CHARACTER_ON_AIM = 7;
     public const byte CHARACTER_ON_CANCEL_AIM = 8;
     public const byte CHARACTER_ON_HP_CHANGED = 9;
+
+    // Room
+    public const byte ROOM_PICKED_SKILLS_CHANGED = 10;
 }

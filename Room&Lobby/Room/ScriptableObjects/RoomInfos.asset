@@ -16,7 +16,7 @@ MonoBehaviour:
   _onRoomPlayerChangedFromLocal: {fileID: 11400000, guid: 54d6b8af90d826c43b8b142d37af6c53, type: 2}
   _onLocalRoomPlayerModified: {fileID: 11400000, guid: f2eb7ad72f82d0c4e8b411ee623414e1, type: 2}
   _onAllPlayerReady: {fileID: 11400000, guid: d1e8de5ce1c710c47802a9e56be85133, type: 2}
-  _team1List:
+  _team1List: []
+  _team2List:
   - nFqqDhSGtybUHQ5T6AeIc9cxNdk2
-  _team2List: []
   _readyCount: 0

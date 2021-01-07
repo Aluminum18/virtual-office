@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d713de83d252df3429251181da1eb363, type: 3}
   m_Name: PickedSkills 2
   m_EditorClassIdentifier: 
-  _list: 0500000004000000
+  _list: 
   _dontDuplicateValue: 0
