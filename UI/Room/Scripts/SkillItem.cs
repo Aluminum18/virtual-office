@@ -97,7 +97,7 @@ public class SkillItem : MonoBehaviour, IScrollListItem<SkillSO>
             return;
         }
 
-        SetPickButtonStatus(true);
+        SetPickButtonStatus(!isPicked);
         _costText.color = _originCostTextColor;
     }
 

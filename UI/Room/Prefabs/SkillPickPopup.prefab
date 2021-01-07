@@ -216,6 +216,7 @@ MonoBehaviour:
   _remainPoint: {fileID: 11400000, guid: d932ef34a975a7a4882eea01c60b064e, type: 2}
   _skillList: {fileID: 11400000, guid: e890b51e014d5cf4d99519a5488eedb6, type: 2}
   _pickedSkills: {fileID: 0}
+  _onRoomInfoSOChanged: {fileID: 11400000, guid: f2eb7ad72f82d0c4e8b411ee623414e1, type: 2}
   _skillSlots:
   - {fileID: 5798944061278914214}
   - {fileID: 6041070365692821683}
