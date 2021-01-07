@@ -34,14 +34,14 @@ public class PlayerInRoomDisplayer : MonoBehaviour
 
     public void Refresh(params object[] args)
     {
+        UpdateSkillIcons();
+
         string playerId = _roomInfo.GetPlayerIdAtPos(_position);
         if (string.IsNullOrEmpty(playerId))
         {
             _playerName.text = "Open";
             return;
         }
-
-        UpdateSkillIcons();
 
         UserInfoFetcher.Instance.GetUserInfo(playerId,
             userInfo =>
