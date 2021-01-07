@@ -1321,6 +1321,17 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &1156283421 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -4186474833301375879, guid: 422172bce63db8f4c89d4d14e2edbf83, type: 3}
+  m_PrefabInstance: {fileID: 7163224754966002610}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b706d03d8c9c78e4c9088f8d984765e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1158710315 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7163224753843011481, guid: 422172bce63db8f4c89d4d14e2edbf83, type: 3}
@@ -3077,6 +3088,34 @@ PrefabInstance:
       propertyPath: _roomDataPunSync
       value: 
       objectReference: {fileID: 1444883708}
+    - target: {fileID: 1745126952298459623, guid: 422172bce63db8f4c89d4d14e2edbf83, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745126952298459623, guid: 422172bce63db8f4c89d4d14e2edbf83, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745126952298459623, guid: 422172bce63db8f4c89d4d14e2edbf83, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1156283421}
+    - target: {fileID: 1745126952298459623, guid: 422172bce63db8f4c89d4d14e2edbf83, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745126952298459623, guid: 422172bce63db8f4c89d4d14e2edbf83, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SubmitChange
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745126952298459623, guid: 422172bce63db8f4c89d4d14e2edbf83, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: SkillPickPopup, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745126952298459623, guid: 422172bce63db8f4c89d4d14e2edbf83, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7163224753843011480, guid: 422172bce63db8f4c89d4d14e2edbf83, type: 3}
       propertyPath: m_Name
       value: SkillPickPopup
