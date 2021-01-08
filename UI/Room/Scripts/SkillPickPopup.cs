@@ -81,6 +81,8 @@ public class SkillPickPopup : ScrollList<SkillSO>
             return;
         }
 
+        _isDirty = false;
+
         _roomDataPunSync.NotifyPickedSkillsChange();
     }
 
@@ -123,7 +125,7 @@ public class SkillPickPopup : ScrollList<SkillSO>
     private void SetPickedSkillSO(params object[] args)
     {
         int pos = _roomInfo.GetPlayerPos(_thisUserId.Value);
-        if (_lastPos == pos)
+        if (pos == -1 || _lastPos == pos)
         {
             return;
         }

@@ -50,6 +50,16 @@ public class RoomDataSync : MonoBehaviour, IOnEventCallback
         SendPunEvent(PhotonEventCode.ROOM_PICKED_SKILLS_CHANGED, data);
     }
 
+    private void OnEnable()
+    {
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+
+    private void OnDisable()
+    {
+        PhotonNetwork.RemoveCallbackTarget(this);
+    }
+
     private void SendPunEvent(byte eventCode, object data)
     {
         RaiseEventOptions eventOptions = new RaiseEventOptions
