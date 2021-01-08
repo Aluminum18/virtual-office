@@ -32,7 +32,24 @@ public class SkillPickPopup : ScrollList<SkillSO>
     [SerializeField]
     private RoomDataSync _roomDataPunSync;
 
-    Dictionary<int, SkillItem> _skillItemsMap = new Dictionary<int, SkillItem>();
+    private Dictionary<int, SkillItem> _skillItemsMap = new Dictionary<int, SkillItem>();
+    private Dictionary<int, SkillItem> SkillItemMap
+    {
+        get
+        {
+            if (_skillItemsMap.Count != _managedItems.Count)
+            {
+                _skillItemsMap.Clear();
+                for (int i = 0; i < _managedItems.Count; i++)
+                {
+                    var item = _managedItems[i].GetComponent<SkillItem>();
+                    _skillItemsMap[item.SkillId] = item;
+                }
+            }
+            return _skillItemsMap;
+        }
+    }
+
     private bool _isDirty = false;
 
     public void PickSkill(int skillId)
@@ -72,10 +89,6 @@ public class SkillPickPopup : ScrollList<SkillSO>
         _dataList = _skillList.SkillList;
 
         SetSkillSlotsParent();
-
-        _onRoomInfoSOChanged.Subcribe(SetPickedSkillSO);
-
-        SetPickedSkillSO();
     }
 
     protected override void DoOnDisable()
@@ -101,6 +114,9 @@ public class SkillPickPopup : ScrollList<SkillSO>
             _skillItemsMap[item.SkillId] = item;
             item.SetParent(this);
         }
+
+        _onRoomInfoSOChanged.Subcribe(SetPickedSkillSO);
+        SetPickedSkillSO();
     }
 
     private int _lastPos = -1;

@@ -23,10 +23,10 @@ public class RoomDataSync : MonoBehaviour, IOnEventCallback
 
         var eventData = (object[])photonEvent.CustomData;
         int pos = (int)eventData[0];
-        var changedPickedSkills = (List<int>)eventData[1];
+        var changedPickedSkills = (int[])eventData[1];
 
         var needUpdate = _allPlayerPickedSkills[pos];
-        needUpdate.AssignNew(changedPickedSkills);
+        needUpdate.AssignNew(new List<int>(changedPickedSkills));
     }
 
     public void NotifyPickedSkillsChange()
@@ -38,7 +38,7 @@ public class RoomDataSync : MonoBehaviour, IOnEventCallback
             return;
         }
 
-        List<int> pickedSkills = _allPlayerPickedSkills[pos - 1].List;
+        int[] pickedSkills = _allPlayerPickedSkills[pos - 1].List.ToArray();
 
 
         object[] data = new object[]
