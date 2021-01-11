@@ -10,8 +10,6 @@ public class RoomInfoSO : ScriptableObject
 
     [Header("Events out")]
     [SerializeField]
-    private GameEvent _onRoomPlayerChangedFromLocal;
-    [SerializeField]
     private GameEvent _onLocalRoomPlayerModified;
     [SerializeField]
     private GameEvent _onAllPlayerReady;
@@ -23,8 +21,20 @@ public class RoomInfoSO : ScriptableObject
     private List<string> _team2List;
     [SerializeField]
     private int _readyCount;
+    [SerializeField]
+    private List<int> _pos1Picks;
+    [SerializeField]
+    private List<int> _pos2Picks;
+    [SerializeField]
+    private List<int> _pos3Picks;
+    [SerializeField]
+    private List<int> _pos4Picks;
+    [SerializeField]
+    private List<int> _pos5Picks;
+    [SerializeField]
+    private List<int> _pos6Picks;
 
-    private int ReadyCount
+    public int ReadyCount
     {
         set
         {
@@ -43,13 +53,87 @@ public class RoomInfoSO : ScriptableObject
         {
             return _team1List;
         }
+        set
+        {
+            _team1List = value;
+        }
     }
-
     public List<string> Team2
     {
         get
         {
             return _team2List;
+        }
+        set
+        {
+            _team2List = value;
+        }
+    }
+
+    public List<int> Pos1Picks
+    {
+        get
+        {
+            return _pos1Picks;
+        }
+        set
+        {
+            _pos1Picks = value;
+        }
+    }
+    public List<int> Pos2Picks
+    {
+        get
+        {
+            return _pos2Picks;
+        }
+        set
+        {
+            _pos2Picks = value;
+        }
+    }
+    public List<int> Pos3Picks
+    {
+        get
+        {
+            return _pos3Picks;
+        }
+        set
+        {
+            _pos3Picks = value;
+        }
+    }
+    public List<int> Pos4Picks
+    {
+        get
+        {
+            return _pos4Picks;
+        }
+        set
+        {
+            _pos4Picks = value;
+        }
+    }
+    public List<int> Pos5Picks
+    {
+        get
+        {
+            return _pos5Picks;
+        }
+        set
+        {
+            _pos5Picks = value;
+        }
+    }
+    public List<int> Pos6Picks
+    {
+        get
+        {
+            return _pos6Picks;
+        }
+        set
+        {
+            _pos6Picks = value;
         }
     }
 
@@ -59,23 +143,6 @@ public class RoomInfoSO : ScriptableObject
         {
             return _team1List.Count + _team2List.Count;
         }
-    }
-
-    public void ResetRoomInfo()
-    {
-        _team1List.Clear();
-        _team2List.Clear();
-    }
-
-    public void CreateNewRoomInfo(bool notifyChanged = false)
-    {
-        ResetRoomInfo();
-        if (notifyChanged)
-        {
-            UpdateRoomPlayerToDB();
-        }
-
-        _onLocalRoomPlayerModified?.Raise();
     }
 
     public string GetPlayerIdAtPos(int pos)
@@ -115,92 +182,17 @@ public class RoomInfoSO : ScriptableObject
         return -1;
     }
 
-    public void AddToTeam1(string playerId, bool notifyChanged = false)
+    public int GetTeam(string userId)
     {
-        if (_team1List.Count >= _roomOption.MaxPlayersPerTeam)
+        if (_team1List.Contains(userId))
         {
-            return;
+            return 1;
+        }
+        else if (_team2List.Contains(userId))
+        {
+            return 2;
         }
 
-        _team1List.Add(playerId);
-
-        if (notifyChanged)
-        {
-            UpdateRoomPlayerToDB();
-        }
-
-        _onLocalRoomPlayerModified?.Raise();
-    }
-
-    public void AddToTeam2(string playerId, bool notifyChanged = false)
-    {
-        if (_team2List.Count >= _roomOption.MaxPlayersPerTeam)
-        {
-            return;
-        }
-        _team2List.Add(playerId);
-
-        if (notifyChanged)
-        {
-            UpdateRoomPlayerToDB();
-        }
-
-        _onLocalRoomPlayerModified?.Raise();
-    }
-
-    public void AddToAvailableSlot(string playerId, bool notifyChanged = false)
-    {
-        if (_team1List.Count < _roomOption.MaxPlayersPerTeam)
-        {
-            _team1List.Add(playerId);
-
-            if (notifyChanged)
-            {
-                UpdateRoomPlayerToDB();
-            }
-
-            _onLocalRoomPlayerModified?.Raise();
-            return;
-        }
-
-        if (_team2List.Count < _roomOption.MaxPlayersPerTeam)
-        {
-            _team2List.Add(playerId);
-            if (notifyChanged)
-            {
-                UpdateRoomPlayerToDB();
-            }
-        }
-
-        _onLocalRoomPlayerModified?.Raise();
-    }
-
-    public void DropPlayer(string playerId, bool notifyChanged = false)
-    {
-        _team1List.Remove(playerId);
-        _team2List.Remove(playerId);
-
-        if (notifyChanged)
-        {
-            UpdateRoomPlayerToDB();
-        }
-
-        _onLocalRoomPlayerModified?.Raise();
-    }
-
-    public void CreateInfoByDbData(FireStoreRoomData roomData)
-    {
-        ResetRoomInfo();
-
-        _team1List = roomData.team1;
-        _team2List = roomData.team2;
-        ReadyCount = roomData.readyOnRoyaleCount;
-
-        _onLocalRoomPlayerModified?.Raise();
-    }
-
-    private void UpdateRoomPlayerToDB()
-    {
-        _onRoomPlayerChangedFromLocal?.Raise();
+        return 0;
     }
 }

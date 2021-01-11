@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7710621485522906742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5726792635207982966}
+  - component: {fileID: 3821769173041482713}
+  m_Layer: 0
+  m_Name: RoomInfoAccessorRTDB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5726792635207982966
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7710621485522906742}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3821769173041482713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7710621485522906742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d8e32352e1cc743b38dc2e480ecbfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _roomOptions: {fileID: 11400000, guid: 2e8c0739fedc538489f90649e8a76c17, type: 2}
+  _roomInfo: {fileID: 11400000, guid: d329bc1c382927d41af5d597862934e2, type: 2}
+  _dbAccessor: {fileID: 0}
+  _thisUserId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
+  _thisPickedSkills: {fileID: 11400000, guid: 662d901291f50ae499d9dd39e2e40a2a, type: 2}
+  _onRoomFull:
+    m_PersistentCalls:
+      m_Calls: []
+  _onRoomInfoChanged: {fileID: 11400000, guid: f2eb7ad72f82d0c4e8b411ee623414e1, type: 2}

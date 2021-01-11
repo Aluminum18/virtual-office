@@ -50,6 +50,11 @@ public class PhotonWrapper : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRoom(roomName);
     }
 
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
     public void JoinDefaultRoom()
     {
         if (string.IsNullOrEmpty(_roomOptions.RoomName))

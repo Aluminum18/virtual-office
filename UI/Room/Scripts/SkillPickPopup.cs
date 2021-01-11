@@ -7,18 +7,9 @@ public class SkillPickPopup : ScrollList<SkillSO>
 {
     [Header("Reference")]
     [SerializeField]
-    private StringVariable _thisUserId;
-    [SerializeField]
-    private RoomInfoSO _roomInfo;
-    [SerializeField]
-    private List<IntegerListVariable> _allPlayersPickedSkills;
-    [SerializeField]
     private IntegerVariable _remainPoint;
-
     [SerializeField]
     private SkillListSO _skillList;
-
-    [Header("Refererence - assigned at runtime")]
     [SerializeField]
     private IntegerListVariable _pickedSkills;
 
@@ -29,8 +20,6 @@ public class SkillPickPopup : ScrollList<SkillSO>
     [Header("Config")]
     [SerializeField]
     private List<SkillSlot> _skillSlots;
-    [SerializeField]
-    private RoomDataSync _roomDataPunSync;
 
     private Dictionary<int, SkillItem> _skillItemsMap = new Dictionary<int, SkillItem>();
     private Dictionary<int, SkillItem> SkillItemMap
@@ -50,40 +39,18 @@ public class SkillPickPopup : ScrollList<SkillSO>
         }
     }
 
-    private bool _isDirty = false;
-
     public void PickSkill(int skillId)
     {
         _pickedSkills.Add(skillId);
 
-        CalculateRemainPoint();
-
-        UpdateSkillItemsAndSlots();
-
-        _isDirty = true;
+        RefreshView();
     }
 
     public void EjectSkill(int skillId)
     {
         _pickedSkills.Remove(skillId);
 
-        CalculateRemainPoint();
-
-        UpdateSkillItemsAndSlots();
-
-        _isDirty = true;
-    }
-
-    public void SubmitChange()
-    {
-        if (!_isDirty)
-        {
-            return;
-        }
-
-        _isDirty = false;
-
-        _roomDataPunSync.NotifyPickedSkillsChange();
+        RefreshView();
     }
 
     protected override void DoOnEnable()
@@ -91,11 +58,6 @@ public class SkillPickPopup : ScrollList<SkillSO>
         _dataList = _skillList.SkillList;
 
         SetSkillSlotsParent();
-    }
-
-    protected override void DoOnDisable()
-    {
-        _onRoomInfoSOChanged.Unsubcribe(SetPickedSkillSO);
     }
 
     protected override void DoOnAllItemsCreated()
@@ -117,32 +79,14 @@ public class SkillPickPopup : ScrollList<SkillSO>
             item.SetParent(this);
         }
 
-        _onRoomInfoSOChanged.Subcribe(SetPickedSkillSO);
-        SetPickedSkillSO();
+        RefreshView();
+
+        _onRoomInfoSOChanged.Subcribe(RefreshView);
     }
 
-    private int _lastPos = -1;
-    private void SetPickedSkillSO(params object[] args)
+    protected override void DoOnDisable()
     {
-        int pos = _roomInfo.GetPlayerPos(_thisUserId.Value);
-        if (pos == -1 || _lastPos == pos)
-        {
-            return;
-        }
-
-        _lastPos = pos;
-
-        var newPickedSkills = _allPlayersPickedSkills[pos - 1];
-        if (_pickedSkills != null)
-        {
-            newPickedSkills.AssignNew(_pickedSkills.List);
-            _pickedSkills.Clear();
-        }
-
-        _pickedSkills = newPickedSkills;
-
-        CalculateRemainPoint();
-        UpdateSkillItemsAndSlots();
+        _onRoomInfoSOChanged.Unsubcribe(RefreshView);
     }
 
     private void SetSkillSlotsParent()
@@ -153,10 +97,10 @@ public class SkillPickPopup : ScrollList<SkillSO>
         }
     }
 
-    private void UpdateSkillItemsAndSlots()
+    private void RefreshView(params object[] args)
     {
+        CalculateRemainPoint();
         UpdateSkillItems();
-
         UpdateSkillSlots();
     }
 

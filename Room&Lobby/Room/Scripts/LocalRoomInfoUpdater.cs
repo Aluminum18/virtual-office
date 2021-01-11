@@ -26,7 +26,7 @@ public class LocalRoomInfoUpdater : MonoBehaviour
 
     private void UpdateCreatedRoomInfo(params object[] args)
     {
-        _roomInfo.CreateNewRoomInfo(true);
+        //_roomInfo.CreateNewRoomInfo(true);
     }
 
     private void UpdateJoinedRoomInfo(params object[] args)
@@ -34,20 +34,20 @@ public class LocalRoomInfoUpdater : MonoBehaviour
         _roomInfoDBAccessor.GetRoomInfo(_roomOption.RoomName,
             roomData =>
             {
-                _roomInfo.CreateInfoByDbData(roomData);
-                _roomInfo.AddToAvailableSlot(_userId.Value, true);
+                //_roomInfo.CreateInfoByDbData(roomData);
+                //_roomInfo.AddToAvailableSlot(_userId.Value, true);
             });
     }
 
     private void DropPlayerWhenLeft(params object[] args)
     {
-        _roomInfo.DropPlayer(_userId.Value);
+        //_roomInfo.DropPlayer(_userId.Value);
     }
 
     private void UpdateRoomDataFromDb(params object[] args)
     {
         var changedRoomData = (FireStoreRoomData)args[0];
-        _roomInfo.CreateInfoByDbData(changedRoomData);
+        //_roomInfo.CreateInfoByDbData(changedRoomData);
     }
 
     private void OnEnable()

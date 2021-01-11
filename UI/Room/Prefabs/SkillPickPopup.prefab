@@ -204,18 +204,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _listItem: {fileID: 4892229905559491732, guid: b62e84a625fb0e041b500081e5728963, type: 3}
   _contentTransform: {fileID: 7163224753927063553}
-  _thisUserId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
-  _roomInfo: {fileID: 11400000, guid: d329bc1c382927d41af5d597862934e2, type: 2}
-  _allPlayersPickedSkills:
-  - {fileID: 11400000, guid: e0a18e859a8f30d4ea9c6371bc7680c2, type: 2}
-  - {fileID: 11400000, guid: 7f2f506c5d8372d4096b7ccfd98f8eee, type: 2}
-  - {fileID: 11400000, guid: d69c10be72ac1394ea94486a9d1c7779, type: 2}
-  - {fileID: 11400000, guid: f10c9f909d1e7fa4aa4ad6ab447957a2, type: 2}
-  - {fileID: 11400000, guid: fdd78b0900f8b7f4f9a13fa0af1d23c1, type: 2}
-  - {fileID: 11400000, guid: 3c6d54c45354ea94a9a90a451c337797, type: 2}
   _remainPoint: {fileID: 11400000, guid: d932ef34a975a7a4882eea01c60b064e, type: 2}
   _skillList: {fileID: 11400000, guid: e890b51e014d5cf4d99519a5488eedb6, type: 2}
-  _pickedSkills: {fileID: 0}
+  _pickedSkills: {fileID: 11400000, guid: 662d901291f50ae499d9dd39e2e40a2a, type: 2}
   _onRoomInfoSOChanged: {fileID: 11400000, guid: f2eb7ad72f82d0c4e8b411ee623414e1, type: 2}
   _skillSlots:
   - {fileID: 5798944061278914214}

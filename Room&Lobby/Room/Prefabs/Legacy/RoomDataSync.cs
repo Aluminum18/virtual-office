@@ -23,9 +23,16 @@ public class RoomDataSync : MonoBehaviour, IOnEventCallback
 
         var eventData = (object[])photonEvent.CustomData;
         int pos = (int)eventData[0];
+
+        if (pos < 0)
+        {
+            Debug.LogError($"invalid pos [{pos}]", this);
+            return;
+        }
+
         var changedPickedSkills = (int[])eventData[1];
 
-        var needUpdate = _allPlayerPickedSkills[pos];
+        var needUpdate = _allPlayerPickedSkills[pos - 1];
         needUpdate.AssignNew(new List<int>(changedPickedSkills));
     }
 

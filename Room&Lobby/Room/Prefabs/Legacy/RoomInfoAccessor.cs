@@ -5,6 +5,7 @@ using UnityEngine;
 using Firebase.Firestore;
 using Firebase.Extensions;
 using System.Text;
+using Firebase.Database;
 
 public class RoomInfoAccessor : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class RoomInfoAccessor : MonoBehaviour
     [Header("Events out")]
     [SerializeField]
     private GameEvent _onRoomPlayerDataChangedFromDb;
+
+    [Header("Config")]
+    [SerializeField]
+    private RealTimeDBAccessor _dbAccessor;
 
     private ListenerRegistration _roomInfoChangeListener;
     private string _currentRoomName = "";
@@ -74,7 +79,6 @@ public class RoomInfoAccessor : MonoBehaviour
     public void RequestSwitchToTeam(string userId, int switchTo)
     {
         var db = FirebaseFirestore.DefaultInstance;
-
         _sb.Clear();
         _sb.Append(FireStoreCollection.MULTIPLAYER_ROOM).Append("/").Append(_roomOptions.RoomName);
         var roomRef = db.Document(_sb.ToString());
@@ -173,6 +177,17 @@ public class RoomInfoAccessor : MonoBehaviour
                     _onRoomPlayerDataChangedFromDb?.Raise(change.Document.ConvertTo<FireStoreRoomData>());
                 }
             });
+    }
+
+    private void ListenRoomPosPicksChange()
+    {
+        var sb = new StringBuilder();
+        sb.Append(RTDBRoomPath.ROOMS_PATH).Append(_roomOptions.RoomName).Append("/").Append(RTDBRoomPath.POS_1_PICKS_KEY);
+
+        _dbAccessor.GetDataRef(sb.ToString()).ValueChanged += (obj, change) =>
+        {
+
+        };
     }
 
     private FireStoreRoomData SwitchTeam(string userId, FireStoreRoomData currentRoomData, int switchTo)

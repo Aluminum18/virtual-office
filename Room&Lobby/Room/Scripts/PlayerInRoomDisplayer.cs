@@ -11,12 +11,6 @@ public class PlayerInRoomDisplayer : MonoBehaviour
     private RoomInfoSO _roomInfo;
     [SerializeField]
     private SkillListSO _skillList;
-    [SerializeField]
-    private List<IntegerListVariable> _allPlayersPickedSkills;
-
-    [Header("Reference - assigned at runtimie")]
-    [SerializeField]
-    private IntegerListVariable _pickedSkills;
 
     [Header("Events in")]
     [SerializeField]
@@ -62,7 +56,7 @@ public class PlayerInRoomDisplayer : MonoBehaviour
             _skillIcons[i].enabled = false;
         }
 
-        var list = _pickedSkills.List;
+        var list = GetPickedSkills(_position);
         for (int i = 0; i < list.Count; i++)
         {
             var icon = _skillList.GetSkillIcon(list[i]);
@@ -75,15 +69,32 @@ public class PlayerInRoomDisplayer : MonoBehaviour
         }
     }
 
-    private void SetPickedSkillsSO()
+    private List<int> GetPickedSkills(int pos)
     {
-        _pickedSkills = _allPlayersPickedSkills[_position - 1];
-        _pickedSkills.OnListChanged += UpdateSkillIcons;
+        switch (pos)
+        {
+            case 1:
+                return _roomInfo.Pos1Picks;
+            case 2:
+                return _roomInfo.Pos2Picks;
+            case 3:
+                return _roomInfo.Pos3Picks;
+            case 4:
+                return _roomInfo.Pos4Picks;
+            case 5:
+                return _roomInfo.Pos5Picks;
+            case 6:
+                return _roomInfo.Pos6Picks;
+            default:
+                {
+                    Debug.LogWarning($"invalid pos [{pos}]", this);
+                    return new List<int>();
+                }
+        }
     }
 
     private void OnEnable()
     {
-        SetPickedSkillsSO();
 
         _onRoomInfoSOChange.Subcribe(Refresh);
 
@@ -93,6 +104,5 @@ public class PlayerInRoomDisplayer : MonoBehaviour
     private void OnDisable()
     {
         _onRoomInfoSOChange.Unsubcribe(Refresh);
-        _pickedSkills.OnListChanged -= UpdateSkillIcons;
     }
 }

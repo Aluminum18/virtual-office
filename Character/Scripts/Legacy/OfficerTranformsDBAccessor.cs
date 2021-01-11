@@ -42,7 +42,7 @@ public class OfficerTranformsDBAccessor : MonoBehaviour
         _sb.Clear();
 
         string childKey = _sb.Append(OfficerDBConstants.OFFICERS_TRANSFORM).Append("/").Append(officer.id).ToString();
-        _dbAccessor.UpdateAChild(OfficerDBConstants.OFFICERS_TRANSFORM, childKey, officer);
+        _dbAccessor.UpdateAChildWithCustomData(childKey, officer);
     }
 
     public void UpdateOfficerPosition(string officerId, Vector3 pos)
@@ -52,7 +52,7 @@ public class OfficerTranformsDBAccessor : MonoBehaviour
         string posChildKey = _sb.Append(OfficerDBConstants.OFFICERS_TRANSFORM)
             .Append("/").Append(officerId)
             .Append("/").Append("position").ToString();
-        _dbAccessor.UpdateAChild(OfficerDBConstants.OFFICERS_TRANSFORM, posChildKey, pos);
+        _dbAccessor.UpdateAChildWithCustomData(posChildKey, pos);
     }
 
     public void UpdateOfficerRotation(string officerId, Vector4 rot)
@@ -62,7 +62,7 @@ public class OfficerTranformsDBAccessor : MonoBehaviour
         string rotChildKey = _sb.Append(OfficerDBConstants.OFFICERS_TRANSFORM)
             .Append("/").Append(officerId)
             .Append("/").Append("rotation").ToString();
-        _dbAccessor.UpdateAChild(OfficerDBConstants.OFFICERS_TRANSFORM, rotChildKey, rot);
+        _dbAccessor.UpdateAChildWithCustomData(rotChildKey, rot);
     }
 
     public void UpdateOfficerDestination(string officerId, Vector3 destination)
@@ -71,7 +71,7 @@ public class OfficerTranformsDBAccessor : MonoBehaviour
         string childKey = _sb.Append(OfficerDBConstants.OFFICERS_TRANSFORM)
             .Append("/").Append(officerId)
             .Append("/").Append("destination").ToString();
-        _dbAccessor.UpdateAChild(OfficerDBConstants.OFFICERS_TRANSFORM, childKey, destination);
+        _dbAccessor.UpdateAChildWithCustomData(childKey, destination);
     }
 
     private void ListenOfficerTranformChanged()

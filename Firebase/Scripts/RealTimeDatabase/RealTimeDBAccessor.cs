@@ -29,6 +29,11 @@ public class RealTimeDBAccessor : MonoBehaviour
         }
     }
 
+    public DatabaseReference GetDataRef(string key)
+    {
+        return FirebaseDatabase.DefaultInstance.GetReference(key);
+    }
+
     public void GetData(string key, Action<string> callback)
     {
         GetSnapShot(key,
@@ -50,7 +55,15 @@ public class RealTimeDBAccessor : MonoBehaviour
     public void UpdateData(string key, object value)
     {
         double currentTime = TimeUtils.GetCurrentTimeInMiliSec();
-        DbRootRef.Child(key).SetRawJsonValueAsync(JsonUtility.ToJson(value)).ContinueWithOnMainThread(
+        //DbRootRef.Child(key).SetRawJsonValueAsync(JsonUtility.ToJson(value)).ContinueWithOnMainThread(
+        //    saveDataTask =>
+        //    {
+        //        Debug.Log($"Data with key [{key}] updated!");
+        //        double responseTime = TimeUtils.GetCurrentTimeInMiliSec() - currentTime;
+        //        Debug.Log($"Response in {responseTime}");
+        //    });
+
+        DbRootRef.Child(key).SetValueAsync(value).ContinueWithOnMainThread(
             saveDataTask =>
             {
                 Debug.Log($"Data with key [{key}] updated!");
@@ -62,12 +75,20 @@ public class RealTimeDBAccessor : MonoBehaviour
     /// <summary>
     /// full child key (eg. use 'parent/child' instead of 'child')
     /// </summary>
-    public void UpdateAChild(string parentKey, string childKey, object newNalue)
+    public void UpdateAChildWithCustomData(string childKey, object newNalue)
     {
         var childNewValue = DataConverter.ToDictionary(newNalue);
+        UpdateAChild(childKey, childNewValue);
+    }
+
+    /// <summary>
+    /// full child key (eg. use 'parent/child' instead of 'child')
+    /// </summary>
+    public void UpdateAChild(string childKey, object newNalue)
+    {
         Dictionary<string, object> childUpdate = new Dictionary<string, object>
         {
-            [childKey] = childNewValue
+            [childKey] = newNalue
         };
 
         double currentTime = TimeUtils.GetCurrentTimeInMiliSec();
@@ -90,6 +111,12 @@ public class RealTimeDBAccessor : MonoBehaviour
     {
         var dataRef = DbRootRef.Child(parent);
         dataRef.ChildChanged += changedHandler;
+    }
+
+    public void RemoveChildChangeListener(string parent, EventHandler<ChildChangedEventArgs> changedHandler)
+    {
+        var dataRef = DbRootRef.Child(parent);
+        dataRef.ChildChanged -= changedHandler;
     }
 
     private void GetSnapShot(string key, Action<DataSnapshot> callback)
