@@ -51,13 +51,13 @@ public class ArrowSoundImpact : MonoBehaviour
 
     private IEnumerator IE_CheckAndPlayNearMiss()
     {
-        float lastDistanceToMainCam = Vector3.Distance(gameObject.transform.localPosition, _mainCamera.gameObject.transform.localPosition);
+        float lastDistanceToMainCam = Vector3.Distance(gameObject.transform.position, _mainCamera.gameObject.transform.position);
         for (; ; )
         {
             yield return null;
             yield return null;
             yield return null;
-            float currentDistanceToMainCam = Vector3.Distance(gameObject.transform.localPosition, _mainCamera.gameObject.transform.localPosition);
+            float currentDistanceToMainCam = Vector3.Distance(gameObject.transform.position, _mainCamera.gameObject.transform.position);
             Debug.Log("distance To mainCam" + currentDistanceToMainCam);
 
             if (currentDistanceToMainCam >= lastDistanceToMainCam)

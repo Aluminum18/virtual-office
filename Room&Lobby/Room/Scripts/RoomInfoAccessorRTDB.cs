@@ -211,6 +211,25 @@ public class RoomInfoAccessorRTDB : MonoBehaviour
             );
     }
 
+    public void RequestSetReadyInRoyale()
+    {
+        var sb = new StringBuilder();
+
+        sb.Append(RTDBRoomPath.ROOMS_PATH).Append(_roomOptions.RoomName).Append("/").Append(RTDBRoomPath.READY_ON_ROYALE_COUNT_KEY);
+        var readyRef = _dbAccessor.GetDataRef(sb.ToString());
+        readyRef.RunTransaction(
+            readyData =>
+            {
+                if (!(readyData.Value is long readyValue))
+                {
+                    readyValue = 0;
+                }
+                readyData.Value = readyValue + 1;
+
+                return TransactionResult.Success(readyData);
+            });
+    }
+
     public void SubmitPickedSkill()
     {
         string posKey = GetPosKey(_roomInfo.GetPlayerPos(_thisUserId.Value));

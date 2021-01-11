@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class RoyaleSceneConnectionNotifyer : MonoBehaviour
 {
@@ -8,9 +9,9 @@ public class RoyaleSceneConnectionNotifyer : MonoBehaviour
     [SerializeField]
     private GameEvent _onSceneOpened;
 
-    [Header("Events out")]
+    [Header("Unity Events")]
     [SerializeField]
-    private GameEvent _onPlayerReady;
+    private UnityEvent _onPlayerReady;
 
     private void OnEnable()
     {
@@ -24,6 +25,6 @@ public class RoyaleSceneConnectionNotifyer : MonoBehaviour
 
     private void NotifyOnScene(params object[] args)
     {
-        _onPlayerReady?.Raise();
+        _onPlayerReady.Invoke();
     }
 }
