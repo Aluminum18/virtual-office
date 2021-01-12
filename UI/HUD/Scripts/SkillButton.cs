@@ -1,3 +1,4 @@
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,12 @@ public class SkillButton : MonoBehaviour
     [Header("Reference")]
     [SerializeField]
     private SkillListSO _skillList;
+    [SerializeField]
+    private PunEventSender _eventSender;
+    [SerializeField]
+    private StringVariable _thisUserId;
+    [SerializeField]
+    private SkillDataGetter _skillDataGetter;
 
     [Header("Reference - assigned at runtime")]
     [SerializeField]
@@ -41,7 +48,7 @@ public class SkillButton : MonoBehaviour
 
         _skillSO = _skillList.GetSkill(skillId);
 
-        _skillId = _skillSO.SkillId;
+        _skillId = (int)_skillSO.SkillId;
 
         _firstButton.image.sprite = _skillSO.SkillIcon;
         _seconButton.image.sprite = _skillSO.SkillIcon2;
@@ -56,6 +63,42 @@ public class SkillButton : MonoBehaviour
 
         _cooldownImage.enabled = false;
         _cooldownText.enabled = false;
+    }
+
+    public void ActivateFirstState()
+    {
+        if (_skillSO.SkillState.Equals(SkillUsageType.DoubleState))
+        {
+            ActiveFirstButton(true);
+            ActiveSecondButton(false);
+        }
+        object[] data =
+        {
+            _thisUserId.Value,
+            _skillId,
+            (int)SkillState.First,
+            _skillDataGetter.GetSkillData(_skillSO.SkillId, SkillState.First)
+        };
+
+        _eventSender.SendEvent(PhotonEventCode.CHARACTER_FIRST_STATE_SKILL, ReceiverGroup.All, data);
+    }
+
+    public void ActivateSecondState()
+    {
+        if (_skillSO.SkillState.Equals(SkillUsageType.DoubleState))
+        {
+            ActiveFirstButton(false);
+            ActiveSecondButton(true);
+        }
+        object[] data =
+        {
+            _thisUserId.Value,
+            _skillId,
+            (int)SkillState.Second,
+            _skillDataGetter.GetSkillData(_skillSO.SkillId, SkillState.Second)
+        };
+
+        _eventSender.SendEvent(PhotonEventCode.CHARACTER_FIRST_STATE_SKILL, ReceiverGroup.All, data);
     }
 
     public void ActiveFirstButton(bool active)

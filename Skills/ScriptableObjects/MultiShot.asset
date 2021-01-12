@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 143f9f711e8ce2c40b46fe582c55b0e6, type: 3}
-  m_Name: 2_PowerShot
+  m_Name: MultiShot
   m_EditorClassIdentifier: 
   SkillId: 2
-  SkillIcon: {fileID: 21300000, guid: 4b54bd263483825488ab643b8ac8563c, type: 3}
+  SkillIcon: {fileID: 21300000, guid: 1fe96bdecd5ae674680d8e420fdd6d9c, type: 3}
+  SkillIcon2: {fileID: 0}
   SkillPic: {fileID: 0}
   SkillType: 0
-  SkillName: Power Shot
+  SkillState: 0
+  SkillName: Multi-shot
   SkillDesc: 
   Cooldown: 60
   Cost: 3
-  Damage: 50
+  Damage: 40
   Duration: 0

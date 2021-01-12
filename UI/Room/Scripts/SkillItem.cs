@@ -57,7 +57,7 @@ public class SkillItem : MonoBehaviour, IScrollListItem<SkillSO>
 
     public void SetUp(SkillSO data)
     {
-        _skillId = data.SkillId;
+        _skillId = (int)data.SkillId;
 
         _skillIcon.sprite = data.SkillIcon;
         _skillPic.sprite = data.SkillPic;

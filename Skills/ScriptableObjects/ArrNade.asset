@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 143f9f711e8ce2c40b46fe582c55b0e6, type: 3}
-  m_Name: 5_Crossbow
+  m_Name: ArrNade
   m_EditorClassIdentifier: 
-  SkillId: 5
-  SkillIcon: {fileID: 21300000, guid: 60f0e79dfaf7ab347a6506ad0cf3d6a4, type: 3}
+  SkillId: 3
+  SkillIcon: {fileID: 21300000, guid: 617955ce8dcd8424eabbe35da8389ecf, type: 3}
+  SkillIcon2: {fileID: 0}
   SkillPic: {fileID: 0}
   SkillType: 0
-  SkillName: Crossbow
+  SkillState: 1
+  SkillName: ArrNade
   SkillDesc: 
-  Cooldown: 0
-  Cost: 2
-  Damage: 20
+  Cooldown: 45
+  Cost: 3
+  Damage: 10
   Duration: 0

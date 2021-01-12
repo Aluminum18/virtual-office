@@ -16,46 +16,60 @@ public class SkillListSO : ScriptableObject
         }
     }
 
-    public void Init()
+    private Dictionary<int, SkillSO> _skillMap = new Dictionary<int, SkillSO>();
+    private Dictionary<int, SkillSO> SkillMap
     {
-        
+        get
+        {
+            if (_skillMap.Count != _skillList.Count)
+            {
+                _skillMap.Clear();
+                for (int i = 0; i < _skillList.Count; i++)
+                {
+                    var skill = _skillList[i];
+                    _skillMap[(int)skill.SkillId] = skill;
+                }
+            }
+            return _skillMap;
+        }
     }
 
     public Sprite GetSkillIcon(int skillId)
     {
-        if (skillId == 0)
-        {
-            return null;
-        }
+        SkillMap.TryGetValue(skillId, out var skill);
 
-        if (_skillList == null || _skillList.Count == 0 || _skillList.Count < skillId)
+        if (skill == null)
         {
             Debug.LogWarning("skill list is empty or invalid skill id", this);
             return null;
         }
 
-        return _skillList[skillId - 1].SkillIcon;
+        return skill.SkillIcon;
     }
 
     public int GetSkillCost(int skillId)
     {
-        if (skillId == 0)
-        {
-            return 0;
-        }
+        SkillMap.TryGetValue(skillId, out var skill);
 
-        if (_skillList == null || _skillList.Count == 0 || _skillList.Count < skillId)
+        if (skill == null)
         {
             Debug.LogWarning("skill list is empty or invalid skill id", this);
             return 0;
         }
 
-        return _skillList[skillId - 1].Cost;
+        return skill.Cost;
     }
 
     public SkillSO GetSkill(int skillId)
     {
-        return _skillList[skillId - 1];
+        SkillMap.TryGetValue(skillId, out var skill);
+
+        if (skill == null)
+        {
+            Debug.LogWarning("skill list is empty or invalid skill id", this);
+        }
+
+        return skill;
     }
 
 }

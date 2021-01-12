@@ -7,16 +7,11 @@ using UnityEngine;
 
 public class PunEventSender : MonoBehaviour
 {
-    protected void SendEvent(byte eventCode, object eventData)
+    public void SendEvent(byte eventCode, ReceiverGroup receivers, params object[] eventData)
     {
-        if (!CheckCondition())
-        {
-            return;
-        }
-
         RaiseEventOptions eventOptions = new RaiseEventOptions
         {
-            Receivers = ReceiverGroup.Others,
+            Receivers = receivers,
             CachingOption = EventCaching.AddToRoomCache
         };
 
@@ -27,10 +22,5 @@ public class PunEventSender : MonoBehaviour
 
         Debug.Log($"Send event [{eventCode}]");
         PhotonNetwork.RaiseEvent(eventCode, eventData, eventOptions, sendOptions);
-    }
-
-    protected virtual bool CheckCondition()
-    {
-        return true;
     }
 }

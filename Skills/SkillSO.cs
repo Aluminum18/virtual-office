@@ -7,7 +7,7 @@ using UnityEngine;
 public class SkillSO : ScriptableObject
 {
     [Header("Static content")]
-    public int SkillId;
+    public SkillId SkillId;
     public Sprite SkillIcon;
     public Sprite SkillIcon2;
     public Sprite SkillPic;
@@ -23,6 +23,15 @@ public class SkillSO : ScriptableObject
     public float Duration;
 }
 
+public enum SkillId
+{
+    PowerShot = 1,
+    MulShot = 2,
+    ArrNade = 3,
+    ThirdEye = 4,
+    Crossbow = 5
+}
+
 public enum SkillType
 {
     Active = 0,
@@ -33,4 +42,10 @@ public enum SkillUsageType
 {
     SingleState = 0,
     DoubleState = 1
+}
+
+public enum SkillState
+{
+    First = 1,
+    Second = 2
 }
