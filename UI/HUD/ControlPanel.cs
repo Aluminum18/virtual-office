@@ -12,6 +12,8 @@ public class ControlPanel : MonoBehaviour
     private StringVariable _userId;
     [SerializeField]
     private RoomInfoSO _roomInfo;
+    [SerializeField]
+    private IntegerListVariable _thisPickedSkill;
 
     [Header("Config")]
     [SerializeField]
@@ -23,9 +25,7 @@ public class ControlPanel : MonoBehaviour
     [SerializeField]
     private Button _shootButton;
     [SerializeField]
-    private Button _skill1Button;
-    [SerializeField]
-    private Button _skill2Button;
+    private List<SkillButton> _skillButtons;
 
     public void AttachInputHolderToUI()
     {
@@ -57,18 +57,6 @@ public class ControlPanel : MonoBehaviour
         {
             shoot.Raise();
         });
-
-        //var skill1 = inputHolder.OnSkill1;
-        //_skill1Button.onClick.AddListener(() =>
-        //{
-        //    skill1.Raise();
-        //});
-
-        //var skill2 = inputHolder.OnSkill2;
-        //_skill2Button.onClick.AddListener(() =>
-        //{
-        //    skill2.Raise();
-        //});
     }
 
     public void DetachInputHolderFromUI()
@@ -80,6 +68,20 @@ public class ControlPanel : MonoBehaviour
         _shootButton.onClick.RemoveAllListeners();
         //_skill1Button.onClick.RemoveAllListeners();
         //_skill2Button.onClick.RemoveAllListeners();
+    }
+
+    public void SetUpSkillButtons()
+    {
+        var pick = _thisPickedSkill.List;
+        for (int i = 0; i < _skillButtons.Count; i++)
+        {
+            if (i >= pick.Count)
+            {
+                _skillButtons[i].SetUpButton(0);
+                continue;
+            }
+            _skillButtons[i].SetUpButton(pick[i]);
+        }
     }
 
     private void OnDisable()

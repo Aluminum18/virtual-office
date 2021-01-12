@@ -53,6 +53,9 @@ public class SkillListSO : ScriptableObject
         return _skillList[skillId - 1].Cost;
     }
 
-
+    public SkillSO GetSkill(int skillId)
+    {
+        return _skillList[skillId - 1];
+    }
 
 }

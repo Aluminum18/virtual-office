@@ -40,7 +40,7 @@ public class RoomInfoSO : ScriptableObject
         {
             _readyCount = value;
 
-            if (_readyCount == PlayerCount)
+            if (_readyCount >= PlayerCount)
             {
                 _onAllPlayerReady?.Raise();
             }

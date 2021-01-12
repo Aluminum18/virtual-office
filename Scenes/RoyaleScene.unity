@@ -4739,6 +4739,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3137695313812413023}
+        m_TargetAssemblyTypeName: ControlPanel, Assembly-CSharp
+        m_MethodName: SetUpSkillButtons
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onAllCharactersSpawned: {fileID: 11400000, guid: fb33b293cf350d940b19bfbdc8294305, type: 2}
   _archerPrefab: {fileID: 7339500980596317687, guid: 145e4762876f94e47a16e01ade026458, type: 3}
   _team1SpawnPos: {fileID: 1637194684}
@@ -14199,7 +14211,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1804956853}
-  m_LocalRotation: {x: 0.1373584, y: -0.000000019054973, z: 0.000000002642407, w: 0.99052143}
+  m_LocalRotation: {x: 0.1373584, y: 0.000000019054976, z: -0.0000000026424074, w: 0.99052143}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -14976,7 +14988,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1888772237}
-  m_LocalRotation: {x: 0.1373584, y: -0.000000019054971, z: 0.0000000026424067, w: 0.99052143}
+  m_LocalRotation: {x: 0.1373584, y: 0.000000019054976, z: -0.0000000026424074, w: 0.99052143}
   m_LocalPosition: {x: -1.452391, y: 2.294922, z: -49.11928}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -17602,6 +17614,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1438346856}
     m_Modifications:
+    - target: {fileID: 449228282884530392, guid: 5784d1200c1a32944bb60415080e3fc5, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 811725579181740564, guid: 5784d1200c1a32944bb60415080e3fc5, type: 3}
       propertyPath: _uiCam
       value: 
@@ -17778,6 +17794,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Target
       value: 
       objectReference: {fileID: 693657919}
+    - target: {fileID: 4112769317672273058, guid: 5784d1200c1a32944bb60415080e3fc5, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4877554937033343124, guid: 5784d1200c1a32944bb60415080e3fc5, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7656571772908220729, guid: 5784d1200c1a32944bb60415080e3fc5, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5784d1200c1a32944bb60415080e3fc5, type: 3}
 --- !u!114 &3137695313812413023 stripped
@@ -17844,12 +17872,12 @@ MonoBehaviour:
   _inputValueHolders: {fileID: 11400000, guid: 75f103630de616c46a4bf2333c129deb, type: 2}
   _userId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
   _roomInfo: {fileID: 11400000, guid: d329bc1c382927d41af5d597862934e2, type: 2}
+  _thisPickedSkill: {fileID: 0}
   _moveJoyStick: {fileID: 783025922}
   _aimButton: {fileID: 3137695314506293638}
   _cancelAimButton: {fileID: 3137695315436102132}
   _shootButton: {fileID: 3137695315471359660}
-  _skill1Button: {fileID: 9046075827755469252}
-  _skill2Button: {fileID: 3670890743785633199}
+  _skillButtons: []
 --- !u!224 &3137695314095773603
 RectTransform:
   m_ObjectHideFlags: 0
