@@ -18,8 +18,7 @@ public static class PhotonEventCode
     public const byte CHARACTER_ON_CANCEL_AIM = 26;
     public const byte CHARACTER_ON_HP_CHANGED = 27;
 
-    public const byte CHARACTER_FIRST_STATE_SKILL = 28;
-    public const byte CHARACTER_SECOND_STATE_SKILL = 29;
+    public const byte CHARACTER_ACTIVATE_SKILL = 28;
 
     // Room
     public const byte ROOM_PICKED_SKILLS_CHANGED = 99;

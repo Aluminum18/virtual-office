@@ -52,7 +52,6 @@ public class CharacterSOSync : MonoBehaviour, IOnEventCallback
     {
 
         byte eventCode = photonEvent.Code;
-        Debug.Log($"Receive event [{eventCode}]");
 
         if (eventCode != PhotonEventCode.CHARACTER_DIRECTION_SO_CHANGE &&
             eventCode != PhotonEventCode.CHARACTER_RAW_JOYSTICK_SO_CHANGE &&

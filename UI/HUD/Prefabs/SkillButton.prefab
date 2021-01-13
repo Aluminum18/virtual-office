@@ -85,8 +85,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8359197723155774671}
   - component: {fileID: 2325704074450854853}
-  - component: {fileID: 9012646716648112018}
-  - component: {fileID: 54016408199400254}
   m_Layer: 5
   m_Name: SkillButton
   m_TagString: Untagged
@@ -131,42 +129,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillList: {fileID: 11400000, guid: e890b51e014d5cf4d99519a5488eedb6, type: 2}
-  _eventSender: {fileID: 9012646716648112018}
   _thisUserId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
-  _skillDataGetter: {fileID: 54016408199400254}
   _skillSO: {fileID: 11400000, guid: 49f19f146718c9a4ebe89e94641ffd2d, type: 2}
+  _onSkillActivate: {fileID: 11400000, guid: 4efaa0a62e756e04096ed7b300ae1adc, type: 2}
+  _onRequestSkillActivate: {fileID: 11400000, guid: c0506ca394acb3e4895999ddba43ce67, type: 2}
   _firstButton: {fileID: 6491815312460149666}
   _seconButton: {fileID: 2412973341576038543}
   _cooldownImage: {fileID: 133709005077393416}
   _cooldownText: {fileID: 2297232084408259410}
   _skillId: 0
---- !u!114 &9012646716648112018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3496500435515182376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f8bc96fdfca08a45945493a866fbeda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &54016408199400254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3496500435515182376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b42f61bf53fa7418f31a4cc0a40381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _thisUserId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
-  _roomInfo: {fileID: 11400000, guid: d329bc1c382927d41af5d597862934e2, type: 2}
-  _inputHolders: {fileID: 11400000, guid: 75f103630de616c46a4bf2333c129deb, type: 2}
 --- !u!1 &4567899712666773827
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +335,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2325704074450854853}
         m_TargetAssemblyTypeName: SkillButton, Assembly-CSharp
-        m_MethodName: ActivateSecondState
+        m_MethodName: RequestActivateSecondState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -496,7 +467,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2325704074450854853}
         m_TargetAssemblyTypeName: SkillButton, Assembly-CSharp
-        m_MethodName: ActivateFirstState
+        m_MethodName: RequestActivateFirstState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

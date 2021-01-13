@@ -21,6 +21,9 @@ public class SkillSO : ScriptableObject
     public int Cost;
     public int Damage;
     public float Duration;
+
+    [Header("Update during runtime")]
+    public float RemainCooldown;
 }
 
 public enum SkillId

@@ -11,15 +11,19 @@ public class SkillButton : MonoBehaviour
     [SerializeField]
     private SkillListSO _skillList;
     [SerializeField]
-    private PunEventSender _eventSender;
-    [SerializeField]
     private StringVariable _thisUserId;
-    [SerializeField]
-    private SkillDataGetter _skillDataGetter;
 
     [Header("Reference - assigned at runtime")]
     [SerializeField]
     private SkillSO _skillSO;
+
+    [Header("Events in")]
+    [SerializeField]
+    private GameEvent _onSkillActivate;
+
+    [Header("Events out")]
+    [SerializeField]
+    private GameEvent _onRequestSkillActivate;
 
     [Header("Config")]
     [SerializeField]
@@ -34,9 +38,6 @@ public class SkillButton : MonoBehaviour
     [Header("Inspec")]
     [SerializeField]
     private int _skillId;
-
-    private float _remainCooldown = 0f;
-    private double _activateTime;
 
     public void SetUpButton(int skillId)
     {
@@ -65,40 +66,38 @@ public class SkillButton : MonoBehaviour
         _cooldownText.enabled = false;
     }
 
+    public void RequestActivateFirstState()
+    {
+        _onRequestSkillActivate?.Raise(_skillSO.SkillId, SkillState.First);
+    }
+
+    public void RequestActivateSecondState()
+    {
+        _onRequestSkillActivate?.Raise(_skillSO.SkillId, SkillState.Second);
+    }
+
     public void ActivateFirstState()
     {
+
         if (_skillSO.SkillState.Equals(SkillUsageType.DoubleState))
         {
-            ActiveFirstButton(true);
-            ActiveSecondButton(false);
+            ActiveFirstButton(false);
+            ActiveSecondButton(true);
+            ShowCooldownElements(false);
+            return;
         }
-        object[] data =
-        {
-            _thisUserId.Value,
-            _skillId,
-            (int)SkillState.First,
-            _skillDataGetter.GetSkillData(_skillSO.SkillId, SkillState.First)
-        };
 
-        _eventSender.SendEvent(PhotonEventCode.CHARACTER_FIRST_STATE_SKILL, ReceiverGroup.All, data);
+        StartCooldown();
+        ShowCooldownElements(true);
     }
 
     public void ActivateSecondState()
     {
         if (_skillSO.SkillState.Equals(SkillUsageType.DoubleState))
         {
-            ActiveFirstButton(false);
-            ActiveSecondButton(true);
+            ActiveFirstButton(true);
+            ActiveSecondButton(false);
         }
-        object[] data =
-        {
-            _thisUserId.Value,
-            _skillId,
-            (int)SkillState.Second,
-            _skillDataGetter.GetSkillData(_skillSO.SkillId, SkillState.Second)
-        };
-
-        _eventSender.SendEvent(PhotonEventCode.CHARACTER_FIRST_STATE_SKILL, ReceiverGroup.All, data);
     }
 
     public void ActiveFirstButton(bool active)
@@ -115,24 +114,27 @@ public class SkillButton : MonoBehaviour
 
     public void StartCooldown()
     {
-        _activateTime = TimeUtils.GetCurrentTimeInMiliSec();
         StopAllCoroutines();
         StartCoroutine(IE_StartCooldown());
     }
 
     public void EndCooldown()
     {
-        _remainCooldown = 0;
         SetInitalStatus();
+    }
+
+    public void ShowCooldownElements(bool show)
+    {
+        _cooldownImage.enabled = show;
+        _cooldownText.enabled = show;
     }
 
     private IEnumerator IE_StartCooldown()
     {
-        while (_remainCooldown > 0)
+        while (_skillSO.RemainCooldown > 0)
         {
-            _remainCooldown -= Time.deltaTime;
-            _cooldownText.text = _remainCooldown.ToString("#.#");
-            _cooldownImage.fillAmount = _remainCooldown / _skillSO.Cooldown;
+            _cooldownText.text = _skillSO.RemainCooldown.ToString("#.#");
+            _cooldownImage.fillAmount = _skillSO.RemainCooldown / _skillSO.Cooldown;
 
             yield return null;
         }
@@ -147,19 +149,47 @@ public class SkillButton : MonoBehaviour
         _cooldownText.enabled = false;
     }
 
-    private void OnApplicationFocus(bool focus)
+    private void HandleSkillActivate(object[] data)
     {
-        if (!focus)
+        if (!(data[0] is string userId))
+        {
+            return;
+        }
+        if (userId != _thisUserId.Value)
         {
             return;
         }
 
-        CalculateCooldown();
+        if (!(data[1] is SkillId skillId))
+        {
+            return;
+        }
+        if ((int)skillId != _skillId)
+        {
+            return;
+        }
+
+        if (!(data[2] is SkillState skillState))
+        {
+            return;
+        }
+        if (skillState.Equals(SkillState.First))
+        {
+            ActivateFirstState();
+        }
+        else
+        {
+            ActivateSecondState();
+        }
     }
 
-    private void CalculateCooldown()
+    private void OnEnable()
     {
-        double timePassed = TimeUtils.GetCurrentTimeInMiliSec() - _activateTime;
-        _remainCooldown -= (float)timePassed;
+        _onSkillActivate.Subcribe(HandleSkillActivate);
+    }
+
+    private void OnDisable()
+    {
+        _onSkillActivate.Unsubcribe(HandleSkillActivate);
     }
 }
