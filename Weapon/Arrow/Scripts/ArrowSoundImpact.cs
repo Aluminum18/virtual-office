@@ -19,6 +19,8 @@ public class ArrowSoundImpact : MonoBehaviour
     private static Camera _mainCamera;
     private Rigidbody _rb;
 
+    private IEnumerator _checkNearMissCor;
+
     private void Awake()
     {
         if (_mainCamera == null)
@@ -27,6 +29,7 @@ public class ArrowSoundImpact : MonoBehaviour
         }
 
         _rb = GetComponent<Rigidbody>();
+        _checkNearMissCor = IE_CheckAndPlayNearMiss();
     }
 
     public void PlayNearMiss()
@@ -47,6 +50,11 @@ public class ArrowSoundImpact : MonoBehaviour
     public void CheckAndPlayNearMiss()
     {
         StartCoroutine(IE_CheckAndPlayNearMiss());
+    }
+
+    public void StopCheckNearMiss()
+    {
+        StopCoroutine(_checkNearMissCor);
     }
 
     private IEnumerator IE_CheckAndPlayNearMiss()

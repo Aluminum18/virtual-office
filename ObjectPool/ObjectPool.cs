@@ -13,6 +13,8 @@ public class ObjectPool : MonoBehaviour
     private int _limitInstances = -1;
 
     private Stack<GameObject> _pool = new Stack<GameObject>();
+    private HashSet<GameObject> _poolChecker = new HashSet<GameObject>();
+
     private Queue<GameObject> _usingOjects = new Queue<GameObject>();
 
     public GameObject Spawn()
@@ -23,6 +25,7 @@ public class ObjectPool : MonoBehaviour
             if (_limitInstances == -1 || _usingOjects.Count < _limitInstances)
             {
                 go = Instantiate(_pooledObject);
+                go.AddComponent<ObjectInPool>().SetPool(this);
             }
             else
             {
@@ -32,16 +35,27 @@ public class ObjectPool : MonoBehaviour
         else
         {
             go = _pool.Pop();
+            _poolChecker.Remove(go);
         }
 
         go.transform.SetPositionAndRotation(_spawnPos.position, _spawnPos.rotation);
         _usingOjects.Enqueue(go);
 
+        go.SetActive(true);
+
         return go;
     }
 
-    public void Return(GameObject go)
+    public void ReturnToPool(GameObject go)
     {
+        go.SetActive(false);
 
+        if (_poolChecker.Contains(go))
+        {
+            return;
+        }
+
+        _pool.Push(go);
+        _poolChecker.Add(go);
     }
 }

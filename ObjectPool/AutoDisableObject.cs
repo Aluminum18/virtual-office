@@ -11,6 +11,7 @@ public class AutoDisableObject : MonoBehaviour
 
     private void OnEnable()
     {
+        StopAllCoroutines();
         StartCoroutine(IE_Disable());
     }
 

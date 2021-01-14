@@ -22,5 +22,5 @@ MonoBehaviour:
 
     3:
     skillData'
-  _logWhenRaise: 0
+  _logWhenRaise: 1
   _subcribers: []

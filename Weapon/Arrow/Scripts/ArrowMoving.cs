@@ -13,6 +13,8 @@ public class ArrowMoving : MonoBehaviour
 
     [Header("Config")]
     [SerializeField]
+    private LayerMask _blockBy;
+    [SerializeField]
     private Transform _rootTransform;
     [SerializeField]
     private Collider _collider;
@@ -87,5 +89,13 @@ public class ArrowMoving : MonoBehaviour
         _rb.velocity = Vector3.zero;
         _onArrowStop.Invoke();
         _rootTransform.localPosition = _inactiveArrowPos;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if ((1 << other.gameObject.layer & _blockBy) != 0)
+        {
+            StopMoving();
+        }
     }
 }

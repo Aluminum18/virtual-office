@@ -14,13 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eventExplanation: 'Event data
 
-    0: userId
+    0: skillId
 
-    1: skillId
-
-    2: skillState
-
-    3:
-    skillData'
+    1: skillState'
   _logWhenRaise: 0
   _subcribers: []
