@@ -35,6 +35,11 @@ public static class TimeUtils
         return timeSpan.TotalMilliseconds;
     }
 
+    public static double GetCurrentTimeInCentiSec()
+    {
+        return GetCurrentTimeInMiliSec() * 10;
+    }
+
     public static string FromSecToDayHourMin(int sec)
     {
         StringBuilder sb = new StringBuilder();

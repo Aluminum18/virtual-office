@@ -16,6 +16,10 @@ public class ScreenRayToWorld : MonoBehaviour
     [SerializeField]
     private InputValueHolders _inputHolders;
 
+    [Header("Events in")]
+    [SerializeField]
+    private GameEvent _onRequestUpdateAimSpot;
+
     [Header("Config")]
     [SerializeField]
     private RectTransform _screenTransform;
@@ -35,7 +39,7 @@ public class ScreenRayToWorld : MonoBehaviour
         _output = holder.AimSpot;
     }
 
-    public void ScreenRayToWorldPoint()
+    public void ScreenRayToWorldPoint(object[] args)
     {
         Vector3 screenPoint = _uiCam.WorldToScreenPoint(_screenTransform.position);
         var ray = _worldCam.ScreenPointToRay(screenPoint);
@@ -48,11 +52,6 @@ public class ScreenRayToWorld : MonoBehaviour
         }
 
         _output.Value = hit.point;
-    }
-
-    private void Update()
-    {
-        ScreenRayToWorldBound();
     }
 
     private void ScreenRayToWorldBound()
@@ -69,5 +68,21 @@ public class ScreenRayToWorld : MonoBehaviour
 
         _boundDirection.Value = hit.point;
     }
+
+    private void OnEnable()
+    {
+        _onRequestUpdateAimSpot.Subcribe(ScreenRayToWorldPoint);
+    }
+
+    private void Update()
+    {
+        ScreenRayToWorldBound();
+    }
+
+    private void OnDisable()
+    {
+        _onRequestUpdateAimSpot.Unsubcribe(ScreenRayToWorldPoint);
+    }
+
 
 }

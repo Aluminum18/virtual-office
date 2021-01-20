@@ -53,7 +53,6 @@ public class ArrowMoving : MonoBehaviour
 
     private IEnumerator IE_RotateToTarget(Vector3 target, float speed)
     {
-        yield return null;
         Quaternion rotateTo = Quaternion.LookRotation(target - transform.position);
 
         float distanceAngle = Quaternion.Angle(transform.rotation, rotateTo);
@@ -61,10 +60,10 @@ public class ArrowMoving : MonoBehaviour
         _rotateSpeed = Quaternion.Angle(transform.rotation, rotateTo) / timeToTarget * 2f;
 
         _onArrowStartMove.Invoke();
+        _rb.velocity = transform.forward * speed;
 
         while (distanceAngle > 1f)
         {
-            Debug.Log("rotate " + Quaternion.Angle(transform.rotation, rotateTo));
             _rb.velocity = transform.forward * speed;
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateTo, _rotateSpeed * Time.deltaTime);
@@ -95,6 +94,7 @@ public class ArrowMoving : MonoBehaviour
     {
         if ((1 << other.gameObject.layer & _blockBy) != 0)
         {
+            Debug.Log($"Arrow blocked by [{other.name}]");
             StopMoving();
         }
     }

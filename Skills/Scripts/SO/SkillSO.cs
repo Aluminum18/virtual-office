@@ -11,6 +11,7 @@ public class SkillSO : ScriptableObject
     public Sprite SkillIcon;
     public Sprite SkillIcon2;
     public Sprite SkillPic;
+    public GameObject SkillActivationObject;
 
     [Header("Reference from server")]
     public SkillType SkillType;
@@ -23,7 +24,30 @@ public class SkillSO : ScriptableObject
     public float Duration;
 
     [Header("Update during runtime")]
-    public float RemainCooldown;
+    [SerializeField]
+    private float _remainCooldown;
+
+    public float RemainCooldown
+    {
+        get
+        {
+            return _remainCooldown;
+        }
+    }
+
+    public delegate void OnCooldownResetDel();
+    public event OnCooldownResetDel OnCooldownReset;
+
+    public void ResetRemainCooldown(float value)
+    {
+        _remainCooldown = value;
+        OnCooldownReset?.Invoke();
+    }
+
+    public void ChangeRemainCooldownValue(float value)
+    {
+        _remainCooldown = value;
+    }
 }
 
 public enum SkillId

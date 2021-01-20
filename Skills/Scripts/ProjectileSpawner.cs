@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ProjectileSpawner : MonoBehaviour
 {
@@ -8,15 +9,17 @@ public class ProjectileSpawner : MonoBehaviour
     private ObjectPool _projectilePool;
     [SerializeField]
     protected float _projectileSpeed;
+    [SerializeField]
+    protected UnityEvent _onProjectileSpawn;
 
-    public void SpawnProjectile(Vector3 target, float speed, MovingPath path)
+    public GameObject SpawnProjectile(Vector3 target, float speed, MovingPath path)
     {
         var projectile = _projectilePool.Spawn();
         var moving = projectile.GetComponent<ArrowMoving>();
 
         if (moving == null)
         {
-            return;
+            return projectile;
         }
 
         if (path.Equals(MovingPath.Straight))
@@ -28,6 +31,9 @@ public class ProjectileSpawner : MonoBehaviour
         {
             moving.HeadTo(target, _projectileSpeed);
         }
+
+        _onProjectileSpawn.Invoke();
+        return projectile;
 
     }
 }

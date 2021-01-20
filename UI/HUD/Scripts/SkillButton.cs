@@ -2,6 +2,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,6 +40,8 @@ public class SkillButton : MonoBehaviour
     [SerializeField]
     private int _skillId;
 
+    private IEnumerator _IECooldown;
+
     public void SetUpButton(int skillId)
     {
         if (skillId <= 0 || _skillList.SkillList.Count < skillId)
@@ -55,6 +58,8 @@ public class SkillButton : MonoBehaviour
         _seconButton.image.sprite = _skillSO.SkillIcon2;
 
         SetInitalStatus();
+
+        _skillSO.OnCooldownReset += CountCoolDown;
     }
 
     public void SetInitalStatus()
@@ -62,8 +67,7 @@ public class SkillButton : MonoBehaviour
         ActiveFirstButton(_skillSO.SkillType.Equals(SkillType.Active));
         ActiveSecondButton(false);
 
-        _cooldownImage.enabled = false;
-        _cooldownText.enabled = false;
+        ShowCooldownElements(false);
     }
 
     public void RequestActivateFirstState()
@@ -78,7 +82,6 @@ public class SkillButton : MonoBehaviour
 
     public void ActivateFirstState()
     {
-
         if (_skillSO.SkillState.Equals(SkillUsageType.DoubleState))
         {
             ActiveFirstButton(false);
@@ -86,9 +89,8 @@ public class SkillButton : MonoBehaviour
             ShowCooldownElements(false);
             return;
         }
-
-        StartCooldown();
         ShowCooldownElements(true);
+
     }
 
     public void ActivateSecondState()
@@ -97,6 +99,7 @@ public class SkillButton : MonoBehaviour
         {
             ActiveFirstButton(true);
             ActiveSecondButton(false);
+            ShowCooldownElements(true);
         }
     }
 
@@ -112,10 +115,9 @@ public class SkillButton : MonoBehaviour
         _seconButton.image.enabled = active;
     }
 
-    public void StartCooldown()
+    public void CountCoolDown()
     {
-        StopAllCoroutines();
-        StartCoroutine(IE_StartCooldown());
+        MainThreadDispatcher.StartUpdateMicroCoroutine(IE_StartCooldown());
     }
 
     public void EndCooldown()
@@ -131,13 +133,15 @@ public class SkillButton : MonoBehaviour
 
     private IEnumerator IE_StartCooldown()
     {
-        while (_skillSO.RemainCooldown > 0)
+        while (_skillSO.RemainCooldown > 0f)
         {
-            _cooldownText.text = _skillSO.RemainCooldown.ToString("#.#");
+            _cooldownText.text = _skillSO.RemainCooldown.ToString("0.0");
             _cooldownImage.fillAmount = _skillSO.RemainCooldown / _skillSO.Cooldown;
 
             yield return null;
         }
+
+        SetInitalStatus();
     }
 
     private void SetNoSkill()
@@ -186,10 +190,12 @@ public class SkillButton : MonoBehaviour
     private void OnEnable()
     {
         _onSkillActivate.Subcribe(HandleSkillActivate);
+        _IECooldown = IE_StartCooldown();
     }
 
     private void OnDisable()
     {
         _onSkillActivate.Unsubcribe(HandleSkillActivate);
+        _skillSO.OnCooldownReset -= CountCoolDown;
     }
 }

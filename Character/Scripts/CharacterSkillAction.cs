@@ -5,14 +5,42 @@ using UnityEngine;
 
 public class CharacterSkillAction : MonoBehaviour
 {
+    [Header("Reference")]
     [SerializeField]
     private StringVariable _thisUserId;
+    [SerializeField]
+    private IntegerListVariable _thisPickedSkills;
+    [SerializeField]
+    private SkillListSO _skillList;
 
     [Header("Events in")]
     [SerializeField]
     private GameEvent _onActivateSkill;
 
+    [Header("Config")]
+    [SerializeField]
+    private Transform _skillObjTransform;
+
     private CharacterAttribute _attribute;
+    private Dictionary<int, GameObject> _skillObjectMap = new Dictionary<int, GameObject>();
+
+    private void SetUpSkills()
+    {
+        _skillObjectMap.Clear();
+
+        List<int> pickedSkills = _thisPickedSkills.List;
+        for (int i = 0; i < pickedSkills.Count; i++)
+        {
+            int skillId = pickedSkills[i];
+            var skillObj = _skillList.GetSkillActivationObject((SkillId)skillId);
+            if (skillObj == null)
+            {
+                continue;
+            }
+
+            _skillObjectMap[skillId] = Instantiate(skillObj, _skillObjTransform.transform.position, Quaternion.identity, gameObject.transform);
+        }
+    }
 
     private void ActivateSkill(SkillId skillId, SkillState skillState, object[] skillData)
     {
@@ -20,6 +48,37 @@ public class CharacterSkillAction : MonoBehaviour
         {
             case SkillId.ArrNade:
                 {
+                    _skillObjectMap.TryGetValue((int)skillId, out var skillObj);
+                    if (skillObj == null)
+                    {
+                        return;
+                    }
+
+                    if (skillState.Equals(SkillState.Second))
+                    {
+                        skillObj.GetComponent<ArrNadeSpawner>()?.ExploseArrnade();
+                    }
+                    else
+                    {
+                        skillObj.GetComponent<ArrNadeSpawner>()?.SpawnArrnade();
+                    }
+
+                    break;
+                }
+            case SkillId.ThirdEye:
+                {
+                    if (_thisUserId.Value != _attribute.AssignedUserId)
+                    {
+                        return;
+                    }
+
+                    _skillObjectMap.TryGetValue((int)skillId, out var skillObj);
+                    if (skillObj == null)
+                    {
+                        return;
+                    }
+
+                    skillObj.GetComponent<ThirdEyeActivation>()?.ActivateThirdEye(true);
                     break;
                 }
             default:
@@ -42,12 +101,12 @@ public class CharacterSkillAction : MonoBehaviour
             return;
         }
 
-        if (!(eventParam[1] is int skillId))
+        if (!(eventParam[1] is SkillId skillId))
         {
             return;
         }
         
-        if (!(eventParam[2] is int skillState))
+        if (!(eventParam[2] is SkillState skillState))
         {
             return;
         }
@@ -57,13 +116,15 @@ public class CharacterSkillAction : MonoBehaviour
             skillData = null;
         }
 
-        ActivateSkill((SkillId)skillId, (SkillState)skillState, skillData);
+        ActivateSkill(skillId, skillState, skillData);
     }
 
     private void OnEnable()
     {
         _attribute = GetComponent<CharacterAttribute>();
         _onActivateSkill.Subcribe(HandleActivateSkill);
+
+        SetUpSkills();
     }
 
     private void OnDisable()

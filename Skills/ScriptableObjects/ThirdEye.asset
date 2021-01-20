@@ -16,11 +16,13 @@ MonoBehaviour:
   SkillIcon: {fileID: 21300000, guid: 102f3f5474359924dba44825d1afb890, type: 3}
   SkillIcon2: {fileID: 0}
   SkillPic: {fileID: 21300000, guid: 4c57c5859b8318a46a88f5a9ad975181, type: 3}
+  SkillActivationObject: {fileID: 630088728049923872, guid: cdc481389db251c43b822eaa49eb4671, type: 3}
   SkillType: 0
   SkillState: 0
   SkillName: Third Eye
   SkillDesc: Spot enemy position
-  Cooldown: 120
+  Cooldown: 10
   Cost: 5
   Damage: 0
-  Duration: 0
+  Duration: 5
+  _remainCooldown: -0.0071697347

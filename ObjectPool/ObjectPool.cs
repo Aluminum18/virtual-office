@@ -46,6 +46,11 @@ public class ObjectPool : MonoBehaviour
         return go;
     }
 
+    public void In_SpawnObject()
+    {
+        Spawn();
+    }
+
     public void ReturnToPool(GameObject go)
     {
         go.SetActive(false);

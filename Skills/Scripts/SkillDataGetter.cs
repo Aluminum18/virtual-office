@@ -11,6 +11,10 @@ public class SkillDataGetter : MonoBehaviour
     [SerializeField]
     private InputValueHolders _inputHolders;
 
+    [Header("Events out")]
+    [SerializeField]
+    private GameEvent _onRequestUpdateAimSpot;
+
     public object[] GetSkillData(SkillId skillId, SkillState state)
     {
         var inputHolder = _inputHolders.GetInputValueHolder(_roomInfo.GetPlayerPos(_thisUserId.Value));
@@ -30,6 +34,7 @@ public class SkillDataGetter : MonoBehaviour
                     {
                         break;
                     }
+                    _onRequestUpdateAimSpot?.Raise();
 
                     data = new object[]
                     {
@@ -43,6 +48,8 @@ public class SkillDataGetter : MonoBehaviour
                 }
             case SkillId.MulShot:
                 {
+                    _onRequestUpdateAimSpot?.Raise();
+
                     data = new object[]
                     {
                         inputHolder.AimSpot.Value
@@ -51,6 +58,8 @@ public class SkillDataGetter : MonoBehaviour
                 }
             case SkillId.PowerShot:
                 {
+                    _onRequestUpdateAimSpot?.Raise();
+
                     data = new object[]
                     {
                         inputHolder.AimSpot.Value

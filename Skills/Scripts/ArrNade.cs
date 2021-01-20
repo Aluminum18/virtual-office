@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UniRx;
+using Photon.Pun;
 
 public class ArrNade : MonoBehaviour
 {
     [Header("Unity Events")]
     [SerializeField]
     private UnityEvent _onExplode;
+
+    [Header("Events out")]
+    [SerializeField]
+    private GameEvent _onRequestActivateSkill;
 
     [Header("Config")]
     [SerializeField]
@@ -26,8 +32,25 @@ public class ArrNade : MonoBehaviour
     [SerializeField]
     private int _layerNumber;
 
+    public bool IsExploded { get; set; }
+
+    public void RequestExplodeOnCollision()
+    {
+        if (!PhotonNetwork.IsMasterClient || IsExploded)
+        {
+            return;
+        }
+        _onRequestActivateSkill.Raise(SkillId.ArrNade, SkillState.Second);
+    }
+
     public void Explose()
     {
+        if (IsExploded)
+        {
+            return;
+        }
+
+        IsExploded = true;
         _onExplode.Invoke();
 
         Stack<GameObject> arrows = new Stack<GameObject>();
@@ -39,8 +62,10 @@ public class ArrNade : MonoBehaviour
 
         _layerNumber = (int)(_maxAngle / _layersOffsetAngle);
 
-        arrows.Pop().transform.rotation = Quaternion.Euler(90f, 0f, 0f);
-
+        var firstArrow = arrows.Pop();
+        firstArrow.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        firstArrow.GetComponent<ArrowMoving>()?.HeadForward(_arrowSpeed);
+       
         for (int i = 1; i < _layerNumber + 1; i++)
         {
             int arrowNum = 2 * i + 2;
@@ -55,17 +80,12 @@ public class ArrNade : MonoBehaviour
 
                 var arrow = arrows.Pop();
                 arrow.transform.rotation = Quaternion.Euler(xAngle, j * yOffset, 0f);
-                StartCoroutine(MoveMiniArrow(arrow, j * 0.1f));
+                Observable.Timer(System.TimeSpan.FromSeconds(0.1 * j)).Subscribe(_ =>
+                {
+                    arrow.GetComponent<ArrowMoving>().HeadForward(_arrowSpeed);
+                });
             }
         }
-
-        gameObject.SetActive(false);
-    }
-
-    private IEnumerator MoveMiniArrow(GameObject arrow, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        arrow.GetComponent<ArrowMoving>().HeadForward(_arrowSpeed);
     }
 }
 
@@ -81,6 +101,7 @@ public class ArrNadeEditor : Editor
         {
             if (Application.isPlaying)
             {
+                myTarget.IsExploded = false;
                 myTarget.Explose();
             }
         }

@@ -49,7 +49,7 @@ public class ArrowSoundImpact : MonoBehaviour
 
     public void CheckAndPlayNearMiss()
     {
-        StartCoroutine(IE_CheckAndPlayNearMiss());
+        StartCoroutine(_checkNearMissCor);
     }
 
     public void StopCheckNearMiss()

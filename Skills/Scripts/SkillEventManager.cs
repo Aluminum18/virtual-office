@@ -29,12 +29,11 @@ public class SkillEventManager : MonoBehaviour, IOnEventCallback
         SkillId skillId = (SkillId)eventParam[0];
         SkillState skillState = (SkillState)eventParam[1];
 
-
         object[] data =
         {
             _thisUserId.Value,
             skillId,
-            SkillState.First,
+            skillState,
             _skillDataGetter.GetSkillData(skillId, skillState)
         };
 
