@@ -5,14 +5,20 @@ using UnityEngine.Events;
 
 public class ArrNadeSpawner : ProjectileSpawner
 {
+    [Header("Reference - assign at runtime")]
     [SerializeField]
     private Vector3Variable _aimSpot;
 
     private GameObject _spawnedArrNade;
-
+   
     public void SpawnArrnade()
     {
-        _spawnedArrNade = SpawnProjectile(_aimSpot.Value, _projectileSpeed, MovingPath.Straight);
+        _spawnedArrNade = SpawnProjectile(_aimSpot.Value);
+    }
+
+    public void Setup(Vector3Variable aimSpot)
+    {
+        _aimSpot = aimSpot;
     }
 
     public void ExploseArrnade()

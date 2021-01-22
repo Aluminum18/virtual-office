@@ -5,14 +5,18 @@ using UnityEngine.Events;
 
 public class ProjectileSpawner : MonoBehaviour
 {
+    [Header("Config")]
     [SerializeField]
     private ObjectPool _projectilePool;
     [SerializeField]
     protected float _projectileSpeed;
     [SerializeField]
+    protected MovingPath _movingPath;
+
+    [SerializeField]
     protected UnityEvent _onProjectileSpawn;
 
-    public GameObject SpawnProjectile(Vector3 target, float speed, MovingPath path)
+    public GameObject SpawnProjectile(Vector3 target)
     {
         var projectile = _projectilePool.Spawn();
         var moving = projectile.GetComponent<ArrowMoving>();
@@ -22,7 +26,7 @@ public class ProjectileSpawner : MonoBehaviour
             return projectile;
         }
 
-        if (path.Equals(MovingPath.Straight))
+        if (_movingPath.Equals(MovingPath.Straight))
         {
             projectile.transform.rotation = Quaternion.LookRotation(target - projectile.transform.position);
             moving.HeadForward(_projectileSpeed);
@@ -34,7 +38,6 @@ public class ProjectileSpawner : MonoBehaviour
 
         _onProjectileSpawn.Invoke();
         return projectile;
-
     }
 }
 

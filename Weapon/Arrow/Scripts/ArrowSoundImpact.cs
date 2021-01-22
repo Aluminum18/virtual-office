@@ -12,14 +12,14 @@ public class ArrowSoundImpact : MonoBehaviour
     [SerializeField]
     private SfxList _hitFleshClips;
     [SerializeField]
-    private AudioSource _audioSource;
+    private World3dSoundPlayer _audioSource;
     [SerializeField]
     private float _triggerNearMissDistance;
 
     private static Camera _mainCamera;
     private Rigidbody _rb;
 
-    private IEnumerator _checkNearMissCor;
+    private Coroutine _checkNearMissCor;
 
     private void Awake()
     {
@@ -29,7 +29,6 @@ public class ArrowSoundImpact : MonoBehaviour
         }
 
         _rb = GetComponent<Rigidbody>();
-        _checkNearMissCor = IE_CheckAndPlayNearMiss();
     }
 
     public void PlayNearMiss()
@@ -49,11 +48,15 @@ public class ArrowSoundImpact : MonoBehaviour
 
     public void CheckAndPlayNearMiss()
     {
-        StartCoroutine(_checkNearMissCor);
+        _checkNearMissCor = StartCoroutine(IE_CheckAndPlayNearMiss());
     }
 
     public void StopCheckNearMiss()
     {
+        if (_checkNearMissCor == null)
+        {
+            return;
+        }
         StopCoroutine(_checkNearMissCor);
     }
 

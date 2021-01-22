@@ -61,8 +61,8 @@ MonoBehaviour:
   _onExplode:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4042006940057304600}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+      - m_Target: {fileID: 7808373934897560134}
+        m_TargetAssemblyTypeName: World3dSoundPlayer, Assembly-CSharp
         m_MethodName: PlayOneShot
         m_Mode: 2
         m_Arguments:
@@ -409,11 +409,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289847b0961bedb4b95a882bab55e016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &4042006940057304600 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 8144205249131641977, guid: f7327b1066e04544783cbb0e24d0e1f4, type: 3}
+--- !u!114 &7808373934897560134 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2684984144549083175, guid: f7327b1066e04544783cbb0e24d0e1f4, type: 3}
   m_PrefabInstance: {fileID: 5268666634504733281}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9077600088322168187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9af3d153a28316947b2f351dec25cfc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &7140199572935717566 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 3028958606027469023, guid: f7327b1066e04544783cbb0e24d0e1f4, type: 3}

@@ -3,22 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ArrowSpawner : MonoBehaviour
+public class ArrowSpawner : ProjectileSpawner
 {
-    [Header("Reference")]
+    [Header("Reference - assigned at runtime")]
     [SerializeField]
-    private StringVariable _charaterState;
+    private Vector3Variable _aimSpot;
 
     [Header("Unity Events")]
     [SerializeField]
     private UnityEvent _onSpawnArrow;
-
-    [SerializeField]
-    private Vector3Variable _aimSpot;
-    [SerializeField]
-    private ObjectPool _arrowPool;
-    [SerializeField]
-    private float _arrowSpeed;
 
     public void SetAimSpotInput(Vector3Variable aimSpot)
     {
@@ -27,25 +20,10 @@ public class ArrowSpawner : MonoBehaviour
 
     public void SetState(StringVariable state)
     {
-        _charaterState = state;
     }
 
     public void FireArrow()
     {
-        GameObject arrow = _arrowPool.Spawn();
-        var arrowMoving = arrow.GetComponent<ArrowMoving>();
-
-        _onSpawnArrow.Invoke();
-
-
-        if (_charaterState.Value.Equals(CharacterState.STATE_READY_ATTACK))
-        {
-            arrowMoving.HeadTo(_aimSpot.Value, _arrowSpeed);
-        }
-        else
-        {
-            arrowMoving.HeadForward(_arrowSpeed);
-        }
-
+        GameObject arrow = SpawnProjectile(_aimSpot.Value);
     }
 }
