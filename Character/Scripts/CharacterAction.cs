@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -23,68 +24,24 @@ public class CharacterAction : MonoBehaviour
     [SerializeField]
     private UnityEvent _onEnable;
     [SerializeField]
-    private UnityEvent _onPrepareProjectile;
-    [SerializeField]
-    private UnityEvent _onCancelAttack;
-    [SerializeField]
-    private UnityEvent _onAttackProjectileSpawn;
-    [SerializeField]
-    private UnityEvent _onStateChanged;
+    private UnityEvent _onHealed;
     [SerializeField]
     private UnityEvent _onTookDamage;
     [SerializeField]
-    private UnityEvent _onHealed;
-    [SerializeField]
     private UnityEvent _onDefeated;
+    [SerializeField]
+    private UnityEvent _onStateChanged;
 
     [Header("Config")]
     [SerializeField]
-    private float _baseAttackTime;
-    [SerializeField]
-    private float _attackRate;
-    [SerializeField]
-    private float _attackFactor;
-    [SerializeField]
     private GameObject _forceShot;
 
+    [Header("Runtime Config")]
     [SerializeField]
-    private float _timeToNextAttack = 0;
+    private BaseWeapon _weapon;
 
 
-    private bool _cancelAttack = false;
-
-    private bool _isAttacking = false;
-
-    private bool _projectileReady = false;
-    private bool _lateAttack = false;
-
-    #region Action could be network awared
-    public bool CancelAttack
-    {
-        get
-        {
-            return _cancelAttack;
-        }
-        set
-        {
-            if (_cancelAttack == value)
-            {
-                return;
-            }
-
-            _cancelAttack = value;
-
-            if (value)
-            {
-                _projectileReady = false;
-                _isAttacking = false;
-                _lateAttack = false;
-                _timeToNextAttack = 0;
-                _onCancelAttack.Invoke();
-            }
-        }
-    }
-
+    #region Network awared actions
     public void SetInput(InputValueHolder inputHolder)
     {
         _characterState = inputHolder.CharacterState;
@@ -105,33 +62,9 @@ public class CharacterAction : MonoBehaviour
         SubcribeInMapInfo();
     }
 
-    public void PrepareProjectile(params object[] args)
+    public void SetWeapon(BaseWeapon weapon)
     {
-        if (_isAttacking || _projectileReady)
-        {
-            return;
-        }
-
-        if (_timeToNextAttack > 0)
-        {
-            return;
-        }
-
-        _cancelAttack = false;
-        _projectileReady = false;
-        CountingUntilProjectile();
-        _onPrepareProjectile?.Invoke();
-    }
-
-    public void Shoot(params object[] args)
-    {
-        if (_projectileReady)
-        {
-            SpawnProjectile();
-            return;
-        }
-
-        _lateAttack = true;
+        _weapon = weapon;
     }
 
     public void ChangeToAttackState(params object[] args)
@@ -145,21 +78,37 @@ public class CharacterAction : MonoBehaviour
         _characterState.Value = "idle";
         _onStateChanged.Invoke();
     }
-    #endregion
+
+    public void PrepareProjectile(params object[] args)
+    {
+        _weapon.PrepareProjectile();
+    }
+
+    public void CancelAttack(params object[] args)
+    {
+        _weapon.CancelAttack();
+    }
+
     public void CheckCancelAttackOnMove()
     {
         if (_characterState.Value == CharacterState.STATE_READY_ATTACK)
         {
             return;
         }
-        CancelAttack = true;
+        CancelAttack();
     }
 
+    public void Attack(object[] args)
+    {
+        _weapon.StartAttack();
+    }
+
+    #endregion
     public void ActiveDefeatedForceShot(Vector3 contactPoint, Quaternion contactRotation, Vector3 direction)
     {
         _forceShot.SetActive(true);
         _forceShot.transform.SetPositionAndRotation(contactPoint, contactRotation);
-        StartCoroutine(IE_ActiveDefeatedForceShot(contactPoint, contactRotation, direction));
+        MainThreadDispatcher.StartUpdateMicroCoroutine(IE_ActiveDefeatedForceShot(contactPoint, contactRotation, direction));
     }
 
     private IEnumerator IE_ActiveDefeatedForceShot(Vector3 contactPoint, Quaternion contactRotation, Vector3 direction)
@@ -174,65 +123,6 @@ public class CharacterAction : MonoBehaviour
         }
 
         rb.velocity = Vector3.zero;
-    }
-
-    private void SpawnProjectile()
-    {
-        _projectileReady = false;
-        _timeToNextAttack = _attackRate;
-        _onAttackProjectileSpawn.Invoke();
-        StartCoroutine(IE_Reload());
-    }
-
-    private void CountingUntilProjectile()
-    {
-        StartCoroutine(IE_AtkToProjectile());
-    }
-
-    private IEnumerator IE_AtkToProjectile()
-    {
-        _isAttacking = true;
-
-        float timeToProjectile = _baseAttackTime * _attackFactor;
-        
-        while (timeToProjectile > 0)
-        {
-            if (_cancelAttack)
-            {
-                yield break;
-            }
-
-            timeToProjectile -= Time.deltaTime;
-            yield return null;
-        }
-
-        _projectileReady = true;
-
-        if (_lateAttack)
-        {
-            SpawnProjectile();
-            _lateAttack = false;
-        }
-        _isAttacking = false;
-    }
-
-    private IEnumerator IE_Reload()
-    {
-        while (_timeToNextAttack > 0)
-        {
-            _timeToNextAttack -= Time.deltaTime;
-            yield return null;
-        }
-
-        ContinuePrepareProjectile();
-    }
-
-    private void ContinuePrepareProjectile()
-    {
-        if (_characterState.Value == CharacterState.STATE_READY_ATTACK)
-        {
-            PrepareProjectile();
-        }
     }
 
     private void TakeDamageOrHeal(float newHp)
@@ -260,10 +150,9 @@ public class CharacterAction : MonoBehaviour
         _onAim?.Subcribe(PrepareProjectile);
 
         _onCancelAim?.Subcribe(ChangeToIdleState);
-        _onCancelAim?.Subcribe(CancelAttackFunc);
+        _onCancelAim?.Subcribe(CancelAttack);
 
-        _onShoot?.Subcribe(PrepareProjectile);
-        _onShoot?.Subcribe(Shoot);
+        _onShoot?.Subcribe(Attack);
     }
 
     private void UnsubcribeInput()
@@ -272,10 +161,9 @@ public class CharacterAction : MonoBehaviour
         _onAim?.Unsubcribe(PrepareProjectile);
 
         _onCancelAim?.Unsubcribe(ChangeToIdleState);
-        _onCancelAim?.Unsubcribe(CancelAttackFunc);
+        _onCancelAim?.Unsubcribe(CancelAttack);
 
-        _onShoot?.Unsubcribe(PrepareProjectile);
-        _onShoot?.Unsubcribe(Shoot);
+        _onShoot?.Unsubcribe(Attack);
     }    
 
     public void SubcribeInMapInfo()
@@ -286,14 +174,6 @@ public class CharacterAction : MonoBehaviour
     private void UnsubcribeInMapInfo()
     {
         _characterHp.OnValueChange -= TakeDamageOrHeal;
-    }
-
-    /// <summary>
-    /// Bridge for subcribe event
-    /// </summary>
-    private void CancelAttackFunc(params object[] args)
-    {
-        CancelAttack = true;
     }
 
     private void OnEnable()

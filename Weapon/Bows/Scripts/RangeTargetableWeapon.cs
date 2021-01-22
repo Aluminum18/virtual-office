@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Crossbow : BaseWeapon
+public class RangeTargetableWeapon : BaseWeapon
 {
     [Header("Reference - assign at runtime")]
     [SerializeField]
@@ -10,7 +10,7 @@ public class Crossbow : BaseWeapon
 
     [Header("Config")]
     [SerializeField]
-    private ArrowSpawner _arrowSpawner;
+    private TargetableProjectileSpawner _arrowSpawner;
 
     private void OnEnable()
     {

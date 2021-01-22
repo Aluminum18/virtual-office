@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6220991573877696018}
   - component: {fileID: 5705500528196877653}
   m_Layer: 0
-  m_Name: CrossbowPrefab
+  m_Name: BasicBowPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,9 +75,14 @@ MonoBehaviour:
   _onReload:
     m_PersistentCalls:
       m_Calls: []
-  _attackDelay: 0.2
-  _reloadTime: 2
+  _attackDelay: 0.7
+  _reloadTime: 0.1
   _rounds: 1
+  _currentRounds: 0
+  _cancelAttack: 0
+  _isAttacking: 0
+  _isReloading: 0
+  _projectileReady: 0
   _aimTo: {fileID: 11400000, guid: c64996ae82b72694dabb27c7077c9928, type: 2}
   _arrowSpawner: {fileID: 1198723937936281730}
 --- !u!114 &5705500528196877653
@@ -152,6 +157,10 @@ PrefabInstance:
     - target: {fileID: 6340998790397513597, guid: 7d5b5a242fc8a5649ace44802568b6de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6457908376459122607, guid: 7d5b5a242fc8a5649ace44802568b6de, type: 3}
+      propertyPath: _movingPath
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d5b5a242fc8a5649ace44802568b6de, type: 3}

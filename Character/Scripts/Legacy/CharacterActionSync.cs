@@ -31,7 +31,7 @@ public class CharacterActionSync : MonoBehaviour
         {
             return;
         }
-        _characterAction.PrepareProjectile();
+        //_characterAction.PrepareProjectile();
     }
 
     public void CallCancelAttack()
@@ -45,7 +45,7 @@ public class CharacterActionSync : MonoBehaviour
         {
             return;
         }
-        _characterAction.CancelAttack = true;
+        //_characterAction.CancelAttack = true;
     }
 
     public void CallSpawnProjectTile()
@@ -60,7 +60,7 @@ public class CharacterActionSync : MonoBehaviour
         {
             return;
         }
-        _characterAction.Shoot();
+        //_characterAction.Shoot();
     }
 
     public void CallChangeState()

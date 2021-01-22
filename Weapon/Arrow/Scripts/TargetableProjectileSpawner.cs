@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ArrowSpawner : ProjectileSpawner
+public class TargetableProjectileSpawner : ProjectileSpawner
 {
     [Header("Reference - assigned at runtime")]
     [SerializeField]

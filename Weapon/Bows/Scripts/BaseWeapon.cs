@@ -28,15 +28,22 @@ public abstract class BaseWeapon : MonoBehaviour
     [SerializeField]
     protected int _rounds;
 
+    [Header("Inspec")]
+    [SerializeField]
     protected int _currentRounds;
-
+    [SerializeField]
     protected bool _cancelAttack = false;
+    [SerializeField]
     protected bool _isAttacking = false;
+    [SerializeField]
     protected bool _isReloading = false;
+    [SerializeField]
     protected bool _projectileReady = false;
 
     public virtual void StartAttack()
     {
+        _cancelAttack = false;
+
         if (_projectileReady)
         {
             AttackImmediately();
@@ -62,6 +69,7 @@ public abstract class BaseWeapon : MonoBehaviour
     {
         _cancelAttack = true;
         _projectileReady = false;
+        _isAttacking = false;
         _onCancelAttack.Invoke();
     }
 
@@ -95,6 +103,7 @@ public abstract class BaseWeapon : MonoBehaviour
             if (_cancelAttack)
             {
                 _cancelAttack = false;
+                _isAttacking = false;
                 yield break;
             }
 
@@ -115,6 +124,7 @@ public abstract class BaseWeapon : MonoBehaviour
             if (_cancelAttack)
             {
                 _cancelAttack = false;
+                _isAttacking = false;
                 yield break;
             }
 
