@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -28,7 +30,10 @@ public class ArrowMoving : MonoBehaviour
     private float _rotateSpeed;
     private static Vector3 _inactiveArrowPos = new Vector3(-99f, -99f, -99f);
 
-    public void HeadTo(Vector3 destination, float speed)
+    private IDisposable _cancelRotateToTarget;
+    private IDisposable _cancelDropAngle;
+
+    public void CurveMoveToTarget(Vector3 destination, float speed)
     {
         Vector3 direction = destination - transform.position;
 
@@ -37,15 +42,29 @@ public class ArrowMoving : MonoBehaviour
 
         transform.Rotate(_maxAngular * direction.magnitude / _maxDistanceForMaxAngular, 0f , 0f);
 
-        if (transform.rotation.eulerAngles.y < -90f)
+        if (transform.rotation.eulerAngles.x < -90f)
         {
             transform.rotation = headToTarget;
         }
 
-        StartCoroutine(IE_RotateToTarget(destination, speed));
+        _cancelRotateToTarget = IE_RotateToTarget(destination, speed).ToObservable().Subscribe();
     }
 
-    public void HeadForward(float speed)
+    public void CurveDropMove(Vector3 target, float speed, float dropAngleSpeed)
+    {
+        transform.rotation = Quaternion.LookRotation(target - transform.position);
+        _cancelDropAngle = IE_DropAngle(speed, dropAngleSpeed).ToObservable().Subscribe();
+    }
+
+    public void MoveForward(Vector3 target, float speed)
+    {
+        transform.rotation = Quaternion.LookRotation(target - transform.position);
+
+        _rb.velocity = transform.forward * speed;
+        _onArrowStartMove.Invoke();
+    }
+
+    public void MoveForward(float speed)
     {
         _rb.velocity = transform.forward * speed;
         _onArrowStartMove.Invoke();
@@ -74,9 +93,34 @@ public class ArrowMoving : MonoBehaviour
         transform.rotation = rotateTo;
     }
 
+    private IEnumerator IE_DropAngle(float speed, float dropAngleSpeed)
+    {
+        _onArrowStartMove.Invoke();
+        _rb.velocity = transform.forward * speed;
+
+        float xAngle = transform.rotation.eulerAngles.x;
+        while (Mathf.Sin(xAngle * Mathf.PI / 180f) < 0.99f)
+        {
+            _rb.velocity = transform.forward * speed;
+
+            transform.Rotate(dropAngleSpeed * Time.deltaTime, 0f, 0f);
+            yield return null;
+            xAngle = transform.rotation.eulerAngles.x;
+            Debug.Log(transform.rotation.eulerAngles);
+        }
+    }
+
     public void StopMoving()
     {
-        StopAllCoroutines();
+        if (_cancelRotateToTarget != null)
+        {
+            _cancelRotateToTarget.Dispose();
+        }
+
+        if (_cancelDropAngle != null)
+        {
+            _cancelDropAngle.Dispose();
+        }
 
         _rb.velocity = Vector3.zero;
         _rootTransform.localPosition -= _rootTransform.forward * 0.5f;

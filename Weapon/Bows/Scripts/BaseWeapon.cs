@@ -19,6 +19,7 @@ public abstract class BaseWeapon : MonoBehaviour
     protected UnityEvent _onFinishAttack;
     [SerializeField]
     protected UnityEvent _onReload;
+    public UnityEvent _onReloaded;
 
     [Header("Config")]
     [SerializeField]
@@ -119,6 +120,7 @@ public abstract class BaseWeapon : MonoBehaviour
         float remainDelay = _attackDelay;
 
         _isAttacking = true;
+        _onPrepareProjectile.Invoke();
         while (remainDelay > 0f)
         {
             if (_cancelAttack)
@@ -149,6 +151,8 @@ public abstract class BaseWeapon : MonoBehaviour
         _isReloading = false;
 
         _currentRounds = _rounds;
+
+        _onReloaded.Invoke();
     }
 
     private void Awake()

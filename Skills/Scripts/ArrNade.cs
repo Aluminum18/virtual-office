@@ -64,7 +64,7 @@ public class ArrNade : MonoBehaviour
 
         var firstArrow = arrows.Pop();
         firstArrow.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
-        firstArrow.GetComponent<ArrowMoving>()?.HeadForward(_arrowSpeed);
+        firstArrow.GetComponent<ArrowMoving>()?.MoveForward(_arrowSpeed);
        
         for (int i = 1; i < _layerNumber + 1; i++)
         {
@@ -82,7 +82,7 @@ public class ArrNade : MonoBehaviour
                 arrow.transform.rotation = Quaternion.Euler(xAngle, j * yOffset, 0f);
                 Observable.Timer(System.TimeSpan.FromSeconds(0.1 * j)).Subscribe(_ =>
                 {
-                    arrow.GetComponent<ArrowMoving>().HeadForward(_arrowSpeed);
+                    arrow.GetComponent<ArrowMoving>().MoveForward(_arrowSpeed);
                 });
             }
         }

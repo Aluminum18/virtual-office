@@ -11,6 +11,8 @@ public class ProjectileSpawner : MonoBehaviour
     [SerializeField]
     protected float _projectileSpeed;
     [SerializeField]
+    protected float _dropAngleSpeed;
+    [SerializeField]
     protected MovingPath _movingPath;
 
     [SerializeField]
@@ -28,12 +30,15 @@ public class ProjectileSpawner : MonoBehaviour
 
         if (_movingPath.Equals(MovingPath.Straight))
         {
-            projectile.transform.rotation = Quaternion.LookRotation(target - projectile.transform.position);
-            moving.HeadForward(_projectileSpeed);
+            moving.MoveForward(target, _projectileSpeed);
+        }
+        else if (_movingPath.Equals(MovingPath.DropCurve))
+        {
+            moving.CurveDropMove(target, _projectileSpeed, _dropAngleSpeed);
         }
         else
         {
-            moving.HeadTo(target, _projectileSpeed);
+            moving.CurveMoveToTarget(target, _projectileSpeed);
         }
 
         _onProjectileSpawn.Invoke();
@@ -44,5 +49,6 @@ public class ProjectileSpawner : MonoBehaviour
 public enum MovingPath
 {
     Straight,
-    Curve
+    Curve,
+    DropCurve
 }

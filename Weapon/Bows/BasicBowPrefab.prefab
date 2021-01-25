@@ -50,7 +50,19 @@ MonoBehaviour:
       m_Calls: []
   _onPrepareProjectile:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5705500528196877653}
+        m_TargetAssemblyTypeName: World3dSoundPlayer, Assembly-CSharp
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 153cc42fbabf480428286131bfba51b2, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onCancelAttack:
     m_PersistentCalls:
       m_Calls: []
@@ -75,8 +87,11 @@ MonoBehaviour:
   _onReload:
     m_PersistentCalls:
       m_Calls: []
+  _onReloaded:
+    m_PersistentCalls:
+      m_Calls: []
   _attackDelay: 0.7
-  _reloadTime: 0.1
+  _reloadTime: 0.3
   _rounds: 1
   _currentRounds: 0
   _cancelAttack: 0
@@ -160,7 +175,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6457908376459122607, guid: 7d5b5a242fc8a5649ace44802568b6de, type: 3}
       propertyPath: _movingPath
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6457908376459122607, guid: 7d5b5a242fc8a5649ace44802568b6de, type: 3}
+      propertyPath: _dropAngleSpeed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d5b5a242fc8a5649ace44802568b6de, type: 3}

@@ -64,7 +64,13 @@ public class CharacterAction : MonoBehaviour
 
     public void SetWeapon(BaseWeapon weapon)
     {
+        if (_weapon != null)
+        {
+            _weapon._onReloaded.RemoveListener(CheckStateAndContinuePrepareAttack);
+        }
+
         _weapon = weapon;
+        _weapon._onReloaded.AddListener(CheckStateAndContinuePrepareAttack);
     }
 
     public void ChangeToAttackState(params object[] args)
@@ -103,6 +109,13 @@ public class CharacterAction : MonoBehaviour
         _weapon.StartAttack();
     }
 
+    private void CheckStateAndContinuePrepareAttack()
+    {
+        if (_characterState.Value.Equals(CharacterState.STATE_READY_ATTACK))
+        {
+            PrepareProjectile();
+        }
+    }
     #endregion
     public void ActiveDefeatedForceShot(Vector3 contactPoint, Quaternion contactRotation, Vector3 direction)
     {
@@ -180,6 +193,14 @@ public class CharacterAction : MonoBehaviour
     {
         _onEnable.Invoke();
         _forceShot.SetActive(false);
+
+#if UNITY_EDITOR
+        if (_weapon == null)
+        {
+            return;
+        }
+        _weapon._onReloaded.AddListener(CheckStateAndContinuePrepareAttack);
+#endif
     }
 
     private void Start()
@@ -191,5 +212,11 @@ public class CharacterAction : MonoBehaviour
     {
         UnsubcribeInput();
         UnsubcribeInMapInfo();
+        
+        if (_weapon == null)
+        {
+            return;
+        }
+        _weapon._onReloaded.RemoveListener(CheckStateAndContinuePrepareAttack);
     }
 }

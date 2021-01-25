@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1337fff361a1041b83112e846d592d, type: 3}
   m_Name: Var_UserInput_AimSpot
   m_EditorClassIdentifier: 
-  _value: {x: -11.501334, y: 2.5178123, z: 29.828564}
+  _value: {x: 3.73, y: 7.86, z: 25.1}
