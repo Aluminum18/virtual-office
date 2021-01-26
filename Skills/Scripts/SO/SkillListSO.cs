@@ -70,6 +70,16 @@ public class SkillListSO : ScriptableObject
         return skill.SkillActivationObject;
     }
 
+    public SkillType GetSkillType(SkillId skillId)
+    {
+        SkillMap.TryGetValue((int)skillId, out var skill);
+        if (skill == null)
+        {
+            Debug.LogWarning("skill list is empty or invalid skill id", this);
+        }
+        return skill.SkillType;
+    }
+
     public SkillSO GetSkill(int skillId)
     {
         SkillMap.TryGetValue(skillId, out var skill);

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2537716096755095080}
   - component: {fileID: 6220991573877696018}
+  - component: {fileID: 6873017736708072163}
   - component: {fileID: 5705500528196877653}
   m_Layer: 0
   m_Name: CrossbowPrefab
@@ -50,10 +51,34 @@ MonoBehaviour:
       m_Calls: []
   _onPrepareProjectile:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6873017736708072163}
+        m_TargetAssemblyTypeName: WeaponControlCharacterAnim, Assembly-CSharp
+        m_MethodName: PlayPrepareProjectile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onCancelAttack:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6873017736708072163}
+        m_TargetAssemblyTypeName: WeaponControlCharacterAnim, Assembly-CSharp
+        m_MethodName: PlayIdle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onAttack:
     m_PersistentCalls:
       m_Calls:
@@ -69,17 +94,66 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6873017736708072163}
+        m_TargetAssemblyTypeName: WeaponControlCharacterAnim, Assembly-CSharp
+        m_MethodName: PlayAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onFinishAttack:
     m_PersistentCalls:
       m_Calls: []
   _onReload:
     m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6873017736708072163}
+        m_TargetAssemblyTypeName: WeaponControlCharacterAnim, Assembly-CSharp
+        m_MethodName: PlayReload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onReloaded:
+    m_PersistentCalls:
       m_Calls: []
-  _attackDelay: 0.2
+  _attackDelay: 0.3
   _reloadTime: 2
   _rounds: 1
+  _currentRounds: 0
+  _cancelAttack: 0
+  _isAttacking: 0
+  _isReloading: 0
+  _projectileReady: 0
   _aimTo: {fileID: 11400000, guid: c64996ae82b72694dabb27c7077c9928, type: 2}
   _arrowSpawner: {fileID: 1198723937936281730}
+--- !u!114 &6873017736708072163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8341320540874449795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce310186012775c4cb2050e30d853ae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterAnimator: {fileID: 0}
+  _animController: {fileID: 0}
+  _weaponAnimLayerName: Crossbow
+  _rigLayerIndex: 0
+  _enableBasicBowModel: 0
 --- !u!114 &5705500528196877653
 MonoBehaviour:
   m_ObjectHideFlags: 0

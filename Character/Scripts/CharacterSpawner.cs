@@ -118,10 +118,6 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
             return;
         }
 
-        var arrowSpawner = characterAtt.ArrowSpawner;
-        arrowSpawner.SetAimSpotInput(holder.AimSpot);
-        arrowSpawner.SetState(holder.CharacterState);
-
         character.GetComponent<CharacterMoving>().SetInputJoystickDirection(holder.JoyStickDirection);
 
         var rotating = character.GetComponent<CharacterRotating>();

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2537716096755095080}
   - component: {fileID: 6220991573877696018}
+  - component: {fileID: 8664976461154681964}
   - component: {fileID: 5705500528196877653}
   m_Layer: 0
   m_Name: BasicBowPrefab
@@ -63,6 +64,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8664976461154681964}
+        m_TargetAssemblyTypeName: WeaponControlCharacterAnim, Assembly-CSharp
+        m_MethodName: PlayPrepareProjectile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onCancelAttack:
     m_PersistentCalls:
       m_Calls: []
@@ -81,17 +94,41 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8664976461154681964}
+        m_TargetAssemblyTypeName: WeaponControlCharacterAnim, Assembly-CSharp
+        m_MethodName: PlayAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onFinishAttack:
     m_PersistentCalls:
       m_Calls: []
   _onReload:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8664976461154681964}
+        m_TargetAssemblyTypeName: WeaponControlCharacterAnim, Assembly-CSharp
+        m_MethodName: PlayReload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onReloaded:
     m_PersistentCalls:
       m_Calls: []
   _attackDelay: 0.7
-  _reloadTime: 0.3
+  _reloadTime: 0.5
   _rounds: 1
   _currentRounds: 0
   _cancelAttack: 0
@@ -100,6 +137,23 @@ MonoBehaviour:
   _projectileReady: 0
   _aimTo: {fileID: 11400000, guid: c64996ae82b72694dabb27c7077c9928, type: 2}
   _arrowSpawner: {fileID: 1198723937936281730}
+--- !u!114 &8664976461154681964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8341320540874449795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c650519bbfeb4dc4fadc666c475a58bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterAnimator: {fileID: 0}
+  _animController: {fileID: 0}
+  _weaponAnimLayerName: BasicBow
+  _rigLayerIndex: -1
+  _enableBasicBowModel: 1
 --- !u!114 &5705500528196877653
 MonoBehaviour:
   m_ObjectHideFlags: 0

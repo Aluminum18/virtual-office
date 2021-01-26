@@ -20,6 +20,8 @@ public class CharacterSkillAction : MonoBehaviour
     [Header("Config")]
     [SerializeField]
     private Transform _skillObjTransform;
+    [SerializeField]
+    private CharacterAction _characterAction;
 
     private CharacterAttribute _attribute;
     private Dictionary<int, GameObject> _skillObjectMap = new Dictionary<int, GameObject>();
@@ -29,16 +31,27 @@ public class CharacterSkillAction : MonoBehaviour
         _skillObjectMap.Clear();
 
         List<int> pickedSkills = _thisPickedSkills.List;
+
+        if (pickedSkills == null)
+        {
+            return;
+        }
+
         for (int i = 0; i < pickedSkills.Count; i++)
         {
-            int skillId = pickedSkills[i];
-            var skillObj = _skillList.GetSkillActivationObject((SkillId)skillId);
+            SkillId skillId = (SkillId)pickedSkills[i];
+            var skillObj = _skillList.GetSkillActivationObject(skillId);
             if (skillObj == null)
             {
                 continue;
             }
 
-            _skillObjectMap[skillId] = Instantiate(skillObj, _skillObjTransform.transform.position, Quaternion.identity, gameObject.transform);
+            _skillObjectMap[(int)skillId] = Instantiate(skillObj, _skillObjTransform.transform.position, Quaternion.identity, gameObject.transform);
+
+            if (_skillList.GetSkillType(skillId).Equals(SkillType.Passive))
+            {
+                ActivateSkill(skillId, SkillState.First, null);
+            }
         }
     }
 
@@ -79,6 +92,34 @@ public class CharacterSkillAction : MonoBehaviour
                     }
 
                     skillObj.GetComponent<ThirdEyeActivation>()?.ActivateThirdEye(true);
+                    break;
+                }
+            case SkillId.Crossbow:
+                {
+                    var skillObject = _skillObjectMap[(int)skillId];
+                    if (skillObject == null)
+                    {
+                        return;
+                    }
+                    var crossbowObject = skillObject.GetComponent<RangeTargetableWeapon>();
+                    if (crossbowObject == null)
+                    {
+                        return;
+                    }
+                    _characterAction.SetWeapon(crossbowObject);
+                    crossbowObject.SetTarget(_attribute.AimSpot);
+
+                    var crossbowAnimControl = skillObject.GetComponent<CrossbowControlCharacterAnim>();
+                    if (crossbowAnimControl == null)
+                    {
+                        return;
+                    }
+                    crossbowAnimControl.SetAnimator(_attribute.Animator);
+                    crossbowAnimControl.SetAnimControl(_attribute.AnimController);
+                    crossbowAnimControl.ActiveWeaponLayer(true);
+
+
+
                     break;
                 }
             default:

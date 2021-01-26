@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class CharacterAnimController : MonoBehaviour
 {
-    private const string IDLE = "Idle";
-    private const int RUN = 1;
-    private const int FULL_ATTACK = 2;
-    private const int AIM = 3;
-    private const int SHOOT = 4;
+    // Animation State key
+    private const string TRANSFORM_STATUS = "TransformStatus";
+
+    // Transform Status values
+    private const int IDLE = 1;
+    private const int RUNNING = 2;
 
     [Header("Reference - assigned in run time")]
     [SerializeField]
@@ -29,6 +31,24 @@ public class CharacterAnimController : MonoBehaviour
     private Animator _animator;
     [SerializeField]
     private CharacterAttribute _characterAtt;
+    [SerializeField]
+    private GameObject _basicBowModel;
+
+    [SerializeField]
+    private RigBuilder _rigBuilder;
+    private List<RigLayer> _rigLayers;
+
+    private List<RigLayer> RigLayers
+    {
+        get
+        {
+            if (_rigLayers == null || _rigLayers.Count == 0)
+            {
+                _rigLayers = _rigBuilder.layers;
+            }
+            return _rigLayers;
+        }
+    }
 
     public void SetInput(InputValueHolder inputHolder)
     {
@@ -81,29 +101,37 @@ public class CharacterAnimController : MonoBehaviour
         UnsubcribeInput();
     }
 
+    public void ActiveRigLayer(int layerIndex, bool active)
+    {
+        if (RigLayers == null || RigLayers.Count == 0 || RigLayers.Count < layerIndex)
+        {
+            Debug.LogError($"invalid rig layer or layer index [{layerIndex}]", this);
+            return;
+        }
+
+        if (layerIndex < 0)
+        {
+            for (int i = 0; i < _rigLayers.Count; i++)
+            {
+                _rigLayers[i].active = false;
+            }
+            return;
+        }
+
+        _rigLayers[layerIndex].active = active;
+    }
+
     public void PlayIdle()
     {
+        _animator.SetInteger(TRANSFORM_STATUS, IDLE);
         _animator.SetTrigger("Idle");
     }
 
     public void PlayRun()
     {
         CheckAndSetLayerFollowingState();
-
+        _animator.SetInteger(TRANSFORM_STATUS, RUNNING);
         _animator.SetTrigger("Run");
-    }
-
-    public void PlayAim()
-    {
-        CheckAndSetLayerFollowingState();
-
-        _animator.SetTrigger("Aim");
-    }
-
-    public void PlayShoot()
-    {
-        CheckAndSetLayerFollowingState();
-        _animator.SetTrigger("Shoot");
     }
 
     private AnimatorStateInfo _stateBeforeHit;
@@ -139,12 +167,17 @@ public class CharacterAnimController : MonoBehaviour
         if (_characterState.Value == CharacterState.STATE_READY_ATTACK)
         {
             SetLayerWeight(1, 1f);
-            SetLayerWeight(2, 1f);
+            //SetLayerWeight(2, 1f);
             return;
         }
 
         SetLayerWeight(1, 0f);
-        SetLayerWeight(2, 0f);
+        //SetLayerWeight(2, 0f);
+    }
+
+    public void ActiveBasicBowModel(bool active)
+    {
+        _basicBowModel.SetActive(active);
     }
 
     private void SetLayerWeight(int layerIndex, float weight)
@@ -156,5 +189,4 @@ public class CharacterAnimController : MonoBehaviour
     {
         PlayIdle();
     }
-
 }

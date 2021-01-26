@@ -16,6 +16,7 @@ MonoBehaviour:
   SkillIcon: {fileID: 21300000, guid: 60f0e79dfaf7ab347a6506ad0cf3d6a4, type: 3}
   SkillIcon2: {fileID: 0}
   SkillPic: {fileID: 0}
+  SkillActivationObject: {fileID: 8341320540874449795, guid: e3243d2baf3c36245aa3df1121bdc51b, type: 3}
   SkillType: 1
   SkillState: 0
   SkillName: Crossbow
@@ -24,3 +25,4 @@ MonoBehaviour:
   Cost: 2
   Damage: 20
   Duration: 0
+  _remainCooldown: 0

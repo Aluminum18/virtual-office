@@ -11,6 +11,8 @@ public class CharacterAttribute : MonoBehaviour
     private PlayersInMapInfoSO _playerInMapInfo;
     [SerializeField]
     private RoomInfoSO _roomInfo;
+    [SerializeField]
+    private InputValueHolders _inputHolders;
 
     [Header("Config")]
     [SerializeField]
@@ -23,7 +25,11 @@ public class CharacterAttribute : MonoBehaviour
     private TargetableProjectileSpawner _arrowSpawner;
     [SerializeField]
     private CharacterAnimController _animController;
+    [SerializeField]
+    private Animator _animator;
     public string AssignedUserId;
+
+    private Vector3Variable _aimSpot;
 
     public bool IsThisPlayer
     {
@@ -71,11 +77,29 @@ public class CharacterAttribute : MonoBehaviour
             return _animController;
         }
     }
+    public Animator Animator
+    {
+        get
+        {
+            return _animator;
+        }
+    }
     public TargetableProjectileSpawner ArrowSpawner
     {
         get
         {
             return _arrowSpawner;
+        }
+    }
+    public Vector3Variable AimSpot
+    {
+        get
+        {
+            if (_aimSpot == null)
+            {
+                _aimSpot = _inputHolders.GetInputValueHolder(_roomInfo.GetPlayerPos(_thisClientUserId.Value)).AimSpot;
+            }
+            return _aimSpot;
         }
     }
 

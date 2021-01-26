@@ -51,11 +51,6 @@ public class Crosshair : MonoBehaviour
         LeanTween.move(gameObject, newPos, _movingCrosshairTime.Value).setEase(LeanTweenType.easeOutSine);
     }
 
-    public void BackToCenter()
-    {
-        transform.localPosition = _centerPos.localPosition;
-    }
-
     private void Start()
     {
         UpdateSpread(_largestSpread.Value);
