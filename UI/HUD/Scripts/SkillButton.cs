@@ -64,7 +64,7 @@ public class SkillButton : MonoBehaviour
 
     public void SetInitalStatus()
     {
-        ActiveFirstButton(_skillSO.SkillType.Equals(SkillType.Active));
+        ActiveFirstButton(true);
         ActiveSecondButton(false);
 
         ShowCooldownElements(false);
@@ -105,7 +105,7 @@ public class SkillButton : MonoBehaviour
 
     public void ActiveFirstButton(bool active)
     {
-        _firstButton.enabled = active;
+        _firstButton.enabled = _skillSO.SkillType == SkillType.Active && active;
         _firstButton.image.enabled = active;
     }
 
