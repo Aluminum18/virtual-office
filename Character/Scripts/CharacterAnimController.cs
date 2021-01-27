@@ -182,11 +182,13 @@ public class CharacterAnimController : MonoBehaviour
     {
         if (_characterState.Value == CharacterState.STATE_READY_ATTACK)
         {
-            SetLayerWeight(1, 1f);
+            SetLayerWeight(3, 1f);
+            SetLayerWeight(4, 1f);
             return;
         }
 
-        SetLayerWeight(1, 0f);
+        SetLayerWeight(3, 0f);
+        SetLayerWeight(4, 0f);
     }
 
     public void ActiveBasicBowModel(bool active)
