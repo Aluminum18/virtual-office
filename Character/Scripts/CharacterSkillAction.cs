@@ -46,7 +46,7 @@ public class CharacterSkillAction : MonoBehaviour
                 continue;
             }
 
-            _skillObjectMap[(int)skillId] = Instantiate(skillObj, _skillObjTransform.transform.position, Quaternion.identity, gameObject.transform);
+            _skillObjectMap[(int)skillId] = Instantiate(skillObj, _skillObjTransform);
 
             if (_skillList.GetSkillType(skillId).Equals(SkillType.Passive))
             {
@@ -117,9 +117,6 @@ public class CharacterSkillAction : MonoBehaviour
                     crossbowAnimControl.SetAnimator(_attribute.Animator);
                     crossbowAnimControl.SetAnimControl(_attribute.AnimController);
                     crossbowAnimControl.ActiveWeaponLayer(true);
-
-
-
                     break;
                 }
             default:

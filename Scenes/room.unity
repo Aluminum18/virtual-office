@@ -2763,18 +2763,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3755046975677156694, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
       propertyPath: _onOpenedScene.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3755046975677156694, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
       propertyPath: _onOpenedScene.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3755046975677156694, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
+      propertyPath: _onOpenedScene.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3755046975677156694, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
       propertyPath: _onOpenedScene.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 2034258147}
     - target: {fileID: 3755046975677156694, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
+      propertyPath: _onOpenedScene.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 2003207657}
+    - target: {fileID: 3755046975677156694, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
       propertyPath: _onOpenedScene.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3755046975677156694, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
+      propertyPath: _onOpenedScene.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3755046975677156694, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
@@ -2782,11 +2794,23 @@ PrefabInstance:
       value: RequestJoinRoom
       objectReference: {fileID: 0}
     - target: {fileID: 3755046975677156694, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
+      propertyPath: _onOpenedScene.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3755046975677156694, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
       propertyPath: _onOpenedScene.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: RoomInfoAccessorRTDB, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3755046975677156694, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
+      propertyPath: _onOpenedScene.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3755046975677156694, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
       propertyPath: _onOpenedScene.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3755046975677156694, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
+      propertyPath: _onOpenedScene.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3755046975677156695, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
@@ -2838,6 +2862,11 @@ PrefabInstance:
 --- !u!20 &2003207656 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 7194781068039535909, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
+  m_PrefabInstance: {fileID: 2003207655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2003207657 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1463344338, guid: 02053a56336b5f147bfecb59dd4ea53c, type: 3}
   m_PrefabInstance: {fileID: 2003207655}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2034258145

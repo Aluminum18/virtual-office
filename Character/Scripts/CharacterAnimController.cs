@@ -121,6 +121,22 @@ public class CharacterAnimController : MonoBehaviour
         _rigLayers[layerIndex].active = active;
     }
 
+    public RigLayerCustomInfo GetRigLayerCustomInfo(int layerIndex)
+    {
+        if (RigLayers == null || RigLayers.Count == 0 || RigLayers.Count < layerIndex)
+        {
+            Debug.LogError($"invalid rig layer or layer index [{layerIndex}]", this);
+            return null;
+        }
+
+        if (layerIndex < 0) // basic bow case
+        {
+            return null;
+        }
+
+        return _rigLayers[layerIndex].rig.gameObject.GetComponent<RigLayerCustomInfo>();
+    }
+
     public void PlayIdle()
     {
         _animator.SetInteger(TRANSFORM_STATUS, IDLE);

@@ -151,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterAnimator: {fileID: 0}
   _animController: {fileID: 0}
+  _weaponModelPrefab: {fileID: 6546815465540317104, guid: 2d8ff28d0b851a942aa02d326a57b07f, type: 3}
   _weaponAnimLayerName: Crossbow
   _rigLayerIndex: 0
   _enableBasicBowModel: 0

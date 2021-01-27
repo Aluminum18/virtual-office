@@ -67,6 +67,7 @@ public class CharacterAction : MonoBehaviour
         if (_weapon != null)
         {
             _weapon._onReloaded.RemoveListener(CheckStateAndContinuePrepareAttack);
+            Destroy(_weapon.gameObject);
         }
 
         _weapon = weapon;
