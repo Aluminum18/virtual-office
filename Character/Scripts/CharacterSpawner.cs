@@ -69,7 +69,7 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
         PlayerMap.TryGetValue(userId, out GameObject character);
         if (character == null)
         {
-            Debug.LogError($"Cannot find character with id [{userId}]", this);           
+            Debug.LogWarning($"Cannot find character with id [{userId}]", this);           
         }
         return character;
     }

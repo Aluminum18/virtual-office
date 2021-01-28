@@ -2315,7 +2315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _joystick: {fileID: 11400000, guid: 492af0ab120cc884ba0e8ee04f895704, type: 2}
-  _aimSpot: {fileID: 11400000, guid: f45e045decf1c3f48a7144a3bf291369, type: 2}
+  _aimSpot: {fileID: 11400000, guid: c64996ae82b72694dabb27c7077c9928, type: 2}
   _userId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
   _characterState: {fileID: 11400000, guid: bfed186c4d2d04144979767670530857, type: 2}
   _rotateSpeed: 360

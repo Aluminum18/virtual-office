@@ -8,8 +8,6 @@ public class CharacterRotating : MonoBehaviour
     [SerializeField]
     private Vector3Variable _joystick;
     [SerializeField]
-    private Vector3Variable _aimSpot;
-    [SerializeField]
     private StringVariable _userId;
     [SerializeField]
     private StringVariable _characterState;
@@ -18,8 +16,9 @@ public class CharacterRotating : MonoBehaviour
     [SerializeField]
     [Tooltip("Degree/s")]
     private float _rotateSpeed;
+    [Tooltip("Maximum difference of result rotation and target rotation in degree")]
     [SerializeField]
-    private float _offsetAngle = 5;
+    private float _offsetAngle;
 
     private bool _isRotating;
     private Vector3 _direction;
@@ -53,7 +52,21 @@ public class CharacterRotating : MonoBehaviour
     public void SetJoystickInputDirection(Vector3Variable joystickDirection)
     {
         _joystick = joystickDirection;
-        CheckAndSubcribeInput();
+    }
+
+    public void CheckAndSubcribeInput()
+    {
+        _joystick.OnValueChange += UpdateDirection;
+    }
+
+    public void Rotate(Vector3 rotate)
+    {
+        transform.Rotate(rotate);
+    }
+
+    public void Rotate(float x, float y, float z)
+    {
+        transform.Rotate(x, y, z);
     }
 
     private void UpdateDirection(Vector3 direction)
@@ -102,36 +115,6 @@ public class CharacterRotating : MonoBehaviour
         }
 
         _isRotating = false;
-    }
-
-    private void Update()
-    {
-        if (_characterState.Value == CharacterState.STATE_IDLE 
-            || !IsThisPlayer)
-        {
-            return;
-        }
-
-        // Rotate around Y only
-        _aimingDirection.x = _aimSpot.Value.x - transform.position.x;
-        _aimingDirection.z = _aimSpot.Value.z - transform.position.z;
-        Quaternion rotateTo = Quaternion.LookRotation(_aimingDirection);
-
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateTo, _rotateSpeed * Time.deltaTime);
-
-    }
-
-
-    public void CheckAndSubcribeInput()
-    {
-        if (_joystick == null
-            || _aimSpot == null
-            )
-        {
-            return;
-        }
-
-        _joystick.OnValueChange += UpdateDirection;
     }
 
     private void OnDestroy()
