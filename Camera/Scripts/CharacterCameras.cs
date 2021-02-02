@@ -33,10 +33,10 @@ public class CharacterCameras : MonoBehaviour
             return;
         }
 
-        _freeLookCam.Follow = characterAtt.Follow;
+        _freeLookCam.Follow = characterAtt.Camlook;
         _freeLookCam.LookAt = characterAtt.Camlook;
 
-        _aimLookCam.Follow = characterAtt.Follow;
-        _aimLookCam.LookAt = characterAtt.AimLook;
+        _aimLookCam.Follow = characterAtt.Camlook;
+        _aimLookCam.LookAt = characterAtt.Camlook;
     }
 }

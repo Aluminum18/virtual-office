@@ -78,11 +78,11 @@ public class CharacterActionSync : MonoBehaviour
 
         if (state == "idle")
         {
-            _characterAction.ChangeToIdleState();
+            _characterAction.ChangeToRunning();
         }
         else
         {
-            _characterAction.ChangeToAttackState();
+            _characterAction.ChangeToWalking();
         }
     }
 }

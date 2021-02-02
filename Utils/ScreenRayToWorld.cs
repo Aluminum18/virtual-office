@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ScreenRayToWorld : MonoBehaviour
 {
-    [Header("Reference")]
+    [Header("Runtime Reference")]
     [SerializeField]
     private Vector3Variable _output;
+
+    [Header("Reference")]
     [SerializeField]
     private Vector3Variable _boundDirection;
     [SerializeField]

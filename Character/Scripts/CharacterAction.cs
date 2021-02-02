@@ -31,6 +31,10 @@ public class CharacterAction : MonoBehaviour
     private UnityEvent _onDefeated;
     [SerializeField]
     private UnityEvent _onStateChanged;
+    [SerializeField]
+    private UnityEvent _onRunningState;
+    [SerializeField]
+    private UnityEvent _onWalkingState;
 
     [Header("Config")]
     [SerializeField]
@@ -74,21 +78,19 @@ public class CharacterAction : MonoBehaviour
         _weapon._onReloaded.AddListener(CheckStateAndContinuePrepareAttack);
     }
 
-    public void ChangeToAttackState(params object[] args)
+    public void ChangeToWalking(params object[] args)
     {
-        _characterState.Value = "attack";
+        _characterState.Value = CharacterStandingState.WALKING;
         _onStateChanged.Invoke();
+        _onWalkingState.Invoke();
+
     }
 
-    public void ChangeToIdleState(params object[] args)
+    public void ChangeToRunning(params object[] args)
     {
-        _characterState.Value = "idle";
+        _characterState.Value = CharacterStandingState.RUNNING;
         _onStateChanged.Invoke();
-    }
-
-    public void PrepareProjectile(params object[] args)
-    {
-        _weapon.PrepareProjectile();
+        _onRunningState.Invoke();
     }
 
     public void CancelAttack(params object[] args)
@@ -98,7 +100,7 @@ public class CharacterAction : MonoBehaviour
 
     public void CheckCancelAttackOnMove()
     {
-        if (_characterState.Value == CharacterState.STATE_READY_ATTACK)
+        if (_characterState.Value == CharacterStandingState.WALKING)
         {
             return;
         }
@@ -112,10 +114,10 @@ public class CharacterAction : MonoBehaviour
 
     private void CheckStateAndContinuePrepareAttack()
     {
-        if (_characterState.Value.Equals(CharacterState.STATE_READY_ATTACK))
-        {
-            PrepareProjectile();
-        }
+        //if (_characterState.Value.Equals(CharacterStandingState.STATE_READY_ATTACK))
+        //{
+        //    PrepareProjectile();
+        //}
     }
     #endregion
     public void ActiveDefeatedForceShot(Vector3 contactPoint, Quaternion contactRotation, Vector3 direction)
@@ -160,10 +162,9 @@ public class CharacterAction : MonoBehaviour
 
     public void SubcribeInput()
     {
-        _onAim?.Subcribe(ChangeToAttackState);
-        _onAim?.Subcribe(PrepareProjectile);
+        _onAim?.Subcribe(ChangeToWalking);
 
-        _onCancelAim?.Subcribe(ChangeToIdleState);
+        _onCancelAim?.Subcribe(ChangeToRunning);
         _onCancelAim?.Subcribe(CancelAttack);
 
         _onShoot?.Subcribe(Attack);
@@ -171,10 +172,9 @@ public class CharacterAction : MonoBehaviour
 
     private void UnsubcribeInput()
     {
-        _onAim?.Unsubcribe(ChangeToAttackState);
-        _onAim?.Unsubcribe(PrepareProjectile);
+        _onAim?.Unsubcribe(ChangeToWalking);
 
-        _onCancelAim?.Unsubcribe(ChangeToIdleState);
+        _onCancelAim?.Unsubcribe(ChangeToRunning);
         _onCancelAim?.Unsubcribe(CancelAttack);
 
         _onShoot?.Unsubcribe(Attack);
@@ -206,7 +206,7 @@ public class CharacterAction : MonoBehaviour
 
     private void Start()
     {
-        ChangeToIdleState();
+        ChangeToRunning();
     }
 
     private void OnDestroy()

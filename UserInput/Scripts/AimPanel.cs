@@ -38,7 +38,8 @@ public class AimPanel : MonoBehaviour, IPointerDownHandler, IDragHandler
                 if (characterObj == null)
                 {
 #if UNITY_EDITOR
-                    return _testRotating;
+                    _characterRotating = _testRotating;
+                    return _characterRotating;
 #endif
                     return null;
                 }
@@ -56,7 +57,7 @@ public class AimPanel : MonoBehaviour, IPointerDownHandler, IDragHandler
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 dragDelta = eventData.delta * Time.deltaTime;
-        CharacterRotating.Rotate(0f, -dragDelta.x * _sensitive, 0f);
+        CharacterRotating.Rotate(0f, dragDelta.x * _sensitive, 0f);
         SetScreenX(dragDelta.y);
         Debug.Log("DragDelta " + dragDelta);
     }
@@ -79,6 +80,11 @@ public class AimPanel : MonoBehaviour, IPointerDownHandler, IDragHandler
     private void SetScreenX(float dragDeltaY)
     {
         Debug.Log("DragDeltaY " + dragDeltaY);
-        AimCompose.m_ScreenY -= _ratio * dragDeltaY * _sensitive;
+        AimCompose.m_ScreenY = Mathf.Clamp(AimCompose.m_ScreenY + _ratio * dragDeltaY * _sensitive, -0.5f, 1.5f);
+    }
+
+    private void OnDisable()
+    {
+        AimCompose.m_ScreenY = 0.5f;
     }
 }

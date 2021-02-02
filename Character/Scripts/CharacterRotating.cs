@@ -12,6 +12,10 @@ public class CharacterRotating : MonoBehaviour
     [SerializeField]
     private StringVariable _characterState;
 
+    [Header("Runtime Reference")]
+    [SerializeField]
+    private Vector3Variable _aimSpot;
+
     [Header("Config")]
     [SerializeField]
     [Tooltip("Degree/s")]
@@ -49,14 +53,34 @@ public class CharacterRotating : MonoBehaviour
         _characterState = inputCharacterState;
     }
 
+    public void SetAimSpot(Vector3Variable aimSpot)
+    {
+        _aimSpot = aimSpot;
+    }
+
     public void SetJoystickInputDirection(Vector3Variable joystickDirection)
     {
         _joystick = joystickDirection;
     }
 
-    public void CheckAndSubcribeInput()
+    public void SubcribeInput()
     {
+        if (_joystick == null || _aimSpot == null)
+        {
+            return;
+        }
+
         _joystick.OnValueChange += UpdateDirection;
+        _aimSpot.OnValueChange += RotateToAimSpot;
+    }
+
+    public void RotateToAimSpot(Vector3 aimSpot)
+    {
+        if (_characterState.Value.Equals(CharacterStandingState.WALKING))
+        {
+            return;
+        }
+        UpdateDirection(aimSpot - transform.position);
     }
 
     public void Rotate(Vector3 rotate)
@@ -71,14 +95,14 @@ public class CharacterRotating : MonoBehaviour
 
     private void UpdateDirection(Vector3 direction)
     {
-        if (direction.Equals(Vector3.zero))
+        if (direction.Equals(Vector3.zero) || _characterState.Value.Equals(CharacterStandingState.WALKING))
         {
             return;
         }
 
         Vector3 nomalize = Vector3.Normalize(direction);
-        _direction.x = nomalize.x;
-        _direction.z = nomalize.z;
+        _direction.x = direction.x;
+        _direction.z = direction.z;
 
         StartRotate();
     }
@@ -99,7 +123,7 @@ public class CharacterRotating : MonoBehaviour
         Quaternion rotateTo = Quaternion.LookRotation(_direction);
         while (Quaternion.Angle(transform.rotation, rotateTo) > _offsetAngle)
         {
-            if (_characterState.Value == CharacterState.STATE_READY_ATTACK)
+            if (_characterState.Value == CharacterStandingState.WALKING)
             {
                 _isRotating = false;
                 yield break;

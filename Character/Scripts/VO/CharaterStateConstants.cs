@@ -1,5 +1,5 @@
-public static class CharacterState
+public static class CharacterStandingState
 {
-    public const string STATE_IDLE = "idle";
-    public const string STATE_READY_ATTACK = "attack";
+    public const string RUNNING = "running";
+    public const string WALKING = "walking";
 }

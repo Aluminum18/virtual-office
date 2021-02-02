@@ -8,9 +8,10 @@ public class CharacterAnimController : MonoBehaviour
     // Animation State key
     private const string TRANSFORM_STATUS = "TransformStatus";
 
+    private const string WALKING_STATE = "WalkingState";
     // Transform Status values
-    private const int IDLE = 1;
-    private const int RUNNING = 2;
+    private const int STAND = 1;
+    private const int MOVE = 2;
 
     [Header("Reference - assigned in run time")]
     [SerializeField]
@@ -80,22 +81,6 @@ public class CharacterAnimController : MonoBehaviour
         _onCancelAim.Unsubcribe(PlayerIdleFunc);
     }
 
-    private bool IsReadyAttackParam
-    {
-        get
-        {
-            return _animator.GetBool("ReadyAttack");
-        }
-    }
-
-    private bool IsMovingParam
-    {
-        get
-        {
-            return _animator.GetBool("Moving");
-        }
-    }
-
     private void OnDestroy()
     {
         UnsubcribeInput();
@@ -139,14 +124,14 @@ public class CharacterAnimController : MonoBehaviour
 
     public void PlayIdle()
     {
-        _animator.SetInteger(TRANSFORM_STATUS, IDLE);
+        _animator.SetInteger(TRANSFORM_STATUS, STAND);
         _animator.SetTrigger("Idle");
     }
 
     public void PlayRun()
     {
         CheckAndSetLayerFollowingState();
-        _animator.SetInteger(TRANSFORM_STATUS, RUNNING);
+        _animator.SetInteger(TRANSFORM_STATUS, MOVE);
         _animator.SetTrigger("Run");
     }
 
@@ -174,21 +159,21 @@ public class CharacterAnimController : MonoBehaviour
 
     public void UpdateReadyAttackState()
     {
-        bool readyAttack = _characterState.Value == CharacterState.STATE_READY_ATTACK;
-        _animator.SetBool("ReadyAttack", readyAttack);
+        bool walking = _characterState.Value == CharacterStandingState.WALKING;
+        _animator.SetBool(WALKING_STATE, walking);
     }
 
     public void CheckAndSetLayerFollowingState()
     {
-        if (_characterState.Value == CharacterState.STATE_READY_ATTACK)
+        if (_characterState.Value == CharacterStandingState.WALKING)
         {
             SetLayerWeight(3, 1f);
-            SetLayerWeight(4, 1f);
+            //SetLayerWeight(4, 1f);
             return;
         }
 
         SetLayerWeight(3, 0f);
-        SetLayerWeight(4, 0f);
+        //SetLayerWeight(4, 0f);
     }
 
     public void ActiveBasicBowModel(bool active)

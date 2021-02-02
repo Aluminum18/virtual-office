@@ -13,7 +13,7 @@ public class CharacterAttEditor : Editor
         if (GUILayout.Button("Assign test input (player 1)"))
         {
             myTarget.GetComponent<CharacterMoving>().CheckAndSubcribeInput();
-            myTarget.GetComponent<CharacterRotating>().CheckAndSubcribeInput();
+            myTarget.GetComponent<CharacterRotating>().SubcribeInput();
             myTarget.GetComponent<CharacterAction>().SubcribeInput();
             myTarget.GetComponent<CharacterAction>().SubcribeInMapInfo();
             myTarget.AnimController.SubcribeInput();

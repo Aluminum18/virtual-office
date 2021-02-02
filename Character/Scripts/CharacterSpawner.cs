@@ -123,6 +123,8 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
         var rotating = character.GetComponent<CharacterRotating>();
         rotating.SetJoystickInputDirection(holder.JoyStickDirection);
         rotating.SetCharacterState(holder.CharacterState);
+        rotating.SetAimSpot(holder.AimSpot);
+        rotating.SubcribeInput();
 
         var charAction = character.GetComponent<CharacterAction>();
         charAction.SetInput(holder);
