@@ -37,7 +37,7 @@ public static class TimeUtils
 
     public static double GetCurrentTimeInCentiSec()
     {
-        return GetCurrentTimeInMiliSec() * 10;
+        return GetCurrentTimeInMiliSec() / 10;
     }
 
     public static string FromSecToDayHourMin(int sec)

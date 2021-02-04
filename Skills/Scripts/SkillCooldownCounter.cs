@@ -60,6 +60,7 @@ public class SkillCooldownCounter : MonoBehaviour
             if (_timePassedFromLostFocus > 0)
             {
                 remain -= _timePassedFromLostFocus;
+                yield return new WaitForEndOfFrame();
                 _timePassedFromLostFocus = 0f;
             }
 
@@ -69,8 +70,6 @@ public class SkillCooldownCounter : MonoBehaviour
             yield return null;
         }
         skill.ChangeRemainCooldownValue(0f);
-
-
     }
 
     private void OnEnable()
@@ -92,6 +91,7 @@ public class SkillCooldownCounter : MonoBehaviour
                 return;
             }
             _timePassedFromLostFocus = (float)(TimeUtils.GetCurrentTimeInCentiSec() - _lostFocusTime) * 0.01f;
+            Debug.Log("Time pass " + _timePassedFromLostFocus);
         }
         else
         {

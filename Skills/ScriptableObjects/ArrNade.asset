@@ -21,8 +21,8 @@ MonoBehaviour:
   SkillState: 1
   SkillName: ArrNade
   SkillDesc: 
-  Cooldown: 5
+  Cooldown: 10
   Cost: 3
   Damage: 10
   Duration: 0
-  _remainCooldown: 1.283468
+  _remainCooldown: 0
