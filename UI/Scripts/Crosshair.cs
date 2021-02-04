@@ -7,17 +7,11 @@ public class Crosshair : MonoBehaviour
 {
     [Header("Referecene")]
     [SerializeField]
-    private Vector3Variable _aimScreenPos;
-    [SerializeField]
-    private FloatVariable _aimingTime;
-    [SerializeField]
     private FloatVariable _spread;
-    [SerializeField]
-    private FloatVariable _largestSpread;
-    [SerializeField]
-    private FloatVariable _movingCrosshairTime;
 
     [Header("Config")]
+    [SerializeField]
+    private float _crosshairAdjustTime;
     [SerializeField]
     private Image _top;
     [SerializeField]
@@ -27,48 +21,42 @@ public class Crosshair : MonoBehaviour
     [SerializeField]
     private Image _right;
     [SerializeField]
-    private Transform _centerPos;
+    private Transform _visualCenterPos;
+    [SerializeField]
+    private Transform _actualCenterPos;
 
     private Vector3 _upInit;
     private Vector3 _rightInit;
 
-    public void StartAim()
+    public void RandomActualCenter()
     {
-        _top.transform.localPosition = _centerPos.localPosition + _upInit;
-        _bot.transform.localPosition = _centerPos.localPosition - _upInit;
-        _left.transform.localPosition = _centerPos.localPosition - _rightInit;
-        _right.transform.localPosition = _centerPos.localPosition + _rightInit;
-
-        LeanTween.moveLocalY(_top.gameObject, _spread.Value, _aimingTime.Value).setEase(LeanTweenType.easeOutQuart);
-        LeanTween.moveLocalY(_bot.gameObject, -_spread.Value, _aimingTime.Value).setEase(LeanTweenType.easeOutQuart);
-        LeanTween.moveLocalX(_right.gameObject, _spread.Value, _aimingTime.Value).setEase(LeanTweenType.easeOutQuart);
-        LeanTween.moveLocalX(_left.gameObject, -_spread.Value, _aimingTime.Value).setEase(LeanTweenType.easeOutQuart);
+        float x = _visualCenterPos.localPosition.x + Random.Range(-_spread.Value, _spread.Value);
+        float y = _visualCenterPos.localPosition.y + Random.Range(-_spread.Value, _spread.Value);
+        _actualCenterPos.localPosition = new Vector3(x, y, _visualCenterPos.localPosition.z);
     }
 
-    public void ChangeCenter()
+    private void AdjustCrosshair(float newSpread)
     {
-        Vector3 newPos = new Vector3(_aimScreenPos.Value.x, _aimScreenPos.Value.y, transform.position.z);
-        LeanTween.move(gameObject, newPos, _movingCrosshairTime.Value).setEase(LeanTweenType.easeOutSine);
-    }
-
-    private void Start()
-    {
-        UpdateSpread(_largestSpread.Value);
+        LeanTween.moveLocalY(_top.gameObject, _spread.Value, _crosshairAdjustTime).setEase(LeanTweenType.easeOutQuart);
+        LeanTween.moveLocalY(_bot.gameObject, -_spread.Value, _crosshairAdjustTime).setEase(LeanTweenType.easeOutQuart);
+        LeanTween.moveLocalX(_right.gameObject, _spread.Value, _crosshairAdjustTime).setEase(LeanTweenType.easeOutQuart);
+        LeanTween.moveLocalX(_left.gameObject, -_spread.Value, _crosshairAdjustTime).setEase(LeanTweenType.easeOutQuart);
     }
 
     private void OnEnable()
     {
-        _spread.OnValueChange += UpdateSpread;
+        _spread.OnValueChange += AdjustCrosshair;
     }
 
     private void OnDisable()
     {
-        _spread.OnValueChange -= UpdateSpread;
+        _spread.OnValueChange -= AdjustCrosshair;
+
     }
 
-    private void UpdateSpread(float newSpread)
+    private void Start()
     {
-        _upInit = Vector3.up * newSpread;
-        _rightInit = Vector3.right * newSpread;
+        AdjustCrosshair(_spread.Value);
     }
+
 }

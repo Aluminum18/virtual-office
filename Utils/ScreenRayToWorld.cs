@@ -24,7 +24,9 @@ public class ScreenRayToWorld : MonoBehaviour
 
     [Header("Config")]
     [SerializeField]
-    private RectTransform _screenTransform;
+    private RectTransform _actualCrosshairCenter;
+    [SerializeField]
+    private RectTransform _crosshairVisualCenter;
     [SerializeField]
     private Camera _worldCam;
     [SerializeField]
@@ -43,7 +45,7 @@ public class ScreenRayToWorld : MonoBehaviour
 
     public void ScreenRayToWorldPoint(object[] args)
     {
-        Vector3 screenPoint = _uiCam.WorldToScreenPoint(_screenTransform.position);
+        Vector3 screenPoint = _uiCam.WorldToScreenPoint(_actualCrosshairCenter.position);
         var ray = _worldCam.ScreenPointToRay(screenPoint);
 
         //Debug.DrawRay(ray.origin, ray.direction * 200f, Color.red, 0.1f);
@@ -58,7 +60,7 @@ public class ScreenRayToWorld : MonoBehaviour
 
     private void ScreenRayToWorldBound()
     {
-        Vector3 screenPoint = _uiCam.WorldToScreenPoint(_screenTransform.position);
+        Vector3 screenPoint = _uiCam.WorldToScreenPoint(_crosshairVisualCenter.position);
         var ray = _worldCam.ScreenPointToRay(screenPoint);
 
         //Debug.DrawRay(ray.origin, ray.direction * 200f, Color.red, 0.1f);
