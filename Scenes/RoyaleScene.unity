@@ -1562,7 +1562,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 193103743}
-  m_LocalRotation: {x: -0.033651628, y: -0, z: -0, w: 0.99943364}
+  m_LocalRotation: {x: -0.13398442, y: -2.3769515e-23, z: -2.1582546e-23, w: 0.9909834}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2496,6 +2496,7 @@ GameObject:
   - component: {fileID: 306697289}
   - component: {fileID: 306697290}
   - component: {fileID: 306697291}
+  - component: {fileID: 306697292}
   m_Layer: 0
   m_Name: FreeLookCam
   m_TagString: Untagged
@@ -2511,7 +2512,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306697288}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1.7817965, z: 5.60046}
+  m_LocalPosition: {x: 1, y: 1.1412845, z: 5.60046}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1750445400}
@@ -2610,9 +2611,9 @@ MonoBehaviour:
   m_BindingMode: 4
   m_SplineCurvature: 0.2
   m_Orbits:
-  - m_Height: 4.5
+  - m_Height: 2
     m_Radius: 1.75
-  - m_Height: 2.5
+  - m_Height: 0.5
     m_Radius: 3
   - m_Height: -1
     m_Radius: 3
@@ -2636,6 +2637,36 @@ MonoBehaviour:
   m_Offset: {x: 0.56, y: -0.3, z: 0}
   m_ApplyAfter: 1
   m_PreserveComposition: 0
+--- !u!114 &306697292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306697288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 32768
+  m_IgnoreTag: 
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 32768
+  m_MinimumDistanceFromTarget: 0.1
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.1
+  m_Strategy: 1
+  m_MaximumEffort: 4
+  m_SmoothingTime: 0
+  m_Damping: 0
+  m_DampingWhenOccluded: 0
+  m_OptimalTargetDistance: 0
 --- !u!1001 &309621172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10588,7 +10619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.016796425, z: -3.13954}
+  m_FollowOffset: {x: 0, y: -0.6237156, z: -3.13954}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -13167,7 +13198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.016796425, z: -3.13954}
+  m_FollowOffset: {x: 0, y: -0.6237156, z: -3.13954}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -13931,7 +13962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 0.016796425, z: -3.13954}
+  m_FollowOffset: {x: 0, y: -0.6237156, z: -3.13954}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -16152,7 +16183,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750445399}
-  m_LocalRotation: {x: 0.0026749605, y: 2.7755476e-17, z: -7.424507e-20, w: 0.9999964}
+  m_LocalRotation: {x: -0.09789854, y: -0.000000014545935, z: -0.0000000014308994, w: 0.9951964}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -16601,7 +16632,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1804956853}
-  m_LocalRotation: {x: -0.015514905, y: -0.000000017221106, z: -2.6721597e-10, w: 0.99987966}
+  m_LocalRotation: {x: -0.11598447, y: -0.000000020387606, z: -0.000000002380713, w: 0.993251}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -17427,8 +17458,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1888772237}
-  m_LocalRotation: {x: -0.027123354, y: -0.00000001238706, z: -3.3610226e-10, w: 0.9996321}
-  m_LocalPosition: {x: 1.56, y: 1.4822834, z: 5.616726}
+  m_LocalRotation: {x: -0.12750922, y: -0.000000013192018, z: -0.0000000016959473, w: 0.9918374}
+  m_LocalPosition: {x: 1.56, y: 0.85108364, z: 5.6763296}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 144106234}
