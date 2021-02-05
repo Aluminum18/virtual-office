@@ -96,14 +96,14 @@ public class CharacterAnimController : MonoBehaviour
 
         if (layerIndex < 0)
         {
-            for (int i = 0; i < _rigLayers.Count; i++)
+            for (int i = 0; i < RigLayers.Count; i++)
             {
-                _rigLayers[i].active = false;
+                RigLayers[i].active = false;
             }
             return;
         }
 
-        _rigLayers[layerIndex].active = active;
+        RigLayers[layerIndex].active = active;
     }
 
     public RigLayerCustomInfo GetRigLayerCustomInfo(int layerIndex)
@@ -119,7 +119,7 @@ public class CharacterAnimController : MonoBehaviour
             return null;
         }
 
-        return _rigLayers[layerIndex].rig.gameObject.GetComponent<RigLayerCustomInfo>();
+        return RigLayers[layerIndex].rig.gameObject.GetComponent<RigLayerCustomInfo>();
     }
 
     public void PlayIdle()

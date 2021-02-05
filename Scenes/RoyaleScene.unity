@@ -6885,6 +6885,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.059106115
       objectReference: {fileID: 0}
+    - target: {fileID: 91252544516372910, guid: 145e4762876f94e47a16e01ade026458, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4553366722181270138, guid: 145e4762876f94e47a16e01ade026458, type: 3}
       propertyPath: viewIdField
       value: 3
@@ -6947,7 +6951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7339500980596317687, guid: 145e4762876f94e47a16e01ade026458, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8169493195163348745, guid: 145e4762876f94e47a16e01ade026458, type: 3}
       propertyPath: m_IsActive
