@@ -31,7 +31,9 @@ public class Crosshair : MonoBehaviour
     public void RandomActualCenter()
     {
         float x = _visualCenterPos.localPosition.x + Random.Range(-_spread.Value, _spread.Value);
-        float y = _visualCenterPos.localPosition.y + Random.Range(-_spread.Value, _spread.Value);
+        float yRandomRange = Mathf.Sqrt(Mathf.Pow(_spread.Value, 2) - x * x);
+        float y = _visualCenterPos.localPosition.y + Random.Range(-yRandomRange, yRandomRange);
+
         _actualCenterPos.localPosition = new Vector3(x, y, _visualCenterPos.localPosition.z);
     }
 
