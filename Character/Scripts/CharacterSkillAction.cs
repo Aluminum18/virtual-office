@@ -46,12 +46,32 @@ public class CharacterSkillAction : MonoBehaviour
                 continue;
             }
 
-            _skillObjectMap[(int)skillId] = Instantiate(skillObj, _skillObjTransform);
+            var skill = Instantiate(skillObj, _skillObjTransform);
+            _skillObjectMap[(int)skillId] = skill;
 
             if (_skillList.GetSkillType(skillId).Equals(SkillType.Passive))
             {
                 ActivateSkill(skillId, SkillState.First, null);
             }
+
+            SetupSkill(skillId, skill.GetComponent<SkillActivator>());
+        }
+    }
+
+    private void SetupSkill(SkillId skillId, SkillActivator activator)
+    {
+        switch (skillId)
+        {
+            
+            case SkillId.ArrNade:
+                {
+                    activator.Setup(_attribute.AimSpot);
+                    break;
+                }
+            default:
+                {
+                    return;
+                }
         }
     }
 
@@ -69,11 +89,11 @@ public class CharacterSkillAction : MonoBehaviour
 
                     if (skillState.Equals(SkillState.Second))
                     {
-                        skillObj.GetComponent<ArrNadeSpawner>()?.ExploseArrnade();
+                        skillObj.GetComponent<SkillActivator>()?.ActiveSecondState();
                     }
                     else
                     {
-                        skillObj.GetComponent<ArrNadeSpawner>()?.SpawnArrnade();
+                        skillObj.GetComponent<SkillActivator>()?.ActiveFirstState();
                     }
 
                     break;

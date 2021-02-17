@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267fa1435b3b35945b4bbf5a612b2acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _skillSO: {fileID: 11400000, guid: c4b096e9c5f2d294c8de55c4b30de6d4, type: 2}
   _onActivateThirdEye: {fileID: 11400000, guid: 9a6b692e3a2a4324eae41637508d941e, type: 2}
   _onDeactivateThirdEye: {fileID: 11400000, guid: 8a01af3dc8b26c54a99a0abd55b2870a, type: 2}
   _thirdEyeSO: {fileID: 11400000, guid: c4b096e9c5f2d294c8de55c4b30de6d4, type: 2}
