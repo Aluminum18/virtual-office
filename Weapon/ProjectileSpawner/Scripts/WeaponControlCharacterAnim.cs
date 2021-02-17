@@ -72,10 +72,6 @@ public class WeaponControlCharacterAnim : MonoBehaviour
             return;
         }
 
-        if (rigInfo == null)
-        {
-            return;
-        }
         AttachWeaponModelToCharacter(rigInfo.WeaponModelPos);
     }
 
