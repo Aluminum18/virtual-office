@@ -16,6 +16,10 @@ public class CharacterRotating : MonoBehaviour
     [SerializeField]
     private Vector3Variable _aimSpot;
 
+    [Header("Events in - Runtime Reference")]
+    [SerializeField]
+    private GameEvent _onAim;
+
     [Header("Config")]
     [SerializeField]
     [Tooltip("Degree/s")]
@@ -58,6 +62,11 @@ public class CharacterRotating : MonoBehaviour
         _aimSpot = aimSpot;
     }
 
+    public void SetOnAimEvent(GameEvent onAim)
+    {
+        _onAim = onAim;
+    }
+
     public void SetJoystickInputDirection(Vector3Variable joystickDirection)
     {
         _joystick = joystickDirection;
@@ -72,6 +81,7 @@ public class CharacterRotating : MonoBehaviour
 
         _joystick.OnValueChange += UpdateDirection;
         _aimSpot.OnValueChange += RotateToAimSpot;
+        _onAim.Subcribe(ForceRotateToAimSpot);
     }
 
     public void RotateToAimSpot(Vector3 aimSpot)
@@ -81,6 +91,12 @@ public class CharacterRotating : MonoBehaviour
             return;
         }
         UpdateDirection(aimSpot - transform.position);
+    }
+
+    public void ForceRotateToAimSpot(object[] param)
+    {
+        Vector3 rotateTo = new Vector3(_aimSpot.Value.x - transform.position.x, 0f, _aimSpot.Value.z - transform.position.z);
+        transform.rotation = Quaternion.LookRotation(rotateTo);
     }
 
     public void Rotate(Vector3 rotate)
@@ -144,6 +160,7 @@ public class CharacterRotating : MonoBehaviour
     private void OnDestroy()
     {
         _joystick.OnValueChange -= UpdateDirection;
+        _onAim.Unsubcribe(ForceRotateToAimSpot);
     }
 
 }
