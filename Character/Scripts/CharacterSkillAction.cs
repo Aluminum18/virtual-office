@@ -91,7 +91,7 @@ public class CharacterSkillAction : MonoBehaviour
                         return;
                     }
 
-                    skillObj.GetComponent<ThirdEyeActivation>()?.ActivateThirdEye(true);
+                    skillObj.GetComponent<SkillActivator>()?.ActiveFirstState();
                     break;
                 }
             case SkillId.Crossbow:

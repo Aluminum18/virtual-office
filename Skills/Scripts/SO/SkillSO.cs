@@ -22,6 +22,8 @@ public class SkillSO : ScriptableObject
     public int Cost;
     public int Damage;
     public float Duration;
+    public float CastTime;
+    public float CastTimeSecond;
 
     [Header("Update during runtime")]
     [SerializeField]

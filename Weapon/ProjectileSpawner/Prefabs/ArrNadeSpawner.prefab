@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1990327432384593134}
   - component: {fileID: -9115803426319779750}
   - component: {fileID: 4168778051712635839}
+  - component: {fileID: 8580569613449990726}
   m_Layer: 0
   m_Name: ArrNadeSpawner
   m_TagString: Untagged
@@ -94,3 +95,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minDistance: 1
   _maxDistance: 20
+--- !u!114 &8580569613449990726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990327432384593133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63578996d69770d4ba9e7b640f19dacd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterAnimator: {fileID: 0}
+  _animController: {fileID: 0}
+  _weaponModelPrefab: {fileID: 0}
+  _weaponAnimLayerName: 
+  _rigLayerIndex: 0
+  _enableBasicBowModel: 0
