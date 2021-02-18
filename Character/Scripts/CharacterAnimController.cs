@@ -151,6 +151,26 @@ public class CharacterAnimController : MonoBehaviour
         PlayRun();
     }
 
+    public void PlayCastArrNade()
+    {
+        _animator.SetTrigger("ArrNadeCast");
+    }
+
+    public void PlayDraw()
+    {
+        _animator.SetTrigger("Draw");
+    }
+
+    public void PlayAim()
+    {
+        _animator.SetTrigger("Aim");
+    }
+
+    public void PlayShoot()
+    {
+        _animator.SetTrigger("Shoot");
+    }
+
     public void SetStrafe()
     {
         _animator.SetFloat("MovingAimX", _rawInputMovingJoystick.Value.x);
@@ -179,16 +199,6 @@ public class CharacterAnimController : MonoBehaviour
     public void ActiveBasicBowModel(bool active)
     {
         _basicBowModel.SetActive(active);
-    }
-
-    public void PlayCastArrNade()
-    {
-        _animator.SetTrigger("ArrNadeCast");
-    }
-
-    public void PlayDraw()
-    {
-        _animator.SetTrigger("Draw");
     }
 
     private void SetLayerWeight(int layerIndex, float weight)

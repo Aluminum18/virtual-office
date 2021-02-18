@@ -41,6 +41,14 @@ public abstract class BaseWeapon : MonoBehaviour
     [SerializeField]
     protected bool _projectileReady = false;
 
+    public float AttackDelay
+    {
+        get
+        {
+            return _attackDelay;
+        }
+    }
+
     public virtual void StartAttack()
     {
         _cancelAttack = false;

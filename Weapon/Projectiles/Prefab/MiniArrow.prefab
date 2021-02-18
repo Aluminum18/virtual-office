@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 3278300424915685032, guid: f7327b1066e04544783cbb0e24d0e1f4, type: 3}
+      propertyPath: _damage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3811185808235616026, guid: f7327b1066e04544783cbb0e24d0e1f4, type: 3}
       propertyPath: m_Name
       value: MiniArrow

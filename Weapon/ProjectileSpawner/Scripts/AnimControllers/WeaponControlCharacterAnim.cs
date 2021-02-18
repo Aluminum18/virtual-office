@@ -72,6 +72,10 @@ public class WeaponControlCharacterAnim : MonoBehaviour
             return;
         }
 
+        if (_enableBasicBowModel)
+        {
+            return;
+        }
         AttachWeaponModelToCharacter(rigInfo.WeaponModelPos);
     }
 

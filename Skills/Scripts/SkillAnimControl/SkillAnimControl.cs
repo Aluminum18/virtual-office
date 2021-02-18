@@ -33,4 +33,14 @@ public class SkillAnimControl : MonoBehaviour
     {
         _animControl.PlayDraw();
     }
+
+    public void PlayAim()
+    {
+        _animControl.PlayAim();
+    }
+
+    public void PlayShoot()
+    {
+        _animControl.PlayShoot();
+    }
 }

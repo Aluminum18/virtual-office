@@ -16,11 +16,15 @@ MonoBehaviour:
   SkillIcon: {fileID: 21300000, guid: 4b54bd263483825488ab643b8ac8563c, type: 3}
   SkillIcon2: {fileID: 0}
   SkillPic: {fileID: 0}
+  SkillActivationObject: {fileID: 4716202455709966007, guid: a1a8f8ac6c91c44fe8bb1e993298ef44, type: 3}
   SkillType: 0
   SkillState: 0
   SkillName: Power Shot
   SkillDesc: 
-  Cooldown: 60
+  Cooldown: 5
   Cost: 3
   Damage: 50
   Duration: 0
+  CastTime: 0.3
+  CastTimeSecond: 0
+  _remainCooldown: 0

@@ -5,6 +5,10 @@ using UnityEngine.Events;
 
 public class ArrowContactBehavior : MonoBehaviour
 {
+    [Header("Config")]
+    [SerializeField]
+    private float _damage;
+
     [SerializeField]
     private UnityEvent _onContactMapObject;
     [SerializeField]
@@ -56,7 +60,7 @@ public class ArrowContactBehavior : MonoBehaviour
             return;
         }
 
-        characterAtt.InMapInfo.Hp.Value -= 20f;
+        characterAtt.InMapInfo.Hp.Value -= _damage;
         _onContactPlayer.Invoke();
 
         if (characterAtt.InMapInfo.Hp.Value > 0)

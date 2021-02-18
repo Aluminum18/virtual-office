@@ -191,6 +191,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4300000, guid: 646aeb36abeda5e4e89fee495f74ec92, type: 2}
     - target: {fileID: 3278300424915685032, guid: f7327b1066e04544783cbb0e24d0e1f4, type: 3}
+      propertyPath: _damage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3278300424915685032, guid: f7327b1066e04544783cbb0e24d0e1f4, type: 3}
       propertyPath: _onContactPlayer.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}

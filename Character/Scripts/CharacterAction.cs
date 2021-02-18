@@ -44,6 +44,14 @@ public class CharacterAction : MonoBehaviour
     [SerializeField]
     private BaseWeapon _weapon;
 
+    public BaseWeapon UsingWeapon
+    {
+        get
+        {
+            return _weapon;
+        }
+    }
+
 
     #region Network awared actions
     public void SetInput(InputValueHolder inputHolder)

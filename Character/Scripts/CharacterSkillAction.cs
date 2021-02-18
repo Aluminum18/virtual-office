@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 public class CharacterSkillAction : MonoBehaviour
@@ -71,6 +72,16 @@ public class CharacterSkillAction : MonoBehaviour
                     skillAnimControl.AttachModel(_attribute.ArrNadeModelTransform);
                     break;
                 }
+            case SkillId.PowerShot:
+                {
+                    // delay 1 frame to make sure the weapon is latest;
+                    Observable.TimerFrame(1).Subscribe(_ =>
+                    {
+                        skillObj.GetComponent<SkillAnimControl>()?.Setup(_attribute.AnimController);
+                        skillObj.GetComponent<SkillActivator>()?.Setup(_attribute.AimSpot, _characterAction.UsingWeapon.AttackDelay);
+                    });
+                    break;
+                }
             default:
                 {
                     return;
@@ -103,18 +114,12 @@ public class CharacterSkillAction : MonoBehaviour
                 }
             case SkillId.ThirdEye:
                 {
-                    if (_thisUserId.Value != _attribute.AssignedUserId)
-                    {
-                        return;
-                    }
-
-                    _skillObjectMap.TryGetValue((int)skillId, out var skillObj);
-                    if (skillObj == null)
-                    {
-                        return;
-                    }
-
-                    skillObj.GetComponent<SkillActivator>()?.ActiveFirstState();
+                    HandleSingleStateSkill(skillId);
+                    break;
+                }
+            case SkillId.PowerShot:
+                {
+                    HandleSingleStateSkill(skillId);
                     break;
                 }
             case SkillId.Crossbow:
@@ -141,12 +146,28 @@ public class CharacterSkillAction : MonoBehaviour
                     crossbowAnimControl.SetAnimControl(_attribute.AnimController);
                     crossbowAnimControl.ActiveWeaponLayer(true);
                     break;
-                }
+                }      
             default:
                 {
                     return;
                 }
         }
+    }
+
+    private void HandleSingleStateSkill(SkillId skillId)
+    {
+        if (_thisUserId.Value != _attribute.AssignedUserId)
+        {
+            return;
+        }
+
+        _skillObjectMap.TryGetValue((int)skillId, out var skillObj);
+        if (skillObj == null)
+        {
+            return;
+        }
+
+        skillObj.GetComponent<SkillActivator>()?.ActiveFirstState();
     }
 
     private void HandleActivateSkill(object[] eventParam)

@@ -60,7 +60,7 @@ public class SkillCooldownCounter : MonoBehaviour
             if (_timePassedFromLostFocus > 0)
             {
                 remain -= _timePassedFromLostFocus;
-                yield return new WaitForEndOfFrame();
+                yield return null;
                 _timePassedFromLostFocus = 0f;
             }
 

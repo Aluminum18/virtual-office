@@ -61,7 +61,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectilePool: {fileID: 5742709083304911865}
   _projectileSpeed: 30
-  _movingPath: 0
+  _dropAngleSpeed: 3
+  _movingPath: 2
   _onProjectileSpawn:
     m_PersistentCalls:
       m_Calls: []
