@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 671609313692716542}
   - component: {fileID: 671609313692716543}
-  - component: {fileID: 182571643771424319}
+  - component: {fileID: 5077796087457408707}
   m_Layer: 0
   m_Name: ArrNadeActivator
   m_TagString: Untagged
@@ -47,13 +47,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onStartCastFirst:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5077796087457408707}
+        m_TargetAssemblyTypeName: SkillAnimControl, Assembly-CSharp
+        m_MethodName: PlayArrnadeCast
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onFinishCastFirst:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5077796087457408707}
+        m_TargetAssemblyTypeName: SkillAnimControl, Assembly-CSharp
+        m_MethodName: PlayDraw
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _skillSO: {fileID: 11400000, guid: 49f19f146718c9a4ebe89e94641ffd2d, type: 2}
   _arrnadeSpawner: {fileID: 7706707579231920020}
---- !u!114 &182571643771424319
+--- !u!114 &5077796087457408707
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,15 +86,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 671609313692716528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63578996d69770d4ba9e7b640f19dacd, type: 3}
+  m_Script: {fileID: 11500000, guid: 41937b707a1374049b8f46591f9ef768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterAnimator: {fileID: 0}
-  _animController: {fileID: 0}
-  _weaponModelPrefab: {fileID: 0}
-  _weaponAnimLayerName: 
-  _rigLayerIndex: 0
-  _enableBasicBowModel: 0
+  _animControl: {fileID: 0}
+  _skillModelPrefab: {fileID: 100004, guid: dddb6335529eb194f83735c0842fff4f, type: 3}
 --- !u!1001 &7750009562656565198
 PrefabInstance:
   m_ObjectHideFlags: 0

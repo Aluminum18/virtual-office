@@ -27,6 +27,9 @@ public class CharacterAttribute : MonoBehaviour
     private CharacterAnimController _animController;
     [SerializeField]
     private Animator _animator;
+    [SerializeField]
+    private Transform _arrnadeModelPos;
+
     public string AssignedUserId;
 
     private Vector3Variable _aimSpot;
@@ -113,6 +116,14 @@ public class CharacterAttribute : MonoBehaviour
                 _inMapInfo = _playerInMapInfo.GetPlayerInfo(_roomInfo.GetPlayerPos(AssignedUserId));
             }
             return _inMapInfo;
+        }
+    }
+
+    public Transform ArrNadeModelTransform
+    {
+        get
+        {
+            return _arrnadeModelPos;
         }
     }
 

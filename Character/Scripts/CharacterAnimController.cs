@@ -167,18 +167,28 @@ public class CharacterAnimController : MonoBehaviour
     {
         if (_characterState.Value == CharacterStandingState.WALKING)
         {
-            SetLayerWeight(3, 1f);
+            SetLayerWeight(1, 1f);
             //SetLayerWeight(4, 1f);
             return;
         }
 
-        SetLayerWeight(3, 0f);
+        SetLayerWeight(1, 0f);
         //SetLayerWeight(4, 0f);
     }
 
     public void ActiveBasicBowModel(bool active)
     {
         _basicBowModel.SetActive(active);
+    }
+
+    public void PlayCastArrNade()
+    {
+        _animator.SetTrigger("ArrNadeCast");
+    }
+
+    public void PlayDraw()
+    {
+        _animator.SetTrigger("Draw");
     }
 
     private void SetLayerWeight(int layerIndex, float weight)

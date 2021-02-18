@@ -54,18 +54,21 @@ public class CharacterSkillAction : MonoBehaviour
                 ActivateSkill(skillId, SkillState.First, null);
             }
 
-            SetupSkill(skillId, skill.GetComponent<SkillActivator>());
+            SetupSkill(skillId, skill);
         }
     }
 
-    private void SetupSkill(SkillId skillId, SkillActivator activator)
+    private void SetupSkill(SkillId skillId, GameObject skillObj)
     {
         switch (skillId)
         {
             
             case SkillId.ArrNade:
                 {
-                    activator.Setup(_attribute.AimSpot);
+                    skillObj.GetComponent<SkillActivator>()?.Setup(_attribute.AimSpot);
+                    var skillAnimControl = skillObj.GetComponent<SkillAnimControl>();
+                    skillAnimControl.Setup(_attribute.AnimController);
+                    skillAnimControl.AttachModel(_attribute.ArrNadeModelTransform);
                     break;
                 }
             default:
