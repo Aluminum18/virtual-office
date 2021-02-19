@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UniRx;
@@ -84,25 +83,6 @@ public class ArrNade : MonoBehaviour
                 {
                     arrow.GetComponent<ArrowMoving>().MoveForward(_arrowSpeed);
                 });
-            }
-        }
-    }
-}
-
-[CustomEditor(typeof(ArrNade))]
-public class ArrNadeEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-
-        var myTarget = (ArrNade)target;
-        if (GUILayout.Button("Explode"))
-        {
-            if (Application.isPlaying)
-            {
-                myTarget.IsExploded = false;
-                myTarget.Explose();
             }
         }
     }
