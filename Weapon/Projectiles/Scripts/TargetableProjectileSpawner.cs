@@ -9,10 +9,6 @@ public class TargetableProjectileSpawner : ProjectileSpawner
     [SerializeField]
     private Vector3Variable _aimSpot;
 
-    [Header("Unity Events")]
-    [SerializeField]
-    private UnityEvent _onSpawnArrow;
-
     public void SetAimSpotInput(Vector3Variable aimSpot)
     {
         _aimSpot = aimSpot;
@@ -22,8 +18,8 @@ public class TargetableProjectileSpawner : ProjectileSpawner
     {
     }
 
-    public void FireArrow()
+    public void FireArrowToAimSpot()
     {
-        GameObject arrow = SpawnProjectile(_aimSpot.Value);
+        SpawnProjectile(_aimSpot.Value);
     }
 }

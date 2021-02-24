@@ -13,12 +13,12 @@ public class SkillActivatorEditor : Editor
         var myTarget = (SkillActivator)target;
         if (GUILayout.Button("Active First"))
         {
-            myTarget.FirstState();
+            myTarget.ActiveFirstState();
         }
 
         if (GUILayout.Button("Active Second"))
         {
-            myTarget.SecondState();
+            myTarget.ActiveSecondState();
         }
     }
 }

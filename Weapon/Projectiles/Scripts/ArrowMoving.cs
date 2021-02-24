@@ -19,8 +19,6 @@ public class ArrowMoving : MonoBehaviour
     [SerializeField]
     private Transform _rootTransform;
     [SerializeField]
-    private Collider _collider;
-    [SerializeField]
     private Rigidbody _rb;
     [SerializeField]
     private float _maxAngular = -10f;

@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 public class CharacterCameras : MonoBehaviour
@@ -10,8 +11,6 @@ public class CharacterCameras : MonoBehaviour
     private StringVariable _userId;
     [SerializeField]
     private CharacterSpawner _characterSpawner;
-    [SerializeField]
-    private Vector3 _moveDirection;
 
     [Header("Events in")]
     [SerializeField]
@@ -22,6 +21,11 @@ public class CharacterCameras : MonoBehaviour
     private CinemachineFreeLook _freeLookCam;
     [SerializeField]
     private CinemachineVirtualCamera _aimLookCam;
+    [SerializeField]
+    private float _inspecCamSpeed = 5f;
+
+    private CompositeDisposable _disposables = new CompositeDisposable();
+    private CharacterAttribute _characterAtt;
 
     public void FindThisPlayerAndFollow()
     {
@@ -32,42 +36,40 @@ public class CharacterCameras : MonoBehaviour
             return;
         }
 
-        var characterAtt = character.GetComponent<CharacterAttribute>();
-        if (characterAtt == null)
+        _characterAtt = character.GetComponent<CharacterAttribute>();
+        if (_characterAtt == null)
         {
             Debug.LogWarning($"Missing CharacterAttribute of [{character.name}]", character);
             return;
         }
 
-        _freeLookCam.Follow = characterAtt.Camlook;
-        _freeLookCam.LookAt = characterAtt.Camlook;
+        _freeLookCam.Follow = _characterAtt.Camlook;
+        _freeLookCam.LookAt = _characterAtt.Camlook;
 
-        _aimLookCam.Follow = characterAtt.Camlook;
-        _aimLookCam.LookAt = characterAtt.Camlook;
+        _aimLookCam.Follow = _characterAtt.Camlook;
+        _aimLookCam.LookAt = _characterAtt.Camlook;
     }
 
     private void ActiveSpecCam(object[] defeatedPlayer)
     {
-        if ((string)defeatedPlayer[0] != _userId.Value)
-        {
-            return;
-        }
+        //if ((string)defeatedPlayer[0] != _userId.Value)
+        //{
+        //    return;
+        //}
         _aimLookCam.gameObject.SetActive(false);
         _freeLookCam.gameObject.SetActive(true);
-    }
 
-    private void ActiveSpecMove()
-    {
 
     }
 
     private void OnEnable()
     {
-        //_onPlayerDefeated.Subcribe(ActiveSpecCam);
+        _onPlayerDefeated.Subcribe(ActiveSpecCam);
     }
 
     private void OnDisable()
     {
-        //_onPlayerDefeated.Unsubcribe(ActiveSpecCam);
+        _disposables.Clear();
+        _onPlayerDefeated.Unsubcribe(ActiveSpecCam);
     }
 }

@@ -2285,8 +2285,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _userId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
   _characterSpawner: {fileID: 573624420}
+  _onPlayerDefeated: {fileID: 11400000, guid: d3801b4fa18a2484da8072b3b0a5f968, type: 2}
   _freeLookCam: {fileID: 306697290}
   _aimLookCam: {fileID: 1242823839}
+  _inspecCamSpeed: 5
 --- !u!1001 &270756111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13637,6 +13639,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6265942845249610296, guid: 145e4762876f94e47a16e01ade026458, type: 3}
+      propertyPath: _onAim
+      value: 
+      objectReference: {fileID: 11400000, guid: f0cca889f9734e947a0247c4f70225d1, type: 2}
+    - target: {fileID: 6265942845249610296, guid: 145e4762876f94e47a16e01ade026458, type: 3}
       propertyPath: _aimSpot
       value: 
       objectReference: {fileID: 11400000, guid: c64996ae82b72694dabb27c7077c9928, type: 2}
@@ -14747,7 +14753,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750445399}
-  m_LocalRotation: {x: -0.09789856, y: 0.0000000042809325, z: 4.2112003e-10, w: 0.9951964}
+  m_LocalRotation: {x: -0.09789855, y: -0.0000000042809325, z: -4.2111997e-10, w: 0.9951964}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -18890,7 +18896,6 @@ MonoBehaviour:
   _thisPickedSkill: {fileID: 0}
   _onPlayerDefeated: {fileID: 0}
   _inputValueHolders: {fileID: 11400000, guid: 75f103630de616c46a4bf2333c129deb, type: 2}
-  _playersInMapInfo: {fileID: 0}
   _moveJoyStick: {fileID: 783025922}
   _aimButton: {fileID: 3137695314506293638}
   _cancelAimButton: {fileID: 3137695315436102132}

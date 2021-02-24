@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6937078134361941208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5773172353334259840}
+  - component: {fileID: -2393961757377171715}
+  - component: {fileID: 6645263092656746872}
+  m_Layer: 0
+  m_Name: MulshotActivator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5773172353334259840
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6937078134361941208}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4328100906831704418}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2393961757377171715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6937078134361941208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d142c274bb30e4a9c72018842daf7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onStartCastFirst:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6645263092656746872}
+        m_TargetAssemblyTypeName: SkillAnimControl, Assembly-CSharp
+        m_MethodName: PlayAim
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onFinishCastFirst:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6645263092656746872}
+        m_TargetAssemblyTypeName: SkillAnimControl, Assembly-CSharp
+        m_MethodName: PlayShoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _skillSO: {fileID: 11400000, guid: 698cfbe2686229f4493ceb8d848a343e, type: 2}
+  _spawner: {fileID: 3634503210480249264}
+  _angle: 3
+  _delayBetween: 0.1
+--- !u!114 &6645263092656746872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6937078134361941208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41937b707a1374049b8f46591f9ef768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animControl: {fileID: 0}
+  _skillModelPrefab: {fileID: 0}
+--- !u!1001 &8908718169700522020
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5773172353334259840}
+    m_Modifications:
+    - target: {fileID: 850435110419171655, guid: c6937e7d34ef17d43bf2e2cd95f92e44, type: 3}
+      propertyPath: m_Name
+      value: MulshotContainerSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 5166366744522959174, guid: c6937e7d34ef17d43bf2e2cd95f92e44, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5166366744522959174, guid: c6937e7d34ef17d43bf2e2cd95f92e44, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5166366744522959174, guid: c6937e7d34ef17d43bf2e2cd95f92e44, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5166366744522959174, guid: c6937e7d34ef17d43bf2e2cd95f92e44, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5166366744522959174, guid: c6937e7d34ef17d43bf2e2cd95f92e44, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5166366744522959174, guid: c6937e7d34ef17d43bf2e2cd95f92e44, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5166366744522959174, guid: c6937e7d34ef17d43bf2e2cd95f92e44, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5166366744522959174, guid: c6937e7d34ef17d43bf2e2cd95f92e44, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5166366744522959174, guid: c6937e7d34ef17d43bf2e2cd95f92e44, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5166366744522959174, guid: c6937e7d34ef17d43bf2e2cd95f92e44, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5166366744522959174, guid: c6937e7d34ef17d43bf2e2cd95f92e44, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c6937e7d34ef17d43bf2e2cd95f92e44, type: 3}
+--- !u!4 &4328100906831704418 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5166366744522959174, guid: c6937e7d34ef17d43bf2e2cd95f92e44, type: 3}
+  m_PrefabInstance: {fileID: 8908718169700522020}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3634503210480249264 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5319391695486349716, guid: c6937e7d34ef17d43bf2e2cd95f92e44, type: 3}
+  m_PrefabInstance: {fileID: 8908718169700522020}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c9cc3e36def104a881bc99fe7df505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

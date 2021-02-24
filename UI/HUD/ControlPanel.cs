@@ -20,8 +20,6 @@ public class ControlPanel : MonoBehaviour
     [Header("Runtime Reference")]
     [SerializeField]
     private InputValueHolders _inputValueHolders;
-    [SerializeField]
-    private PlayersInMapInfoSO _playersInMapInfo;
 
     [Header("Config")]
     [SerializeField]
@@ -69,21 +67,6 @@ public class ControlPanel : MonoBehaviour
         });
     }
 
-    public void TrackInMapInfo()
-    {
-        int pos = _roomInfo.GetPlayerPos(_userId.Value);
-        if (pos == -1)
-        {
-            return;
-        }
-
-        var playerInfo = _playersInMapInfo.GetPlayerInfo(pos);
-        if (playerInfo == null)
-        {
-            return;
-        }
-    }
-
     public void DetachInputHolderFromUI()
     {
         // skip dettact direction;
@@ -111,10 +94,10 @@ public class ControlPanel : MonoBehaviour
 
     private void CheckAndDeactivateControlPanel(object[] defeatedPlayer)
     {
-        if ((string)defeatedPlayer[0] != _userId.Value)
-        {
-            return;
-        }
+        //if ((string)defeatedPlayer[0] != _userId.Value)
+        //{
+        //    return;
+        //}
 
         _skillButtonsObj.SetActive(false);
         _shootButton.gameObject.SetActive(false);

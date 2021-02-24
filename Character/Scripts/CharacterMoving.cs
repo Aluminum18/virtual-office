@@ -72,7 +72,7 @@ public class CharacterMoving : MonoBehaviour
         _joystickDirection.OnValueChange += UpdateDirection;
     }
 
-    private void OnDestroy()
+    public void UnsubcribeInput()
     {
         if (_joystickDirection == null)
         {
@@ -80,6 +80,11 @@ public class CharacterMoving : MonoBehaviour
         }
 
         _joystickDirection.OnValueChange -= UpdateDirection;
+    }
+
+    private void OnDestroy()
+    {
+        UnsubcribeInput();
     }
 
     private void Start()

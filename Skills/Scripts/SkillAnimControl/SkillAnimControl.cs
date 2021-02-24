@@ -26,21 +26,45 @@ public class SkillAnimControl : MonoBehaviour
 
     public void PlayArrnadeCast()
     {
+#if UNITY_EDITOR
+        if (_animControl == null)
+        {
+            return;
+        }
+#endif
         _animControl.PlayCastArrNade();
     }
 
     public void PlayDraw()
     {
+#if UNITY_EDITOR
+        if (_animControl == null)
+        {
+            return;
+        }
+#endif
         _animControl.PlayDraw();
     }
 
     public void PlayAim()
     {
+#if UNITY_EDITOR
+        if (_animControl == null)
+        {
+            return;
+        }
+#endif
         _animControl.PlayAim();
     }
 
     public void PlayShoot()
     {
+#if UNITY_EDITOR
+        if (_animControl == null)
+        {
+            return;
+        }
+#endif
         _animControl.PlayShoot();
     }
 }

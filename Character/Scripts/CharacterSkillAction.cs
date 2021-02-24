@@ -82,6 +82,16 @@ public class CharacterSkillAction : MonoBehaviour
                     });
                     break;
                 }
+            case SkillId.MulShot:
+                {
+                    // delay 1 frame to make sure the weapon is latest;
+                    Observable.TimerFrame(1).Subscribe(_ =>
+                    {
+                        skillObj.GetComponent<SkillAnimControl>()?.Setup(_attribute.AnimController);
+                        skillObj.GetComponent<SkillActivator>()?.Setup(_attribute.AimSpot, _characterAction.UsingWeapon.AttackDelay);
+                    });
+                    break;
+                }
             default:
                 {
                     return;
@@ -118,6 +128,11 @@ public class CharacterSkillAction : MonoBehaviour
                     break;
                 }
             case SkillId.PowerShot:
+                {
+                    HandleSingleStateSkill(skillId);
+                    break;
+                }
+            case SkillId.MulShot:
                 {
                     HandleSingleStateSkill(skillId);
                     break;

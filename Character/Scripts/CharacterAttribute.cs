@@ -33,6 +33,7 @@ public class CharacterAttribute : MonoBehaviour
     public string AssignedUserId;
 
     private Vector3Variable _aimSpot;
+    private Vector3Variable _joyStickDirection;
 
     public bool IsThisPlayer
     {
@@ -103,6 +104,18 @@ public class CharacterAttribute : MonoBehaviour
                 _aimSpot = _inputHolders.GetInputValueHolder(_roomInfo.GetPlayerPos(_thisClientUserId.Value)).AimSpot;
             }
             return _aimSpot;
+        }
+    }
+
+    public Vector3Variable JoyStickDirection
+    {
+        get
+        {
+            if (_joyStickDirection == null)
+            {
+                _joyStickDirection = _inputHolders.GetInputValueHolder(_roomInfo.GetPlayerPos(_thisClientUserId.Value)).JoyStickDirection;
+            }
+            return _joyStickDirection;
         }
     }
 

@@ -84,6 +84,12 @@ public class CharacterRotating : MonoBehaviour
         _onAim.Subcribe(ForceRotateToAimSpot);
     }
 
+    public void UnsubcribeInput()
+    {
+        _joystick.OnValueChange -= UpdateDirection;
+        _onAim.Unsubcribe(ForceRotateToAimSpot);
+    }
+
     public void RotateToAimSpot(Vector3 aimSpot)
     {
         if (_characterState.Value.Equals(CharacterStandingState.WALKING))
@@ -159,8 +165,7 @@ public class CharacterRotating : MonoBehaviour
 
     private void OnDestroy()
     {
-        _joystick.OnValueChange -= UpdateDirection;
-        _onAim.Unsubcribe(ForceRotateToAimSpot);
+        UnsubcribeInput();
     }
 
 }

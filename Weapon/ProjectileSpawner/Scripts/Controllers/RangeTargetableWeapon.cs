@@ -25,6 +25,6 @@ public class RangeTargetableWeapon : BaseWeapon
     public override void AttackImmediately()
     {
         base.AttackImmediately();
-        _arrowSpawner.FireArrow();
+        _arrowSpawner.FireArrowToAimSpot();
     }
 }
