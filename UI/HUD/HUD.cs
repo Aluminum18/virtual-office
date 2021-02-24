@@ -14,6 +14,8 @@ public class HUD : MonoBehaviour
     [SerializeField]
     private HPBar _hpBar;
 
+    private PlayerInMapInfo _playerInfo;
+
     public void MapUIToSO()
     {
         int pos = _roomInfo.GetPlayerPos(_userId.Value);
@@ -22,13 +24,12 @@ public class HUD : MonoBehaviour
             return;
         }
 
-        var playerInfo =_playersInMapInfo.GetPlayerInfo(pos);
-        if (playerInfo == null)
+        _playerInfo = _playersInMapInfo.GetPlayerInfo(pos);
+        if (_playerInfo == null)
         {
             return;
         }
 
-        _hpBar.SetHpVariable(playerInfo.Hp);
-
+        _hpBar.SetHpVariable(_playerInfo.Hp);
     }
 }

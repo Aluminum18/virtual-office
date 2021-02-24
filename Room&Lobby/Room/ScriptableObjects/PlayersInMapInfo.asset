@@ -14,8 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _players:
   - Hp: {fileID: 11400000, guid: 40a0fc8c718ee6741b5ecbf44e2ad964, type: 2}
+    Defeated: {fileID: 11400000, guid: 459ffcc20cd154d4fac718f21a790045, type: 2}
   - Hp: {fileID: 11400000, guid: 7802f5779a084914c944d53204b0317a, type: 2}
+    Defeated: {fileID: 11400000, guid: 8406d156132ca764788fa5498510f2bb, type: 2}
   - Hp: {fileID: 11400000, guid: 0f9b8bf61b6a1104f98f3c7eb4a530d3, type: 2}
+    Defeated: {fileID: 11400000, guid: 8dcb15033747b4f41ababd078e2c4752, type: 2}
   - Hp: {fileID: 11400000, guid: 6a902dd3d1466364e9cda7ec1db0defb, type: 2}
+    Defeated: {fileID: 11400000, guid: 9c94da79435ef1447bb95f28cf471deb, type: 2}
   - Hp: {fileID: 11400000, guid: 2ca147868e608494badf346718f8d3eb, type: 2}
+    Defeated: {fileID: 11400000, guid: 8429b6cda4889da448596cea374b0831, type: 2}
   - Hp: {fileID: 11400000, guid: 31ff3c753d422c54ab20d6a26cd7d8f3, type: 2}
+    Defeated: {fileID: 11400000, guid: 7e75d819d25a81d4e857128d3457f9e3, type: 2}

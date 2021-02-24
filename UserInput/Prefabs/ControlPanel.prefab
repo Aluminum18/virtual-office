@@ -953,10 +953,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0dbab734bb7010448e246b5c782d946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputValueHolders: {fileID: 11400000, guid: 75f103630de616c46a4bf2333c129deb, type: 2}
   _userId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
   _roomInfo: {fileID: 11400000, guid: d329bc1c382927d41af5d597862934e2, type: 2}
   _thisPickedSkill: {fileID: 11400000, guid: 662d901291f50ae499d9dd39e2e40a2a, type: 2}
+  _onPlayerDefeated: {fileID: 11400000, guid: d3801b4fa18a2484da8072b3b0a5f968, type: 2}
+  _inputValueHolders: {fileID: 11400000, guid: 75f103630de616c46a4bf2333c129deb, type: 2}
+  _playersInMapInfo: {fileID: 0}
   _moveJoyStick: {fileID: 3137695314927335196}
   _aimButton: {fileID: 3137695315562592829}
   _cancelAimButton: {fileID: 3137695314378766927}
@@ -966,6 +968,7 @@ MonoBehaviour:
   - {fileID: 3434084652442854620}
   - {fileID: 2005507765817391829}
   - {fileID: 3757129832396579066}
+  _skillButtonsObj: {fileID: 5830760869310825505}
 --- !u!1 &3137695315296834286
 GameObject:
   m_ObjectHideFlags: 0

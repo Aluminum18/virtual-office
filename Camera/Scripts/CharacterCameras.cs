@@ -10,6 +10,12 @@ public class CharacterCameras : MonoBehaviour
     private StringVariable _userId;
     [SerializeField]
     private CharacterSpawner _characterSpawner;
+    [SerializeField]
+    private Vector3 _moveDirection;
+
+    [Header("Events in")]
+    [SerializeField]
+    private GameEvent _onPlayerDefeated;
 
     [Header("Config")]
     [SerializeField]
@@ -38,5 +44,30 @@ public class CharacterCameras : MonoBehaviour
 
         _aimLookCam.Follow = characterAtt.Camlook;
         _aimLookCam.LookAt = characterAtt.Camlook;
+    }
+
+    private void ActiveSpecCam(object[] defeatedPlayer)
+    {
+        if ((string)defeatedPlayer[0] != _userId.Value)
+        {
+            return;
+        }
+        _aimLookCam.gameObject.SetActive(false);
+        _freeLookCam.gameObject.SetActive(true);
+    }
+
+    private void ActiveSpecMove()
+    {
+
+    }
+
+    private void OnEnable()
+    {
+        //_onPlayerDefeated.Subcribe(ActiveSpecCam);
+    }
+
+    private void OnDisable()
+    {
+        //_onPlayerDefeated.Unsubcribe(ActiveSpecCam);
     }
 }

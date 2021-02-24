@@ -7,13 +7,21 @@ public class ControlPanel : MonoBehaviour
 {
     [Header("Reference")]
     [SerializeField]
-    private InputValueHolders _inputValueHolders;
-    [SerializeField]
     private StringVariable _userId;
     [SerializeField]
     private RoomInfoSO _roomInfo;
     [SerializeField]
     private IntegerListVariable _thisPickedSkill;
+
+    [Header("Events in")]
+    [SerializeField]
+    private GameEvent _onPlayerDefeated;
+
+    [Header("Runtime Reference")]
+    [SerializeField]
+    private InputValueHolders _inputValueHolders;
+    [SerializeField]
+    private PlayersInMapInfoSO _playersInMapInfo;
 
     [Header("Config")]
     [SerializeField]
@@ -26,6 +34,8 @@ public class ControlPanel : MonoBehaviour
     private Button _shootButton;
     [SerializeField]
     private List<SkillButton> _skillButtons;
+    [SerializeField]
+    private GameObject _skillButtonsObj;
 
     public void AttachInputHolderToUI()
     {
@@ -59,6 +69,21 @@ public class ControlPanel : MonoBehaviour
         });
     }
 
+    public void TrackInMapInfo()
+    {
+        int pos = _roomInfo.GetPlayerPos(_userId.Value);
+        if (pos == -1)
+        {
+            return;
+        }
+
+        var playerInfo = _playersInMapInfo.GetPlayerInfo(pos);
+        if (playerInfo == null)
+        {
+            return;
+        }
+    }
+
     public void DetachInputHolderFromUI()
     {
         // skip dettact direction;
@@ -84,8 +109,27 @@ public class ControlPanel : MonoBehaviour
         }
     }
 
+    private void CheckAndDeactivateControlPanel(object[] defeatedPlayer)
+    {
+        if ((string)defeatedPlayer[0] != _userId.Value)
+        {
+            return;
+        }
+
+        _skillButtonsObj.SetActive(false);
+        _shootButton.gameObject.SetActive(false);
+        _aimButton.gameObject.SetActive(false);
+        _cancelAimButton.gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        _onPlayerDefeated.Subcribe(CheckAndDeactivateControlPanel);
+    }
+
     private void OnDisable()
     {
         DetachInputHolderFromUI();
+        _onPlayerDefeated.Unsubcribe(CheckAndDeactivateControlPanel);
     }
 }

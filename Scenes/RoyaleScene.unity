@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.28096986, g: 0.40111542, b: 0.6836362, a: 1}
+  m_IndirectSpecularColor: {r: 0.56662333, g: 0.66602117, b: 0.8453877, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -18885,15 +18885,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0dbab734bb7010448e246b5c782d946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputValueHolders: {fileID: 11400000, guid: 75f103630de616c46a4bf2333c129deb, type: 2}
   _userId: {fileID: 11400000, guid: 2ad8453f585c14844b9d623295ee2d0c, type: 2}
   _roomInfo: {fileID: 11400000, guid: d329bc1c382927d41af5d597862934e2, type: 2}
   _thisPickedSkill: {fileID: 0}
+  _onPlayerDefeated: {fileID: 0}
+  _inputValueHolders: {fileID: 11400000, guid: 75f103630de616c46a4bf2333c129deb, type: 2}
+  _playersInMapInfo: {fileID: 0}
   _moveJoyStick: {fileID: 783025922}
   _aimButton: {fileID: 3137695314506293638}
   _cancelAimButton: {fileID: 3137695315436102132}
   _shootButton: {fileID: 3137695315471359660}
   _skillButtons: []
+  _skillButtonsObj: {fileID: 0}
 --- !u!224 &3137695314095773603
 RectTransform:
   m_ObjectHideFlags: 0

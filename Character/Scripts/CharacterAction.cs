@@ -35,6 +35,8 @@ public class CharacterAction : MonoBehaviour
     private UnityEvent _onRunningState;
     [SerializeField]
     private UnityEvent _onWalkingState;
+    [SerializeField]
+    private GameEvent _onPlayerDefeated;
 
     [Header("Config")]
     [SerializeField]
@@ -43,6 +45,8 @@ public class CharacterAction : MonoBehaviour
     [Header("Runtime Config")]
     [SerializeField]
     private BaseWeapon _weapon;
+
+    private CharacterAttribute _att;
 
     public BaseWeapon UsingWeapon
     {
@@ -154,6 +158,7 @@ public class CharacterAction : MonoBehaviour
         if (_characterHp.Value <= 0f)
         {
             _onDefeated.Invoke();
+            _onPlayerDefeated?.Raise(_att.AssignedUserId);
             return;
         }
 
@@ -202,6 +207,8 @@ public class CharacterAction : MonoBehaviour
     {
         _onEnable.Invoke();
         _forceShot.SetActive(false);
+
+        _att = GetComponent<CharacterAttribute>();
 
 #if UNITY_EDITOR
         if (_weapon == null)
