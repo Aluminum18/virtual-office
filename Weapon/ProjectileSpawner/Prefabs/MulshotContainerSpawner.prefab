@@ -21,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 6001369965344494239, guid: d75ff3a37be1e9d498e36b619f6be6c2, type: 3}
     - target: {fileID: 5742709083304911865, guid: 7d5b5a242fc8a5649ace44802568b6de, type: 3}
       propertyPath: _limitInstances
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6340998790397513597, guid: 7d5b5a242fc8a5649ace44802568b6de, type: 3}
       propertyPath: m_RootOrder

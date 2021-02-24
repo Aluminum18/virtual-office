@@ -35,7 +35,12 @@ public class MulshotContainer : MonoBehaviour
 
     private void OnEnable()
     {
-        ActiveMulshot();
+        // container rotation will aim to aimspot,
+        //delay 1 frame to make sure split shots always rotate to aimspot at the beginning
+        Observable.TimerFrame(1).Subscribe(_ =>
+        {
+            ActiveMulshot();
+        });
         gameObject.SetActive(false);
     }
 }
