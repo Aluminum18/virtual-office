@@ -107,6 +107,15 @@ public class RealTimeDBAccessor : MonoBehaviour
             });
     }
 
+    /// <summary>
+    /// full child key (eg. use 'parent/child' instead of 'child')
+    /// </summary>
+    public void RemoveAChild(string childKey)
+    {
+        var childRef = DbRootRef.Child(childKey);
+        childRef.RemoveValueAsync();
+    }
+
     public void ListenChildChange(string parent, EventHandler<ChildChangedEventArgs> changedHandler)
     {
         var dataRef = DbRootRef.Child(parent);

@@ -5,6 +5,7 @@ using System.Text;
 using Firebase.Database;
 using Firebase.Extensions;
 using UnityEngine.Events;
+using Photon.Pun;
 
 public class RoomInfoAccessorRTDB : MonoBehaviour
 {
@@ -330,5 +331,16 @@ public class RoomInfoAccessorRTDB : MonoBehaviour
     private void OnDisable()
     {
         RemoveRoomChangeListener(_currentRoomName);
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            return;
+        }
+
+        RemoveRoomChangeListener(_roomOptions.RoomName);
+        _dbAccessor.RemoveAChild(RTDBRoomPath.ROOMS_PATH + _roomOptions.RoomName);
     }
 }
