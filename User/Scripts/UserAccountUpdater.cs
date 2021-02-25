@@ -14,6 +14,10 @@ public class UserAccountUpdater : MonoBehaviour
     [Header("Reference")]
     [SerializeField]
     private ThisPlayerAccountInfo _userAccount;
+    [SerializeField]
+    private StringVariable _thisUserId;
+    [SerializeField]
+    private StringVariable _thisUserDisplayName;
 
     [Header("Events in")]
     [SerializeField]
@@ -68,6 +72,11 @@ public class UserAccountUpdater : MonoBehaviour
 
     private void UpdateAccountInfoToSO(params object[] args)
     {
+        if (args.Length == 0)
+        {
+            CreateGuestInfo();
+            return;
+        }
         var userAuthInfo = (FirebaseUser)args[0];
         var userRef = FirebaseFirestore.DefaultInstance.Collection(FireStoreCollection.USER_ACCOUNT).Document(userAuthInfo.UserId);
 
@@ -90,6 +99,14 @@ public class UserAccountUpdater : MonoBehaviour
                 _onUserAccountInfoReadyInSO.Invoke();
             });
 
+    }
+
+    private void CreateGuestInfo()
+    {
+        _userAccount.DisplayName = SystemInfo.deviceName;
+        _userAccount.Id = SystemInfo.deviceUniqueIdentifier;
+        _thisUserId.Value = _userAccount.Id;
+        _onUserAccountInfoReadyInSO.Invoke();
     }
 
     private void OnEnable()

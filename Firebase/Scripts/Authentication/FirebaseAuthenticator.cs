@@ -48,6 +48,11 @@ public class FirebaseAuthenticator : MonoBehaviour
             });
     }
 
+    public void GuestSignIn()
+    {
+        _onUserSignedIn.Raise();
+    }
+
     public void SignInWithEmail(string email)
     {
         if (string.IsNullOrEmpty(email))

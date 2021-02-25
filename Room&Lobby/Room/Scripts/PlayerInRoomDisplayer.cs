@@ -8,6 +8,10 @@ public class PlayerInRoomDisplayer : MonoBehaviour
 {
     [Header("Reference")]
     [SerializeField]
+    private StringVariable _thisUserId;
+    [SerializeField]
+    private StringVariable _thisUserName;
+    [SerializeField]
     private RoomInfoSO _roomInfo;
     [SerializeField]
     private SkillListSO _skillList;
@@ -34,6 +38,12 @@ public class PlayerInRoomDisplayer : MonoBehaviour
         if (string.IsNullOrEmpty(playerId))
         {
             _playerName.text = "Open";
+            return;
+        }
+
+        if (playerId == _thisUserId.Value)
+        {
+            _playerName.text = _thisUserName.Value;
             return;
         }
 

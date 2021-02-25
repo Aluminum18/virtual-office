@@ -958,7 +958,6 @@ MonoBehaviour:
   _thisPickedSkill: {fileID: 11400000, guid: 662d901291f50ae499d9dd39e2e40a2a, type: 2}
   _onPlayerDefeated: {fileID: 11400000, guid: d3801b4fa18a2484da8072b3b0a5f968, type: 2}
   _inputValueHolders: {fileID: 11400000, guid: 75f103630de616c46a4bf2333c129deb, type: 2}
-  _playersInMapInfo: {fileID: 0}
   _moveJoyStick: {fileID: 3137695314927335196}
   _aimButton: {fileID: 3137695315562592829}
   _cancelAimButton: {fileID: 3137695314378766927}
@@ -1588,7 +1587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8359197723155774671, guid: 16a8c89764a7745459e05b010419aab5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -147.9
+      value: 47.099976
       objectReference: {fileID: 0}
     - target: {fileID: 8359197723155774671, guid: 16a8c89764a7745459e05b010419aab5, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1701,7 +1700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8359197723155774671, guid: 16a8c89764a7745459e05b010419aab5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -146
+      value: 48.99997
       objectReference: {fileID: 0}
     - target: {fileID: 8359197723155774671, guid: 16a8c89764a7745459e05b010419aab5, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2284,7 +2283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8359197723155774671, guid: 16a8c89764a7745459e05b010419aab5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -147
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 8359197723155774671, guid: 16a8c89764a7745459e05b010419aab5, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2397,7 +2396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8359197723155774671, guid: 16a8c89764a7745459e05b010419aab5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 194.99997
       objectReference: {fileID: 0}
     - target: {fileID: 8359197723155774671, guid: 16a8c89764a7745459e05b010419aab5, type: 3}
       propertyPath: m_AnchoredPosition.y

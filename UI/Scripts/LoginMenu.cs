@@ -40,6 +40,11 @@ public class LoginMenu : MonoBehaviour
         _authenticator.SignIn(_email.text, _password.text);
     }
 
+    public void GuestLogin()
+    {
+        _authenticator.GuestSignIn();
+    }
+
     public void AutoLogin()
     {
         string email = PlayerPrefs.GetString("email", "");
@@ -53,8 +58,6 @@ public class LoginMenu : MonoBehaviour
 
     private void OnLoginSuccess(params object[] args)
     {
-        var user = (FirebaseUser)args[0];
-        _userId.Value = user.UserId;
         _afterLogin.Invoke();
     }
 
