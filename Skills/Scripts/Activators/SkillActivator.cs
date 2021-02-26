@@ -7,6 +7,12 @@ using UnityEngine.Events;
 
 public class SkillActivator : MonoBehaviour
 {
+    [Header("Inspec")]
+    [SerializeField]
+    private string _owner;
+    [SerializeField]
+    private int _team;
+
     [Header("Unity Events")]
     [SerializeField]
     private UnityEvent _onStartCastFirst;
@@ -16,6 +22,29 @@ public class SkillActivator : MonoBehaviour
     [Header("Config")]
     [SerializeField]
     protected SkillSO _skillSO;
+
+    public string Owner
+    {
+        get
+        {
+            return _owner;
+        }
+        set
+        {
+            _owner = value;
+        }
+    }
+    public int Team
+    {
+        get
+        {
+            return _team;
+        }
+        set
+        {
+            _team = Mathf.Clamp(value, 1, 2);
+        }
+    }
 
     public void ActiveFirstState()
     {

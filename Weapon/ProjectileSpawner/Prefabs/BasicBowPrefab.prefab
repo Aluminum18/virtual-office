@@ -224,6 +224,10 @@ PrefabInstance:
       propertyPath: _dropAngleSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6457908376459122607, guid: 7d5b5a242fc8a5649ace44802568b6de, type: 3}
+      propertyPath: _projectileDamage
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d5b5a242fc8a5649ace44802568b6de, type: 3}
 --- !u!4 &2216440259485222992 stripped

@@ -27,7 +27,7 @@ public class CharacterSkillAction : MonoBehaviour
     private CharacterAttribute _attribute;
     private Dictionary<int, GameObject> _skillObjectMap = new Dictionary<int, GameObject>();
 
-    private void SetUpSkills()
+    public void SetUpSkills()
     {
         _skillObjectMap.Clear();
 
@@ -61,12 +61,20 @@ public class CharacterSkillAction : MonoBehaviour
 
     private void SetupSkill(SkillId skillId, GameObject skillObj)
     {
+        var activator = skillObj.GetComponent<SkillActivator>();
+        if (activator == null)
+        {
+            return;
+        }
+        activator.Owner = _attribute.AssignedUserId;
+        activator.Team = _attribute.Team;
+
         switch (skillId)
         {
-            
             case SkillId.ArrNade:
                 {
-                    skillObj.GetComponent<SkillActivator>()?.Setup(_attribute.AimSpot);
+                    activator.Setup(_attribute.AimSpot, _skillList.GetSkillDamage(skillId));
+
                     var skillAnimControl = skillObj.GetComponent<SkillAnimControl>();
                     skillAnimControl.Setup(_attribute.AnimController);
                     skillAnimControl.AttachModel(_attribute.ArrNadeModelTransform);
@@ -78,7 +86,9 @@ public class CharacterSkillAction : MonoBehaviour
                     Observable.TimerFrame(1).Subscribe(_ =>
                     {
                         skillObj.GetComponent<SkillAnimControl>()?.Setup(_attribute.AnimController);
-                        skillObj.GetComponent<SkillActivator>()?.Setup(_attribute.AimSpot, _characterAction.UsingWeapon.AttackDelay);
+                        skillObj.GetComponent<SkillActivator>()?.Setup( _attribute.AimSpot, 
+                                                                        _characterAction.UsingWeapon.AttackDelay, 
+                                                                        _skillList.GetSkillDamage(skillId));
                     });
                     break;
                 }
@@ -88,7 +98,9 @@ public class CharacterSkillAction : MonoBehaviour
                     Observable.TimerFrame(1).Subscribe(_ =>
                     {
                         skillObj.GetComponent<SkillAnimControl>()?.Setup(_attribute.AnimController);
-                        skillObj.GetComponent<SkillActivator>()?.Setup(_attribute.AimSpot, _characterAction.UsingWeapon.AttackDelay);
+                        skillObj.GetComponent<SkillActivator>()?.Setup( _attribute.AimSpot, 
+                                                                        _characterAction.UsingWeapon.AttackDelay, 
+                                                                        _skillList.GetSkillDamage(skillId));
                     });
                     break;
                 }
@@ -144,13 +156,15 @@ public class CharacterSkillAction : MonoBehaviour
                     {
                         return;
                     }
-                    var crossbowObject = skillObject.GetComponent<RangeTargetableWeapon>();
-                    if (crossbowObject == null)
+                    var weapon = skillObject.GetComponent<RangeTargetableWeapon>();
+                    if (weapon == null)
                     {
                         return;
                     }
-                    _characterAction.SetWeapon(crossbowObject);
-                    crossbowObject.SetTarget(_attribute.AimSpot);
+
+                    weapon.SetTeamAndOwner(_attribute.Team, _attribute.AssignedUserId);
+                    _characterAction.SetWeapon(weapon);
+                    weapon.SetTarget(_attribute.AimSpot);
 
                     var crossbowAnimControl = skillObject.GetComponent<CrossbowControlCharacterAnim>();
                     if (crossbowAnimControl == null)
@@ -220,8 +234,6 @@ public class CharacterSkillAction : MonoBehaviour
     {
         _attribute = GetComponent<CharacterAttribute>();
         _onActivateSkill.Subcribe(HandleActivateSkill);
-
-        SetUpSkills();
     }
 
     private void OnDisable()

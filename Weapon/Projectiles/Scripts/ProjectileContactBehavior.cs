@@ -3,18 +3,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ArrowContactBehavior : MonoBehaviour
+public class ProjectileContactBehavior : MonoBehaviour
 {
-    [Header("Config")]
+    [Header("Runtime config")]
     [SerializeField]
-    private float _damage;
+    private string _owner;
+    [SerializeField]
+    private int _team;
+    [SerializeField]
+    private int _damage;
 
+    [Header("Unity Events")]
     [SerializeField]
     private UnityEvent _onContactMapObject;
     [SerializeField]
     private UnityEvent _onContactPlayer;
 
     private Rigidbody _rb;
+
+    public string Owner
+    {
+        get
+        {
+            return _owner;
+        }
+        set
+        {
+            _owner = value;
+        }
+    }
+    public int Team
+    {
+        get
+        {
+            return _team;
+        }
+        set
+        {
+            _team = Mathf.Clamp(value, 1, 2);
+        }
+    }
+    public int Damage
+    {
+        get
+        {
+            return _damage;
+        }
+        set
+        {
+            _damage = value;
+        }
+    }
 
     public void OnTriggerEnter(Collider other)
     {

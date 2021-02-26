@@ -340,6 +340,7 @@ public class RoomInfoAccessorRTDB : MonoBehaviour
             return;
         }
 
+        // TODO: remove only when all players leave
         RemoveRoomChangeListener(_roomOptions.RoomName);
         _dbAccessor.RemoveAChild(RTDBRoomPath.ROOMS_PATH + _roomOptions.RoomName);
     }

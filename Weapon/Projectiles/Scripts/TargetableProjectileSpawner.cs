@@ -7,7 +7,7 @@ public class TargetableProjectileSpawner : ProjectileSpawner
 {
     [Header("Reference - assigned at runtime")]
     [SerializeField]
-    private Vector3Variable _aimSpot;
+    protected Vector3Variable _aimSpot;
 
     public void SetAimSpotInput(Vector3Variable aimSpot)
     {
@@ -18,8 +18,8 @@ public class TargetableProjectileSpawner : ProjectileSpawner
     {
     }
 
-    public void FireArrowToAimSpot()
+    public GameObject FireArrowToAimSpot()
     {
-        SpawnProjectile(_aimSpot.Value);
+        return SpawnProjectile(_aimSpot.Value);
     }
 }

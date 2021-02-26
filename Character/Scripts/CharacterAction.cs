@@ -78,6 +78,13 @@ public class CharacterAction : MonoBehaviour
         SubcribeInMapInfo();
     }
 
+    public void SetupDefaultWeapon()
+    {
+        var basicBow = (RangeTargetableWeapon)_weapon;
+        basicBow.SetTeamAndOwner(_att.Team, _att.AssignedUserId);
+        basicBow.SetTarget(_att.AimSpot);
+    }
+
     public void SetWeapon(BaseWeapon weapon)
     {
         if (_weapon != null)
@@ -95,7 +102,6 @@ public class CharacterAction : MonoBehaviour
         _characterState.Value = CharacterStandingState.WALKING;
         _onStateChanged.Invoke();
         _onWalkingState.Invoke();
-
     }
 
     public void ChangeToRunning(params object[] args)

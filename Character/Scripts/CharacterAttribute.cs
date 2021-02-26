@@ -30,11 +30,22 @@ public class CharacterAttribute : MonoBehaviour
     [SerializeField]
     private Transform _arrnadeModelPos;
 
-    public string AssignedUserId;
-
     private Vector3Variable _aimSpot;
     private Vector3Variable _joyStickDirection;
+    private int _team = 0;
 
+    public string AssignedUserId { get; set; }
+    public int Team
+    {
+        get
+        {
+            if (_team == 0)
+            {
+                _team = _roomInfo.GetTeam(AssignedUserId);
+            }
+            return _team;
+        }
+    }
     public bool IsThisPlayer
     {
         get

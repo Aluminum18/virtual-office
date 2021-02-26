@@ -20,12 +20,23 @@ public class PowerShotActivator : SkillActivator
             return;
         }
         _spawner.SetAimSpotInput(aimSpot);
+        _spawner.Owner = Owner;
+        _spawner.Team = Team;
 
         if (!(args[1] is float delayTime)) // reload time of using weapon
         {
             Debug.LogError("reload time for PowerShot is invalid", this);
             return;
         }
+
+        if (!(args[2] is int damage))
+        {
+            Debug.LogError("damage for[{gameObject.name}] is invalid", this);
+            return;
+        }
+
+        _spawner.ProjectileDamage = damage;
+
         _skillSO.CastTime = delayTime;
     }
 }

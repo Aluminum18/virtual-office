@@ -33,6 +33,8 @@ public class ArrNade : MonoBehaviour
 
     public bool IsExploded { get; set; }
 
+    private ProjectileContactBehavior _contactBehavior;
+
     public void RequestExplodeOnCollision()
     {
         if (!PhotonNetwork.IsMasterClient || IsExploded)
@@ -64,7 +66,7 @@ public class ArrNade : MonoBehaviour
         var firstArrow = arrows.Pop();
         firstArrow.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
         firstArrow.GetComponent<ArrowMoving>()?.MoveForward(_arrowSpeed);
-       
+
         for (int i = 1; i < _layerNumber + 1; i++)
         {
             int arrowNum = 2 * i + 2;
@@ -78,13 +80,31 @@ public class ArrNade : MonoBehaviour
                 }
 
                 var arrow = arrows.Pop();
+
                 arrow.transform.rotation = Quaternion.Euler(xAngle, j * yOffset, 0f);
+
                 Observable.Timer(System.TimeSpan.FromSeconds(0.1 * j)).Subscribe(_ =>
                 {
                     arrow.GetComponent<ArrowMoving>().MoveForward(_arrowSpeed);
                 });
             }
         }
+    }
+
+    private void Awake()
+    {
+        Observable.TimerFrame(1).Subscribe(_ =>
+        {
+            _contactBehavior = GetComponent<ProjectileContactBehavior>();
+
+            _contactBehavior = GetComponent<ProjectileContactBehavior>();
+            var splitArrowContactBhv = _arrrowPool.PooledObject.GetComponent<ProjectileContactBehavior>();
+            splitArrowContactBhv.Damage = _contactBehavior.Damage;
+            splitArrowContactBhv.Team = _contactBehavior.Team;
+            splitArrowContactBhv.Owner = _contactBehavior.Owner;
+
+            _contactBehavior.Damage = 0;
+        });   
     }
 }
 

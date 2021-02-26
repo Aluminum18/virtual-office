@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RangeTargetableWeapon : BaseWeapon
 {
-    [Header("Reference - assign at runtime")]
+    [Header("Runtime Reference")]
     [SerializeField]
     private Vector3Variable _aimTo;
 
@@ -20,6 +20,12 @@ public class RangeTargetableWeapon : BaseWeapon
     public void SetTarget(Vector3Variable target)
     {
         _arrowSpawner.SetAimSpotInput(target);
+    }
+
+    public void SetTeamAndOwner(int team, string owner)
+    {
+        _arrowSpawner.Team = team;
+        _arrowSpawner.Owner = owner;
     }
 
     public override void AttackImmediately()

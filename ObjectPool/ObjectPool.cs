@@ -17,6 +17,14 @@ public class ObjectPool : MonoBehaviour
 
     private Queue<GameObject> _usingOjects = new Queue<GameObject>();
 
+    public GameObject PooledObject
+    {
+        get
+        {
+            return _pooledObject;
+        }
+    }
+
     public GameObject Spawn()
     {
         GameObject go;

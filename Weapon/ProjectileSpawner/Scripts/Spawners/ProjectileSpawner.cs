@@ -5,6 +5,14 @@ using UnityEngine.Events;
 
 public class ProjectileSpawner : MonoBehaviour
 {
+    [Header("Runtime Config")]
+    [SerializeField]
+    private string _owner;
+    [SerializeField]
+    private int _team;
+    [SerializeField]
+    private int _projectileDamage;
+
     [Header("Config")]
     [SerializeField]
     private ObjectPool _projectilePool;
@@ -18,11 +26,49 @@ public class ProjectileSpawner : MonoBehaviour
     [SerializeField]
     protected UnityEvent _onProjectileSpawn;
 
+    public string Owner
+    {
+        get
+        {
+            return _owner;
+        }
+        set
+        {
+            _owner = value;
+        }
+    }
+    public int Team
+    {
+        get
+        {
+            return _team;
+        }
+        set
+        {
+            _team = Mathf.Clamp(value, 1, 2);
+        }
+    }
+    public int ProjectileDamage
+    {
+        get
+        {
+            return _projectileDamage;
+        }
+        set
+        {
+            _projectileDamage = value;
+        }
+    }
+
     public GameObject SpawnProjectile(Vector3 target)
     {
         var projectile = _projectilePool.Spawn();
-        var moving = projectile.GetComponent<ArrowMoving>();
+        var contactBehavior = projectile.GetComponent<ProjectileContactBehavior>();
+        contactBehavior.Owner = _owner;
+        contactBehavior.Team = _team;
+        contactBehavior.Damage = _projectileDamage;
 
+        var moving = projectile.GetComponent<ArrowMoving>();
         if (moving == null)
         {
             return projectile;

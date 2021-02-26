@@ -16,18 +16,29 @@ public class MulShotActivator : SkillActivator
 
     public override void Setup(params object[] args)
     {
+        _spawner.Owner = Owner;
+        _spawner.Team = Team;
+
         if (!(args[0] is Vector3Variable aimSpot)) // aimspot
         {
-            Debug.LogError("aimspot for PowerShot is invalid", this);
+            Debug.LogError($"aimspot for [{gameObject.name}] is invalid", this);
             return;
         }
-        _spawner.SetAimSpotInput(aimSpot);
 
         if (!(args[1] is float delayTime)) // reload time of using weapon
         {
-            Debug.LogError("reload time for PowerShot is invalid", this);
+            Debug.LogError($"reload time for [{gameObject.name}] is invalid", this);
             return;
         }
+
+        if (!(args[2] is int damage))
+        {
+            Debug.LogError("damage for[{gameObject.name}] is invalid", this);
+            return;
+        }
+
+        _spawner.SetAimSpotInput(aimSpot);
+        _spawner.ProjectileDamage = damage;
         _skillSO.CastTime = delayTime;
     }
 

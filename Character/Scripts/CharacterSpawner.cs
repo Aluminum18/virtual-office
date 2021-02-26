@@ -155,6 +155,9 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
         AddPhotonPropsToObject(character, teamNo);
         ManageCharacter(character);
         MapPlayerToInputHolder(character);
+
+        character.GetComponent<CharacterAction>()?.SetupDefaultWeapon();
+        character.GetComponent<CharacterSkillAction>()?.SetUpSkills();
     }
 
     private void SpawnCharacterResponseToEvent(EventData photonEvent)
@@ -174,6 +177,8 @@ public class CharacterSpawner : MonoBehaviour, IOnEventCallback
 
         ManageCharacter(character);
         MapPlayerToInputHolder(character);
+
+        character.GetComponent<CharacterSkillAction>()?.SetUpSkills();
     }
 
     private void AddPhotonPropsToObject(GameObject go, int team)
